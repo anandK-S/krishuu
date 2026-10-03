@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Happy Birthday Krishuu Ji! 💖 | Aapka Special Digital Surprise</title>
+  <meta name="description" content="Personalized birthday surprise website for Krishuu Ji! Born 12 Oct 2009. Digital cards, countdown timer, 170+ photo memories, 41 video reels, cinematic movie, interactive cake, and gift box in respectful Hinglish.">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Floating Ambient Particles Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Background Music Fallback Tag -->
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ==========================================================================
+       FLOATING AUDIO WIDGET
+       ========================================================================== -->
+  <div class="music-controller" title="Gaana chalane ya band karne ke liye click kijiye">
+    <div class="vinyl-disc" id="vinyl-disc">
+      <div class="vinyl-center"></div>
+    </div>
+    <div class="music-info">
+      <span class="music-title">Birthday Lofi Box</span>
+      <span class="music-sub">Sirf Krishuu Ji Ke Liye 💕</span>
+    </div>
+    <button class="music-btn" id="music-toggle-btn" aria-label="Music Chalu/Band Kijiye">
+      <i class="fas fa-play" id="music-icon"></i>
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       PHOTO MANAGER / CUSTOMIZER FLOATING BUTTON
+       ========================================================================== -->
+  <button class="photo-manager-btn" id="photo-manager-btn" title="Krishuu Ji ki photos badliye">
+    <i class="fas fa-camera-retro"></i>
+    <span>Photos Badliye 📸</span>
+  </button>
+
+  <!-- ==========================================================================
+       SECTION 1: SECRET VAULT LOCK SCREEN (PASSCODE: 12:14)
+       ========================================================================== -->
+  <div class="lock-screen" id="lock-screen">
+    <div class="lock-container" id="lock-container">
+      <div class="lock-top-icon">
+        <i class="fas fa-lock" style="color: #ff5e8e;"></i>
+      </div>
+      <h2 class="lock-title">Krishuu Ji Ki <span>Secret Duniya</span></h2>
+      <p class="lock-desc">Apna birthday surprise dekhne ke liye secret passcode enter kijiye!</p>
+
+      <!-- Smartphone Notification Card -->
+      <div class="lock-notification">
+        <img src="assets/images/krishuu_hero.jpg" alt="Krishuu Ji" class="notif-avatar" id="notif-avatar">
+        <div class="notif-content">
+          <div class="notif-header">
+            <span>Special Message Aaya Hai 🎂</span>
+            <span class="notif-time" id="lock-clock-time">12:14</span>
+          </div>
+          <div class="notif-body">
+            Namaste Krishuu Ji! Aapke 17th birthday ke liye ek magical universe locked hai. Passcode enter kijiye ✨
+          </div>
+        </div>
+      </div>
+
+      <!-- Passcode Display (HH:MM format for 12:14) -->
+      <div class="passcode-display">
+        <div class="time-slot" id="slot-1"></div>
+        <div class="time-slot" id="slot-2"></div>
+        <div class="time-separator">:</div>
+        <div class="time-slot" id="slot-3"></div>
+        <div class="time-slot" id="slot-4"></div>
+      </div>
+
+      <!-- Numeric Keypad -->
+      <div class="keypad-grid">
+        <button class="key-btn" data-num="1">1<span class="key-sub"></span></button>
+        <button class="key-btn" data-num="2">2<span class="key-sub">ABC</span></button>
+        <button class="key-btn" data-num="3">3<span class="key-sub">DEF</span></button>
+        <button class="key-btn" data-num="4">4<span class="key-sub">GHI</span></button>
+        <button class="key-btn" data-num="5">5<span class="key-sub">JKL</span></button>
+        <button class="key-btn" data-num="6">6<span class="key-sub">MNO</span></button>
+        <button class="key-btn" data-num="7">7<span class="key-sub">PQRS</span></button>
+        <button class="key-btn" data-num="8">8<span class="key-sub">TUV</span></button>
+        <button class="key-btn" data-num="9">9<span class="key-sub">WXYZ</span></button>
+        <button class="key-btn key-action" data-action="clear" title="Reset"><i class="fas fa-redo"></i></button>
+        <button class="key-btn" data-num="0">0<span class="key-sub">+</span></button>
+        <button class="key-btn key-action" data-action="delete" title="Backspace"><i class="fas fa-backspace"></i></button>
+      </div>
+
+      <!-- Passcode Hint -->
+      <div class="hint-container">
+        <button class="hint-toggle-btn" id="hint-toggle">
+          <i class="fas fa-lightbulb"></i> Kya aapko hint chahiye?
+        </button>
+        <div class="hint-box" id="hint-box">
+          ⏰ <strong>Hint:</strong> Ghadi ka time dekhiye! Ek bohot special time hai na... (Password hai: <strong>12:14</strong>)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER (REVEALED ON UNLOCK)
+       ========================================================================== -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================================================
+         SECTION 2: HERO STAGE & LIVE COUNTDOWN (12 OCT CELEBRATION)
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-avatar-wrap">
+        <div class="crown-badge">👑</div>
+        <img src="assets/images/krishuu_hero.jpg" alt="Krishuu Ji" class="hero-avatar" id="hero-img-main">
+      </div>
+
+      <div class="hero-badge-dob">
+        <i class="fas fa-calendar-star" style="color: var(--gold);"></i>
+        <span>12 October 2009 • Celebrating 17 Magical Years of Krishuu Ji ✨</span>
+      </div>
+
+      <h1 class="hero-title">
+        Happy Birthday, <span class="krishuu-name">Krishuu Ji!</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Aap sabse pyaari bestie, hamari favorite insaan aur sabse cute dost hain! Aaj aap poore 17 saal ki ho gayi hain. Aapke chehre ki ye smile hamesha aisi hi chamakti rahe! 💖🌸
+      </p>
+
+      <!-- FEATURE HIGHLIGHT: WATCH KRISHUU'S BIRTHDAY MOVIE BUTTON -->
+      <div style="margin-bottom: 30px;">
+        <button class="btn-primary" id="start-cinema-btn" style="background: linear-gradient(135deg, #ffd166, #ff5e8e); color: #1a0b2e; font-size: 1.1rem; padding: 15px 32px; box-shadow: 0 10px 30px rgba(255, 209, 102, 0.4);">
+          <i class="fas fa-film"></i> Krishuu Ji Ki Birthday Film Play Kijiye 🎬🍿
+        </button>
+      </div>
+
+      <!-- Birthday Today Celebration Alert Banner (Activates on 12 Oct!) -->
+      <div class="birthday-today-banner" id="birthday-today-banner">
+        <div style="font-size: 2.8rem; margin-bottom: 5px;">🎉 🎂 👑 🎈 🥳</div>
+        <h2 style="font-family: var(--font-handwriting); font-size: clamp(2rem, 5vw, 3rem); color: #ffd166; margin-bottom: 8px;">
+          AAGAYA 12 OCTOBER! IT'S YOUR BIRTHDAY KRISHUU JI! 🎉
+        </h2>
+        <p style="font-size: 1.15rem; color: #fff; max-width: 650px; margin: 0 auto 12px; line-height: 1.5;">
+          Aaj ka poora din sirf aur sirf aapka hai! 12 October 2009 ko ek pari is duniya me aayi thi. May this 17th year bring you infinite laughs, sweet memories, and success! 💖✨
+        </p>
+        <span style="display: inline-block; background: rgba(255, 94, 142, 0.3); border: 1px solid var(--secondary-pink); padding: 6px 18px; border-radius: 20px; font-size: 0.9rem; color: #ffd166; font-weight: 600;">
+          👑 Welcome to Fabulous 17, Queen! 👑
+        </span>
+      </div>
+
+      <!-- Live Countdown Timer Box -->
+      <div class="countdown-box" id="countdown-box">
+        <div class="time-card">
+          <span class="time-num" id="days-val">00</span>
+          <span class="time-label">Dino (Days)</span>
+        </div>
+        <div class="countdown-divider">:</div>
+        <div class="time-card">
+          <span class="time-num" id="hours-val">00</span>
+          <span class="time-label">Ghante (Hrs)</span>
+        </div>
+        <div class="countdown-divider">:</div>
+        <div class="time-card">
+          <span class="time-num" id="mins-val">00</span>
+          <span class="time-label">Minute (Mins)</span>
+        </div>
+        <div class="countdown-divider">:</div>
+        <div class="time-card">
+          <span class="time-num" id="secs-val">00</span>
+          <span class="time-label">Second (Secs)</span>
+        </div>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -25px; margin-bottom: 30px;">
+        ⏳ 12 October aane me bacha hua time... Sabse bada celebration bas shuru hone wala hai!
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#cake-section" class="btn-primary">
+          <i class="fas fa-birthday-cake"></i> Mombatti Bujhaiye 🎂
+        </a>
+        <a href="#reels-section" class="btn-secondary">
+          <i class="fas fa-play-circle"></i> Video Reels Dekhiye 🎬
+        </a>
+        <a href="#gift-section" class="btn-secondary">
+          <i class="fas fa-gift"></i> Surprise Gifts Kholiye 🎁
+        </a>
+        <button class="btn-secondary" id="preview-celebration-btn" title="Dekhiye 12 Oct ko kaisa blast hoga!">
+          <i class="fas fa-sparkles" style="color: var(--gold);"></i> 12 Oct Mode Dekhiye 🎉
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: INTERACTIVE BIRTHDAY CAKE & CANDLE BLOWING
+         ========================================================================== -->
+    <section class="cake-section" id="cake-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-cake-candles"></i> Virtual Cake</div>
+        <h2 class="section-title">Aankhein Band Kijiye Aur <span>Wish Maangiye!</span> ✨</h2>
+        <p class="section-desc">
+          Dil me jo bhi sabse badi wish hai chupke se maang lijiye, aur phir mombatti (candles) par tap karke bujhaiye! 🎂💨
+        </p>
+      </div>
+
+      <div class="cake-stage">
+        <div class="cake-container">
+          <!-- 3 Candles for tapping/blowing -->
+          <div class="candles-row">
+            <div class="candle" id="candle-1" title="Tap karke bujhaiye!">
+              <div class="wick"></div>
+              <div class="flame"></div>
+              <div class="smoke"></div>
+            </div>
+            <div class="candle" id="candle-2" title="Tap karke bujhaiye!">
+              <div class="wick"></div>
+              <div class="flame"></div>
+              <div class="smoke"></div>
+            </div>
+            <div class="candle" id="candle-3" title="Tap karke bujhaiye!">
+              <div class="wick"></div>
+              <div class="flame"></div>
+              <div class="smoke"></div>
+            </div>
+          </div>
+
+          <!-- Cake Tiers -->
+          <div class="cake-tier tier-top">
+            <div class="drip" style="left: 15px; height: 16px;"></div>
+            <div class="drip" style="left: 45px; height: 22px;"></div>
+            <div class="drip" style="left: 85px; height: 18px;"></div>
+            <div class="drip" style="left: 125px; height: 20px;"></div>
+          </div>
+          <div class="cake-tier tier-mid">
+            <div class="drip" style="left: 20px; height: 20px; background: #ffd166;"></div>
+            <div class="drip" style="left: 70px; height: 25px; background: #ffd166;"></div>
+            <div class="drip" style="left: 130px; height: 18px; background: #ffd166;"></div>
+            <div class="drip" style="left: 175px; height: 22px; background: #ffd166;"></div>
+          </div>
+          <div class="cake-tier tier-bot">
+            <div class="drip" style="left: 30px; height: 22px;"></div>
+            <div class="drip" style="left: 90px; height: 28px;"></div>
+            <div class="drip" style="left: 150px; height: 20px;"></div>
+            <div class="drip" style="left: 210px; height: 25px;"></div>
+          </div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <div class="cake-action-box">
+          <button class="btn-primary" id="blow-candles-btn">
+            <i class="fas fa-wind"></i> Blow Out The Candles! 💨 (Mombatti Bujhaiye)
+          </button>
+        </div>
+
+        <!-- Wish Sent Banner -->
+        <div class="cake-wish-banner" id="cake-wish-banner">
+          <h3 style="font-family: var(--font-handwriting); font-size: 2.2rem; color: #ffd166; margin-bottom: 6px;">
+            ✨ Aapki Wish Seedha Stars Tak Pahunch Gayi! ✨
+          </h3>
+          <p style="color: #fff; font-size: 1.05rem;">
+            Happy 17th Birthday Krishuu Ji! Bhagwan kare aapki har ek dua, har ek khwaab sach ho jaye! 🌟💖
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: MEMORY LANE & POLAROID WALL
+         ========================================================================== -->
+    <section class="gallery-section" id="gallery-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-images"></i> Hamari Yaadein</div>
+        <h2 class="section-title">Moments of <span>Krishuu Ji</span> 📸</h2>
+        <p class="section-desc">
+          Aapke saath bitaya hua har ek pal bohot anmol hai. Kisi bhi photo par click karke zoom kijiye aur yaadein taaza kijiye! 💕
+        </p>
+      </div>
+
+      <!-- Polaroid Wall Grid (12 Aesthetic Photos) -->
+      <div class="polaroid-grid">
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory1.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-1">
+          </div>
+          <div class="polaroid-caption">Wo Cute Si Smile 💕</div>
+          <div class="polaroid-sub"><i class="fas fa-heart" style="color: #ff5e8e;"></i> Aapka hasna = Hamara din ban jaana</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory2.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-2">
+          </div>
+          <div class="polaroid-caption">Pure Dramebaaz 👑</div>
+          <div class="polaroid-sub"><i class="fas fa-sparkles" style="color: #ffd166;"></i> Full-on nautanki mode</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory3.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-3">
+          </div>
+          <div class="polaroid-caption">Raat Bhar Ki Baatein 🌙</div>
+          <div class="polaroid-sub"><i class="fas fa-moon" style="color: #b588f7;"></i> Bina matlab ki endless gup-shup</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory4.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-4">
+          </div>
+          <div class="polaroid-caption">Hamari Favorite Insaan 🌸</div>
+          <div class="polaroid-sub"><i class="fas fa-crown" style="color: #ffd166;"></i> Jinke saath sab best lagta hai</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory5.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-5">
+          </div>
+          <div class="polaroid-caption">Crime Partner 👯‍♀️</div>
+          <div class="polaroid-sub"><i class="fas fa-star" style="color: #ff5e8e;"></i> Har safar me sabse aage</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory6.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-6">
+          </div>
+          <div class="polaroid-caption">Sweet 17 Ki Queen ✨</div>
+          <div class="polaroid-sub"><i class="fas fa-cake-candles" style="color: #ffd166;"></i> 12 Oct 2009 Special</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory7.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-7">
+          </div>
+          <div class="polaroid-caption">Aapka Pout Face 😤</div>
+          <div class="polaroid-sub"><i class="fas fa-heart" style="color: #2ecc71;"></i> Gusse me bhi 100% cute</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory8.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-8">
+          </div>
+          <div class="polaroid-caption">Candid Khushiyan 📸</div>
+          <div class="polaroid-sub"><i class="fas fa-camera" style="color: #ff5e8e;"></i> Asli bina filter wali smile</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory9.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-9">
+          </div>
+          <div class="polaroid-caption">Hamare Inside Jokes 😂</div>
+          <div class="polaroid-sub"><i class="fas fa-laugh-squint" style="color: #ffd166;"></i> Jo sirf hum samajhte hain</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory10.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-10">
+          </div>
+          <div class="polaroid-caption">Comfort Zone 🫂</div>
+          <div class="polaroid-sub"><i class="fas fa-heart" style="color: #ff5e8e;"></i> Aapke saath safe and happy</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory11.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-11">
+          </div>
+          <div class="polaroid-caption">Foodie Buddy 🍕</div>
+          <div class="polaroid-sub"><i class="fas fa-sun" style="color: #ffd166;"></i> Saath me khana aur maze karna</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrap">
+            <img src="assets/images/memory12.jpg" alt="Memory with Krishuu Ji" class="polaroid-img" id="polaroid-img-12">
+          </div>
+          <div class="polaroid-caption">Forever & Always 💖</div>
+          <div class="polaroid-sub"><i class="fas fa-infinity" style="color: #b588f7;"></i> Chahe kuch bhi ho jaye</div>
+        </div>
+      </div>
+
+      <!-- Interactive Flip Memory Cards -->
+      <div class="flip-carousel-container">
+        <div class="text-center" style="margin-bottom: 25px;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: #fff;">
+            Tap Karke <span>Flip Kijiye</span> Aur Secret Notes Padhiye! 💌
+          </h3>
+        </div>
+
+        <div class="flip-cards-grid">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="assets/images/memory1.jpg" alt="Krishuu Ji">
+                <div class="front-badge">
+                  <h4>Yaad Hai Pehli Baar?</h4>
+                  <p>Tap kijiye secret note padhne ke liye ➔</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Jab pehli baar baat hui thi na, tab socha nahi tha aap itni zaroori ban jayengi meri life me! Thank you for coming into my life, Krishuu Ji 💕"</p>
+                <span class="flip-tag">Secret Note #1</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="assets/images/memory2.jpg" alt="Krishuu Ji">
+                <div class="front-badge">
+                  <h4>Wo Pagalpanti Wale Din</h4>
+                  <p>Tap kijiye secret note padhne ke liye ➔</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Wo jab hum bina wajah haste-haste pagal ho gaye the! Sach me aapke bina life bilkul bore hoti 😂"</p>
+                <span class="flip-tag">Secret Note #2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="assets/images/memory3.jpg" alt="Krishuu Ji">
+                <div class="front-badge">
+                  <h4>Hamesha Saath Hu</h4>
+                  <p>Tap kijiye secret note padhne ke liye ➔</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Chahe life me koi bhi mod aaye, gussa ho ya khush, main hamesha aapke saath khada hu. Forever Besties Promise! 🤞"</p>
+                <span class="flip-tag">Secret Note #3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: VIDEO REELS THEATER (41 VIDEOS!)
+         ========================================================================== -->
+    <section class="reels-section" id="reels-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-video"></i> Video Reels Theater</div>
+        <h2 class="section-title">Krishuu Ji Ki <span>Reel Duniya</span> 🎬</h2>
+        <p class="section-desc">
+          41 Khaas Videos & Moments! Horizontal swipe kijiye aur kisi bhi reel par tap karke full screen me dekhiye! 🍿✨
+        </p>
+      </div>
+
+      <!-- Reels Horizontal Scroll Wrap -->
+      <div class="reels-carousel-wrap" id="reels-carousel">
+        <!-- Dynamically rendered via js/script.js from KRISHUU_GALLERY.videos -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: THE INFINITE PHOTO VAULT (170+ PHOTOS OF KRISHUU JI!)
+         ========================================================================== -->
+    <section class="photo-vault-section" id="photo-vault-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-camera"></i> Infinite Photo Vault</div>
+        <h2 class="section-title">170+ Unfiltered <span>Memories</span> 📸</h2>
+        <p class="section-desc">
+          Chhoti si muskaan se leke saare pagalpan tak — har ek photo me ek khoobsurat kahani hai! Tap kijiye zoom karne ke liye! 💕
+        </p>
+      </div>
+
+      <div class="gallery-filter-tabs">
+        <button class="tab-btn active" id="tab-all-photos"><i class="fas fa-images"></i> Sabhi Photos (171) 💖</button>
+        <button class="tab-btn" id="tab-shuffle-photos"><i class="fas fa-random"></i> Shuffle Yaadein 🎲</button>
+      </div>
+
+      <!-- Photo Grid -->
+      <div class="vault-grid" id="vault-grid">
+        <!-- Dynamically populated via js/script.js from KRISHUU_GALLERY.images -->
+      </div>
+
+      <div class="load-more-wrap" id="load-more-wrap">
+        <button class="btn-primary" id="load-more-btn">
+          <i class="fas fa-plus-circle"></i> Aur Photos Dekhiye (Load More) 💖
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: VIRTUAL GIFT BOX UNBOXING (DIGITAL SURPRISE)
+         ========================================================================== -->
+    <section class="gift-unboxing-section" id="gift-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-gift"></i> Digital Surprise</div>
+        <h2 class="section-title">Krishuu Ji Ka <span>Surprise Dabba</span> 🎁</h2>
+        <p class="section-desc">
+          Dabba par tap kijiye aur dekhiye aapke liye kya kya special surprises band hain! 🎀✨
+        </p>
+      </div>
+
+      <div class="gift-box-wrap" id="gift-box-wrap" title="Dabba kholne ke liye tap kijiye!">
+        <div class="gift-box">
+          <div class="gift-body">
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+          </div>
+          <div class="gift-lid">
+            <div class="gift-bow">🎀</div>
+          </div>
+          <div class="gift-light-burst"></div>
+        </div>
+      </div>
+
+      <!-- REVEALED DIGITAL SURPRISES -->
+      <div class="revealed-surprises" id="revealed-surprises">
+        
+        <!-- SURPRISE 1: HANDWRITTEN LOVE LETTER IN RESPECTFUL HINGLISH -->
+        <div class="letter-envelope-card">
+          <div class="letter-header">
+            <div class="letter-to">Dearest Krishuu Ji Ke Naam 💕</div>
+            <div class="wax-seal">K</div>
+          </div>
+          <div class="letter-body">
+Happy 17th Birthday Krishuu Ji! 🎉
+
+Sach bataun toh mere paas shabdon ki kami pad jaati hai ye batane ke liye ki aap mere liye kitni special hain. 12 October 2009 ko jab aap is duniya me aayi thi na, tab is duniya ko ek angel mil gayi thi!
+
+Aapke saath bitaya hua har ek pal bohot khoobsurat hota hai. Jab aap hasti hain na, sach me poora din achha guzar jaata hai. Aapki wo chhoti-chhoti baatein, wo cute sa andaaz, aur phir wo smile... sab kuch bohot pyaara lagta hai.
+
+Aaj aap poore 17 saal ki ho gayi hain! Meri bas yahi dua hai ki aap hamesha khush rahein, aapke chehre se ye hasi kabhi kam na ho, aur aap jo bhi chahein apni life me wo sab aapko mile.
+
+Kabhi mat bhooliyega ki chahe kuch bhi ho jaye, main hamesha aapke saath hu, har ek situation me. Aap meri sabse achhi best friend aur sabse favorite person hain!
+
+Happiest Birthday Once Again, Krishuu Ji! Enjoy your special day to the fullest! 💖
+          </div>
+          <div class="letter-sign">Hamesha Aapka Saath Nibhane Wala ❤️</div>
+        </div>
+
+        <!-- SURPRISE 2: VIP BIRTHDAY COUPONS IN HINGLISH -->
+        <div class="text-center" style="margin-bottom: 25px;">
+          <h3 style="font-family: var(--font-serif); font-size: 2rem; color: #fff;">
+            Krishuu Ji Ke <span>VIP Birthday Coupons</span> 🎟️
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Kabhi bhi claim kar sakti hain — inki koi expiry date nahi hai!
+          </p>
+        </div>
+
+        <div class="coupons-grid">
+          <div class="coupon-ticket">
+            <div class="coupon-icon">☕🍰</div>
+            <h4 class="coupon-title">Free Sweet Treat / Coffee Date</h4>
+            <p class="coupon-desc">Aap jo bolein (Coffee, Boba ya Cake), treat meri taraf se!</p>
+            <button class="btn-redeem">Claim Kijiye 🎟️</button>
+          </div>
+
+          <div class="coupon-ticket">
+            <div class="coupon-icon">🫂❤️</div>
+            <h4 class="coupon-title">Unlimited Warm Hugs</h4>
+            <p class="coupon-desc">Jab bhi mood off ho ya khush hon, sabse tight wala warm hug free!</p>
+            <button class="btn-redeem">Claim Kijiye 🎟️</button>
+          </div>
+
+          <div class="coupon-ticket">
+            <div class="coupon-icon">👑✨</div>
+            <h4 class="coupon-title">Hukum Ki Rani Pass</h4>
+            <p class="coupon-desc">1 poore din tak aap jo bolein wahi hoga, koi mana nahi karega!</p>
+            <button class="btn-redeem">Claim Kijiye 🎟️</button>
+          </div>
+
+          <div class="coupon-ticket">
+            <div class="coupon-icon">🌙🚗</div>
+            <h4 class="coupon-title">Late Night Drive & Gup-Shup</h4>
+            <p class="coupon-desc">Thandi hawa, achha music aur dil ki dher saari baatein!</p>
+            <button class="btn-redeem">Claim Kijiye 🎟️</button>
+          </div>
+        </div>
+
+        <!-- SURPRISE 3: MAGIC SCRATCH CARD IN HINGLISH -->
+        <div class="scratch-card-box">
+          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: #fff; margin-bottom: 6px;">
+            Magic <span>Scratch Card</span> 🪄
+          </h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Ungli ya mouse se golden foil ragad kar Krishuu Ji ka secret message nikaliye!
+          </p>
+
+          <div class="scratch-canvas-container">
+            <div class="scratch-hidden-content">
+              <h3>Aap Hamari Favorite Hain! 💖</h3>
+              <p>Pata hai? Is poori duniya me aapke jaisa koi nahi hai! Hamesha aise hi muskurati rahiye! 🌸✨</p>
+              <span style="font-size: 1.6rem; margin-top: 5px;">👑 Bestie Forever 👑</span>
+            </div>
+            <canvas id="scratch-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- SURPRISE 4: GOLDEN BOARDING PASS TO 17 -->
+        <div class="boarding-pass">
+          <div class="pass-main">
+            <div class="pass-airline">SPECIAL BIRTHDAY AIRWAYS • FIRST CLASS VIP</div>
+            <div class="pass-route">
+              <div class="pass-city">
+                <h2>16</h2>
+                <span>SWEET 16</span>
+              </div>
+              <div class="pass-plane-icon"><i class="fas fa-plane"></i></div>
+              <div class="pass-city">
+                <h2>17</h2>
+                <span>FABULOUS 17</span>
+              </div>
+            </div>
+            <div class="pass-details-grid">
+              <div class="pass-field">
+                <span>Yatri (Passenger)</span>
+                <strong>KRISHUU JI 👑</strong>
+              </div>
+              <div class="pass-field">
+                <span>Flight</span>
+                <strong>KR-1214</strong>
+              </div>
+              <div class="pass-field">
+                <span>Date</span>
+                <strong>12 OCT 2026</strong>
+              </div>
+              <div class="pass-field">
+                <span>Gate</span>
+                <strong>FOREVER BESTIES</strong>
+              </div>
+              <div class="pass-field">
+                <span>Seat</span>
+                <strong>1A (VIP DIL ME)</strong>
+              </div>
+              <div class="pass-field">
+                <span>Status</span>
+                <strong style="color: #2ecc71;">CONFIRMED ✨</strong>
+              </div>
+            </div>
+          </div>
+          <div class="pass-stub">
+            <div style="font-size: 0.7rem; font-weight: 700; color: var(--primary-pink);">BOARDING PASS</div>
+            <div style="margin: 10px 0;">
+              <i class="fas fa-barcode" style="font-size: 2.8rem; color: #333;"></i>
+            </div>
+            <div style="font-size: 0.75rem; color: #555;">PASSENGER: KRISHUU JI</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: REASONS WHY KRISHUU JI IS SPECIAL
+         ========================================================================== -->
+    <section class="reasons-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-heart"></i> Dil Ki Baatein</div>
+        <h2 class="section-title">10 Reasons Why <span>Krishuu Ji</span> Is One In A Billion</h2>
+        <p class="section-desc">
+          Kuch khaas baatein jo aapko sabse alag aur sabse pyaari banati hain! 💖
+        </p>
+      </div>
+
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-num">01</div>
+          <div class="reason-icon">✨</div>
+          <h3 class="reason-title">Aapka Wo Hasna</h3>
+          <p class="reason-text">Aapke hasne ki aawaz sunke sabse kharaab aur bekaar din bhi ek second me chamak jaata hai.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">02</div>
+          <div class="reason-icon">💛</div>
+          <h3 class="reason-title">Aapka Saaf Aur Pyaara Dil</h3>
+          <p class="reason-text">Aap sabki bina kisi matlab ke itni care karti hain, aisi achhi soul bohot mushkil se milti hai.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">03</div>
+          <div class="reason-icon">🌸</div>
+          <h3 class="reason-title">Aapke Cute Expressions & Nakhre</h3>
+          <p class="reason-text">Wo dramatic reactions, chhota sa pout aur ajeeb expressions... full entertainment!</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">04</div>
+          <div class="reason-icon">🎧</div>
+          <h3 class="reason-title">Best Music & Vibe Partner</h3>
+          <p class="reason-text">Aapke saath gaane sunna, be-suron ki tarah gaana aur chill karna best feeling hai.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">05</div>
+          <div class="reason-icon">👑</div>
+          <h3 class="reason-title">Aap Bohot Strong Hain</h3>
+          <p class="reason-text">Aap jitna sochti hain na, usse 100 guna zyada strong aur samajhdaar hain.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">06</div>
+          <div class="reason-icon">🌙</div>
+          <h3 class="reason-title">Comforting Presence</h3>
+          <p class="reason-text">Bas aapke saath baat karke ya aapke aas-paas reh kar ek sukoon aur warmth milti hai.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">07</div>
+          <div class="reason-icon">🍰</div>
+          <h3 class="reason-title">Foodie & Snack Buddy</h3>
+          <p class="reason-text">Nayi cheezein khane ke plan banana aur late night cravings ka saath dena!</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">08</div>
+          <div class="reason-icon">🫂</div>
+          <h3 class="reason-title">Hamesha Saath Dena</h3>
+          <p class="reason-text">Chahe kitni bhi ladayi ho ya situation kharab ho, aap hamesha saath khadi rehti hain.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">09</div>
+          <div class="reason-icon">🌟</div>
+          <h3 class="reason-title">Bina Filter Ka Pagalpan</h3>
+          <p class="reason-text">Aapke saath kuch pretend nahi karna padta; aap jaisi hain bilkul real aur authentic hain.</p>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">10</div>
+          <div class="reason-icon">💖</div>
+          <h3 class="reason-title">Sirf Aur Sirf Hamari Krishuu Ji Hona</h3>
+          <p class="reason-text">Is poori duniya me aapke jaisa koi aur ho hi nahi sakta! You are simply the best!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 9: INTERACTIVE WISH JAR / STAR BOTTLE
+         ========================================================================== -->
+    <section class="wish-jar-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-star"></i> Duaon Ka Jar</div>
+        <h2 class="section-title">Star Jar Se <span>Ek Dua Nikaaliye!</span> 🌟</h2>
+        <p class="section-desc">
+          Is chamakte huye jar par tap kijiye aur Krishuu Ji ke liye ek pyaari si birthday blessing nikaaliye!
+        </p>
+      </div>
+
+      <div class="jar-stage">
+        <div class="jar-illustration" id="jar-illustration" title="Tap karke star nikaaliye!">
+          <div class="jar-lid"></div>
+          <div class="jar-star-icon">⭐</div>
+        </div>
+
+        <div class="wish-popup-card">
+          <p id="wish-display-text">"Upar chamakte huye star jar par tap kijiye aur secret blessing dekhiye! ✨"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 10: LEAVE A WISH & GUESTBOOK
+         ========================================================================== -->
+    <section class="guestbook-section">
+      <div class="text-center">
+        <div class="section-tag"><i class="fas fa-feather"></i> Birthday Wishes</div>
+        <h2 class="section-title">Krishuu Ji Ke Liye <span>Ek Wish Chhodiye</span> 💌</h2>
+        <p class="section-desc">
+          Apne pyaare shabdon me Krishuu Ji ke 17th birthday ke liye ek heartfelt note likhiye!
+        </p>
+      </div>
+
+      <div class="guestbook-box">
+        <form class="guestbook-form" id="guestbook-form">
+          <input type="text" class="input-field" id="guest-name" placeholder="Apna Naam / Nickname" required>
+          <textarea class="input-field" id="guest-msg" placeholder="Krishuu Ji ke liye pyaara sa birthday message likhiye..." required></textarea>
+          <button type="submit" class="btn-primary" style="justify-content: center;">
+            <i class="fas fa-paper-plane"></i> Wish Post Kijiye ✨
+          </button>
+        </form>
+
+        <div class="wishes-stream" id="wishes-stream">
+          <div class="wish-item">
+            <strong>✨ Aapka Favorite Bestie:</strong>
+            <p>Happiest 17th Birthday Krishuu Ji! Aap hamesha aise hi khush rahein aur chamakti rahein! Love you loads! 💖</p>
+          </div>
+          <div class="wish-item">
+            <strong>✨ Ek Khaas Dost:</strong>
+            <p>12 October 2009 ko ek pari aayi thi! Happy Birthday Krishuu Ji, party hard! 🥳🌟</p>
+          </div>
+        </div>
+
+        <!-- WhatsApp Greeting Button -->
+        <div style="margin-top: 25px; text-align: center;">
+          <a href="https://api.whatsapp.com/send?text=Happy%2017th%20Birthday%20Krishuu%20Ji!%20%F0%9F%8E%89%F0%9F%92%96%20Aaj%20ka%20din%20sirf%20aapka%20hai!%20Aapka%20special%20surprise%20website%20dekhna%20mat%20bhooliyega!%20%E2%9C%A8" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="font-size: 0.9rem;">
+            <i class="fab fa-whatsapp" style="color: #25d366;"></i> Krishuu Ji Ko WhatsApp Par Wish Bhejiye 📲
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grand Confetti Blast Finale Button -->
+    <div style="text-align: center; margin: 60px 0 20px;">
+      <button class="btn-primary" id="blast-confetti-btn" style="font-size: 1.15rem; padding: 16px 36px;">
+        <i class="fas fa-party-horn"></i> Ek Baar Phir Jashn Manaiye! 🎊
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       CINEMATIC BIRTHDAY MOVIE THEATER ("A 17-YEAR JOURNEY")
+       ========================================================================== -->
+  <div class="cinema-overlay" id="cinema-modal">
+    <button class="close-cinema-btn" id="close-cinema-btn" title="Cinema Band Kijiye">&times;</button>
+    <div class="cinema-theater">
+      <!-- Screen Stage -->
+      <div class="cinema-screen-wrap" id="cinema-screen-wrap">
+        <!-- Intro Title Card with 3... 2... 1... countdown -->
+        <div class="cinema-title-card" id="cinema-title-card">
+          <div class="cinema-countdown-num" id="cinema-countdown-num">3</div>
+          <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); color: #ffd166; margin-top: 15px;">
+            Krishuu Ji: The 17-Year Journey 🎬
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 8px;">
+            A Special Birthday Film • Starring: Krishuu Ji 👑
+          </p>
+        </div>
+
+        <!-- Cinema Media Elements -->
+        <img src="" alt="Cinema Scene" class="cinema-media" id="cinema-img-layer">
+        <video src="" class="cinema-media" id="cinema-video-layer" playsinline muted></video>
+
+        <!-- Subtitle Caption Box -->
+        <div class="cinema-caption-box" id="cinema-caption-box">
+          <div class="cinema-scene-tag" id="cinema-scene-tag">Scene 1 • The Beginning</div>
+          <p class="cinema-caption-text" id="cinema-caption-text">12 October 2009 ko ek khoobsurat kahani shuru hui thi...</p>
+        </div>
+      </div>
+
+      <!-- Playback Controls Bar -->
+      <div class="cinema-controls">
+        <button class="cinema-btn" id="cinema-prev-btn" title="Pichla Scene"><i class="fas fa-backward"></i></button>
+        <button class="cinema-btn" id="cinema-play-btn" title="Play / Pause"><i class="fas fa-play" id="cinema-play-icon"></i></button>
+        <button class="cinema-btn" id="cinema-next-btn" title="Agla Scene"><i class="fas fa-forward"></i></button>
+        <div class="cinema-progress-track" id="cinema-progress-track">
+          <div class="cinema-progress-fill" id="cinema-progress-fill"></div>
+        </div>
+        <span class="cinema-time-label" id="cinema-time-label">01 / 15</span>
+        <button class="cinema-btn" id="cinema-sound-btn" title="Awaaz Chalu / Band"><i class="fas fa-volume-up" id="cinema-sound-icon"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FULLSCREEN VIDEO REELS MODAL (FOR 41 VIDEOS)
+       ========================================================================== -->
+  <div class="video-modal-overlay" id="video-modal">
+    <button class="modal-close-btn" id="close-video-modal" title="Band Kijiye" style="z-index: 20;">&times;</button>
+    <button class="video-nav-btn video-prev-btn" id="video-prev-btn" title="Pichli Reel">&#10094;</button>
+    <div class="video-modal-box">
+      <video id="modal-video-player" controls playsinline></video>
+    </div>
+    <button class="video-nav-btn video-next-btn" id="video-next-btn" title="Agli Reel">&#10095;</button>
+  </div>
+
+  <!-- ==========================================================================
+       UPGRADED LIGHTBOX MODAL WITH SLIDESHOW & NAVIGATION
+       ========================================================================== -->
+  <div class="modal-overlay" id="lightbox-modal">
+    <button class="lightbox-nav-btn lightbox-prev" id="lightbox-prev-btn" title="Pichli Photo">&#10094;</button>
+    <div class="modal-content" style="max-width: 650px; text-align: center; position: relative;">
+      <button class="modal-close-btn" id="close-lightbox" title="Close">&times;</button>
+      <img src="" alt="Zoomed Photo" class="lightbox-img" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+      <div class="lightbox-counter" id="lightbox-counter">Photo 1 of 171</div>
+      <div class="lightbox-action-row">
+        <button class="btn-lightbox-action" id="lightbox-like-btn">
+          <i class="fas fa-heart" style="color: #ff5e8e;"></i> <span id="like-text">Like kiya! 💕</span>
+        </button>
+        <button class="btn-lightbox-action" id="lightbox-autoplay-btn">
+          <i class="fas fa-play"></i> Auto-Play 📽️
+        </button>
+      </div>
+    </div>
+    <button class="lightbox-nav-btn lightbox-next" id="lightbox-next-btn" title="Agli Photo">&#10095;</button>
+  </div>
+
+  <!-- ==========================================================================
+       PHOTO MANAGER / CUSTOMIZER MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="photo-manager-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="close-manager-modal" title="Close">&times;</button>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #fff; margin-bottom: 6px;">
+        Krishuu Ji Ki <span>Photos Badliye</span> 📸
+      </h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">
+        Apne phone ya computer se photos choose kijiye, ye website par turant update ho jayengi aur save rahengi!
+      </p>
+
+      <div class="photo-slot-list">
+        <!-- Hero Avatar -->
+        <div class="photo-slot-item">
+          <img src="assets/images/krishuu_hero.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Main Hero / Avatar Photo</div>
+            <div class="photo-slot-desc">Upar wali main round photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="hero-img-main" style="display: none;">
+          </label>
+        </div>
+
+        <!-- Polaroid 1 -->
+        <div class="photo-slot-item">
+          <img src="assets/images/memory1.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Photo 1: Cute Si Smile</div>
+            <div class="photo-slot-desc">Pehli polaroid photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="polaroid-img-1" style="display: none;">
+          </label>
+        </div>
+
+        <!-- Polaroid 2 -->
+        <div class="photo-slot-item">
+          <img src="assets/images/memory2.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Photo 2: Pure Dramebaaz</div>
+            <div class="photo-slot-desc">Dusri polaroid photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="polaroid-img-2" style="display: none;">
+          </label>
+        </div>
+
+        <!-- Polaroid 3 -->
+        <div class="photo-slot-item">
+          <img src="assets/images/memory3.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Photo 3: Raat Bhar Ki Baatein</div>
+            <div class="photo-slot-desc">Teesri polaroid photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="polaroid-img-3" style="display: none;">
+          </label>
+        </div>
+
+        <!-- Polaroid 4 -->
+        <div class="photo-slot-item">
+          <img src="assets/images/memory4.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Photo 4: Hamari Favorite Insaan</div>
+            <div class="photo-slot-desc">Chauthi polaroid photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="polaroid-img-4" style="display: none;">
+          </label>
+        </div>
+
+        <!-- Polaroid 5 -->
+        <div class="photo-slot-item">
+          <img src="assets/images/memory5.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Photo 5: Crime Partner</div>
+            <div class="photo-slot-desc">Paanchwi polaroid photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="polaroid-img-5" style="display: none;">
+          </label>
+        </div>
+
+        <!-- Polaroid 6 -->
+        <div class="photo-slot-item">
+          <img src="assets/images/memory6.jpg" class="photo-slot-thumb" alt="Thumb">
+          <div class="photo-slot-info">
+            <div class="photo-slot-name">Photo 6: Sweet 17 Ki Queen</div>
+            <div class="photo-slot-desc">Chhatti polaroid photo</div>
+          </div>
+          <label class="btn-upload-file">
+            Badliye
+            <input type="file" accept="image/*" class="photo-file-input" data-target-img="polaroid-img-6" style="display: none;">
+          </label>
+        </div>
+      </div>
+
+      <div style="background: rgba(255, 209, 102, 0.1); border: 1px dashed var(--gold); border-radius: 12px; padding: 12px; font-size: 0.75rem; color: #ffd166;">
+        💡 <strong>Tip:</strong> Aap folder <code>d:\k\assets\images\</code> me jaakar bhi direct apni photos replace kar sakte hain!
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer>
+    <p>Dil se banaya gaya sirf <span>Krishuu Ji</span> ke liye 💕</p>
+    <p style="font-size: 0.75rem; margin-top: 6px; color: rgba(255, 255, 255, 0.4);">
+      12 October 2009 — Hamesha Hamari Favorite Bestie ✨
+    </p>
+  </footer>
+
+  <!-- Media Collection Data (171 Images & 41 Videos) -->
+  <script src="js/media_data.js"></script>
+
+  <!-- Core Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>

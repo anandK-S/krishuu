@@ -1,0 +1,3 @@
+# Ignore redundant WhatsApp backup folders (already copied to assets/media/)
+WhatsApp Unknown*
+*.bat
