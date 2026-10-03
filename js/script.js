@@ -422,21 +422,21 @@ function initCake() {
 // 6. CINEMATIC BIRTHDAY MOVIE THEATER ("A 17-YEAR JOURNEY")
 // ==========================================================================
 const MOVIE_SCENES = [
-  { type: 'image', src: 'assets/media/images/img_1.jpg', tag: 'Scene 1 • Ek Pari Ka Aagman', text: '12 October 2009 — Is din is duniya ko Krishuu Ji jaisi angel mili thi ✨', dur: 5000 },
-  { type: 'video', src: 'assets/media/videos/vid_1.mp4', tag: 'Scene 2 • Aapki Wo Muskaan', text: 'Aapki wo pyaari muskaan, jo har kisi ka din roshan kar deti hai 💕', dur: 6000 },
-  { type: 'image', src: 'assets/media/images/img_5.jpg', tag: 'Scene 3 • Nautanki & Drama Queen', text: 'Aapka wo cute andaaz aur dramatic expressions, full entertainment! 👑', dur: 5000 },
-  { type: 'video', src: 'assets/media/videos/vid_2.mp4', tag: 'Scene 4 • Real Moments on Camera', text: 'Har ek video me aapki sachhi khushi aur mast energy dikhti hai 🎥', dur: 6000 },
-  { type: 'image', src: 'assets/media/images/img_15.jpg', tag: 'Scene 5 • Purity of Heart', text: 'Aapka saaf aur pyaara dil, jo sabki bina kisi matlab ke itni care karta hai 💛', dur: 5000 },
+  { type: 'image', src: 'assets/media/images/img_1.jpg', tag: 'Scene 1 • Ek Pari Ka Aagman', text: '12 October 2009 — Is din is duniya ko Krishuu jaisi angel mili thi ✨', dur: 5000 },
+  { type: 'video', src: 'assets/media/videos/vid_1.mp4', tag: 'Scene 2 • Teri Wo Muskaan', text: 'Teri wo pyaari muskaan, jo har kisi ka din roshan kar deti hai 💕', dur: 6000 },
+  { type: 'image', src: 'assets/media/images/img_5.jpg', tag: 'Scene 3 • Nautanki & Drama Queen', text: 'Tera wo cute andaaz aur dramatic expressions, full entertainment! 👑', dur: 5000 },
+  { type: 'video', src: 'assets/media/videos/vid_2.mp4', tag: 'Scene 4 • Real Moments on Camera', text: 'Har ek video me teri sachhi khushi aur mast energy dikhti hai 🎥', dur: 6000 },
+  { type: 'image', src: 'assets/media/images/img_15.jpg', tag: 'Scene 5 • Purity of Heart', text: 'Tera saaf aur pyaara dil, jo sabki bina kisi matlab ke itni care karta hai 💛', dur: 5000 },
   { type: 'video', src: 'assets/media/videos/vid_3.mp4', tag: 'Scene 6 • Endless Laughter', text: 'Wo jab hum bina wajah haste-haste pagal ho jaate hain 😂', dur: 6000 },
-  { type: 'image', src: 'assets/media/images/img_25.jpg', tag: 'Scene 7 • Comfort & Peace', text: 'Bas aapke saath reh kar ya baat karke ek alag hi sukoon milta hai 🌸', dur: 5000 },
-  { type: 'video', src: 'assets/media/videos/vid_4.mp4', tag: 'Scene 8 • Bestie Vibes', text: 'Aap jaisi dost milna sach me kismat ki baat hai 👯‍♀️', dur: 6000 },
-  { type: 'image', src: 'assets/media/images/img_40.jpg', tag: 'Scene 9 • Strong & Beautiful Soul', text: 'Aap jitna sochti hain na, usse 100 guna zyada strong aur samajhdaar hain 🌟', dur: 5000 },
+  { type: 'image', src: 'assets/media/images/img_25.jpg', tag: 'Scene 7 • Comfort & Peace', text: 'Bas tere saath reh kar ya baat karke ek alag hi sukoon milta hai 🌸', dur: 5000 },
+  { type: 'video', src: 'assets/media/videos/vid_4.mp4', tag: 'Scene 8 • Bestie Vibes', text: 'Tere jaisi dost milna sach me kismat ki baat hai 👯‍♀️', dur: 6000 },
+  { type: 'image', src: 'assets/media/images/img_40.jpg', tag: 'Scene 9 • Strong & Beautiful Soul', text: 'Tu jitna sochti hai na, usse 100 guna zyada strong aur samajhdaar hai 🌟', dur: 5000 },
   { type: 'video', src: 'assets/media/videos/vid_5.mp4', tag: 'Scene 10 • Golden Hours', text: 'Zindagi ke sabse khoobsurat lamhe jo hamesha dil me rahenge 🌅', dur: 6000 },
   { type: 'image', src: 'assets/media/images/img_60.jpg', tag: 'Scene 11 • Food & Sweet Cravings', text: 'Saath me khana, nayi jagah explore karna aur unlimited baatein 🍰', dur: 5000 },
-  { type: 'video', src: 'assets/media/videos/vid_6.mp4', tag: 'Scene 12 • Forever Best Friends', text: 'Chahe life me koi bhi mod aaye, hum hamesha aapke saath khade hain 🤞', dur: 6000 },
-  { type: 'image', src: 'assets/media/images/img_80.jpg', tag: 'Scene 13 • 17 Magical Years', text: 'Sweet 16 se Fabulous 17 tak ka safar, aap hamesha aisi hi chamakti rahiye 👑', dur: 5000 },
-  { type: 'video', src: 'assets/media/videos/vid_7.mp4', tag: 'Scene 14 • Celebration Time', text: 'Aaj ka poora din sirf aur sirf aapke naam, Krishuu Ji! 🥳🎉', dur: 6000 },
-  { type: 'image', src: 'assets/media/images/img_1.jpg', tag: 'Scene 15 • Grand Birthday Finale', text: 'Happy 17th Birthday Dearest Krishuu Ji! May all your secret wishes come true! 💖🎂✨', dur: 6000 }
+  { type: 'video', src: 'assets/media/videos/vid_6.mp4', tag: 'Scene 12 • Forever Best Friends', text: 'Chahe life me koi bhi mod aaye, main hamesha tere saath khada hu 🤞', dur: 6000 },
+  { type: 'image', src: 'assets/media/images/img_80.jpg', tag: 'Scene 13 • 17 Magical Years', text: 'Sweet 16 se Fabulous 17 tak ka safar, tu hamesha aisi hi chamakti rehna 👑', dur: 5000 },
+  { type: 'video', src: 'assets/media/videos/vid_7.mp4', tag: 'Scene 14 • Celebration Time', text: 'Aaj ka poora din sirf aur sirf tere naam, Krishuu! 🥳🎉', dur: 6000 },
+  { type: 'image', src: 'assets/media/images/img_1.jpg', tag: 'Scene 15 • Grand Birthday Finale', text: 'Happy 17th Birthday Dearest Krishuu! May all your secret wishes come true! 💖🎂✨', dur: 6000 }
 ];
 
 function initCinemaMovie() {
@@ -493,7 +493,7 @@ function initCinemaMovie() {
       triggerConfetti();
       sounds.playUnlockChime();
       sceneTag.textContent = "FINALE • THE END";
-      captionText.textContent = "Happy 17th Birthday Krishuu Ji! Aap hamesha khush rahiye! 💖✨";
+      captionText.textContent = "Happy 17th Birthday Krishuu! Tu hamesha khush rehna! 💖✨";
       STATE.isCinemaPlaying = false;
       if (playIcon) playIcon.className = 'fas fa-redo';
       return;
@@ -694,7 +694,7 @@ function initPhotoVault() {
       const item = document.createElement('div');
       item.className = 'vault-item';
       item.innerHTML = `
-        <img src="${src}" alt="Krishuu Ji Memory" loading="lazy">
+        <img src="${src}" alt="Krishuu Memory" loading="lazy">
         <div class="vault-badge">#${i + 1}</div>
       `;
       item.addEventListener('click', () => openLightbox(i));
@@ -757,7 +757,7 @@ function openLightbox(idx) {
   img.src = STATE.vaultPhotos[idx];
 
   if (counter) counter.textContent = `Photo ${idx + 1} of ${total}`;
-  if (caption) caption.textContent = `Pyaari Krishuu Ji 💕 (#${idx + 1})`;
+  if (caption) caption.textContent = `Pyaari Krishuu 💕 (#${idx + 1})`;
 
   modal.classList.add('active');
 }
@@ -929,9 +929,9 @@ function initScratchCard() {
     ctx.fillStyle = '#6e5414';
     ctx.font = 'bold 15px Poppins, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('✨ Ungli ya mouse se scratch kijiye! ✨', width / 2, height / 2 - 5);
+    ctx.fillText('✨ Ungli ya mouse se scratch karo! ✨', width / 2, height / 2 - 5);
     ctx.font = '12px Poppins, sans-serif';
-    ctx.fillText('Krishuu Ji Ka Secret Birthday Message 💖', width / 2, height / 2 + 20);
+    ctx.fillText('Krishuu Ka Secret Birthday Message 💖', width / 2, height / 2 + 20);
   }
   drawCover();
 
@@ -962,23 +962,23 @@ function initScratchCard() {
 }
 
 // ==========================================================================
-// 12. INTERACTIVE WISH JAR (RESPECTFUL HINGLISH)
+// 12. INTERACTIVE WISH JAR
 // ==========================================================================
 function initWishJar() {
   const jar = document.getElementById('jar-illustration');
   const wishText = document.getElementById('wish-display-text');
 
   const wishes = [
-    "Bhagwan kare Krishuu Ji ke 17th saal me sirf khushiyaan aur success aaye! ✨",
-    "Aapki har ek wish jo aap dil me maangein wo poori ho jaye! 🎂",
-    "Aap hamesha aise hi hasti rahein aur chamakti rahein! 💖",
-    "Duniya ki saari khushiyan aur best treats Krishuu Ji ke naam! 🍰",
+    "Bhagwan kare Krishuu ke 17th saal me sirf khushiyaan aur success aaye! ✨",
+    "Teri har ek wish jo tu dil me maange wo poori ho jaye! 🎂",
+    "Tu hamesha aise hi hasti rahe aur chamakti rahe! 💖",
+    "Duniya ki saari khushiyan aur best treats Krishuu ke naam! 🍰",
     "Hamari dosti hamesha aisi hi strong rahe, chahe kuch bhi ho jaye! 🫂",
-    "Aapke chehre ki ye smile duniya ki sabse keemti cheez hai! 🌸",
-    "Kabhi koi dukh ya pareshani aapke paas bhi na bhatke! 🌟",
-    "Aap jitna sochti hain usse 100 guna zyada special hain sabke liye! 💫",
+    "Tere chehre ki ye smile duniya ki sabse keemti cheez hai! 🌸",
+    "Kabhi koi dukh ya pareshani tere paas bhi na bhatke! 🌟",
+    "Tu jitna sochti hai usse 100 guna zyada special hai sabke liye! 💫",
     "Happy 17th Birthday to the most special person in the universe! 👑",
-    "Har ek din aapke liye nayi khushiyan aur blessings lekar aaye! 🚀"
+    "Har ek din tere liye nayi khushiyan aur blessings lekar aaye! 🚀"
   ];
 
   if (jar && wishText) {
@@ -1055,7 +1055,7 @@ function initGuestbook() {
   if (form && stream) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = nameInput.value.trim() || 'Aapka Khaas Dost';
+      const name = nameInput.value.trim() || 'Tera Khaas Dost';
       const msg = msgInput.value.trim();
       if (!msg) return;
 

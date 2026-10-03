@@ -189,7 +189,6 @@ html.is-locked,
 body.is-locked {
   overflow: hidden !important;
   height: 100% !important;
-  touch-action: none;
 }
 
 .lock-screen {
@@ -203,8 +202,7 @@ body.is-locked {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 12px;
+  padding: clamp(8px, 2vh, 16px) clamp(10px, 3vw, 16px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
@@ -220,34 +218,32 @@ body.is-locked {
 .lock-container {
   width: 100%;
   max-width: 360px;
-  max-height: 96dvh;
-  background: rgba(30, 20, 52, 0.78);
+  margin: auto;
+  background: rgba(30, 20, 52, 0.85);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 28px;
-  padding: 16px 18px;
+  border-radius: clamp(18px, 4vw, 26px);
+  padding: clamp(12px, 2.5vh, 18px) clamp(14px, 3.5vw, 20px);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 94, 142, 0.25);
   text-align: center;
   position: relative;
   box-sizing: border-box;
-  margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .lock-top-icon {
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 6px;
+  width: clamp(34px, 5vh, 42px);
+  height: clamp(34px, 5vh, 42px);
+  margin: 0 auto clamp(3px, 1vh, 6px);
   background: linear-gradient(135deg, rgba(255, 94, 142, 0.2), rgba(181, 136, 247, 0.2));
   border: 1px solid rgba(255, 94, 142, 0.4);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2.5vh, 1.25rem);
   box-shadow: 0 0 15px rgba(255, 94, 142, 0.3);
   animation: floatPulse 3s ease-in-out infinite;
   flex-shrink: 0;
@@ -260,7 +256,7 @@ body.is-locked {
 
 .lock-title {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: clamp(1.15rem, 3.5vh, 1.35rem);
   letter-spacing: 0.5px;
   color: #fff;
   margin-bottom: 2px;
@@ -270,24 +266,24 @@ body.is-locked {
 .lock-title span {
   color: var(--secondary-pink);
   font-family: var(--font-handwriting);
-  font-size: 1.65rem;
+  font-size: clamp(1.4rem, 4vh, 1.65rem);
   display: inline-block;
   margin-left: 4px;
 }
 
 .lock-desc {
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 1.8vh, 0.78rem);
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: clamp(6px, 1.2vh, 10px);
 }
 
 /* iOS Notification Card inside Lock Screen */
 .lock-notification {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-  padding: 8px 10px;
-  margin-bottom: 10px;
+  border-radius: 12px;
+  padding: clamp(6px, 1vh, 8px) 10px;
+  margin-bottom: clamp(6px, 1.2vh, 10px);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -302,8 +298,8 @@ body.is-locked {
 }
 
 .notif-avatar {
-  width: 36px;
-  height: 36px;
+  width: clamp(30px, 4.5vh, 36px);
+  height: clamp(30px, 4.5vh, 36px);
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--secondary-pink);
@@ -317,7 +313,7 @@ body.is-locked {
 .notif-header {
   display: flex;
   justify-content: space-between;
-  font-size: 0.72rem;
+  font-size: clamp(0.68rem, 1.6vh, 0.72rem);
   font-weight: 600;
   color: var(--secondary-pink);
   margin-bottom: 2px;
@@ -329,7 +325,7 @@ body.is-locked {
 }
 
 .notif-body {
-  font-size: 0.74rem;
+  font-size: clamp(0.68rem, 1.6vh, 0.74rem);
   color: #fff;
   line-height: 1.25;
 }
@@ -339,21 +335,21 @@ body.is-locked {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin: 6px 0 10px;
+  gap: clamp(6px, 1.5vw, 8px);
+  margin: clamp(4px, 1vh, 8px) 0 clamp(6px, 1.2vh, 10px);
   flex-shrink: 0;
 }
 
 .time-slot {
-  width: 40px;
-  height: 46px;
+  width: clamp(36px, 8vw, 40px);
+  height: clamp(40px, 5.5vh, 46px);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.06);
   border: 2px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  font-size: clamp(1.15rem, 3vh, 1.3rem);
   font-weight: 700;
   color: var(--secondary-pink);
   transition: all 0.25s ease;
@@ -393,19 +389,20 @@ body.is-locked {
 .keypad-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  max-width: 250px;
-  margin: 0 auto 8px;
+  gap: clamp(6px, 1.2vh, 8px);
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto clamp(4px, 1vh, 8px);
   flex-shrink: 0;
 }
 
 .key-btn {
-  height: 48px;
+  height: clamp(40px, 5.5vh, 46px);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 2.8vh, 1.25rem);
   font-weight: 600;
   cursor: pointer;
   display: flex;
