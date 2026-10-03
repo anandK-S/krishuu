@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" class="is-locked">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -12,31 +12,10 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="is-locked">
 
   <!-- Floating Ambient Particles Canvas -->
   <canvas id="particles-canvas"></canvas>
-
-  <!-- Background Music Fallback Tag -->
-  <audio id="bg-audio" loop preload="none">
-    <source src="assets/audio/song.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- ==========================================================================
-       FLOATING AUDIO WIDGET
-       ========================================================================== -->
-  <div class="music-controller" title="Gaana chalane ya band karne ke liye click kijiye">
-    <div class="vinyl-disc" id="vinyl-disc">
-      <div class="vinyl-center"></div>
-    </div>
-    <div class="music-info">
-      <span class="music-title">Birthday Lofi Box</span>
-      <span class="music-sub">Sirf Krishuu Ji Ke Liye 💕</span>
-    </div>
-    <button class="music-btn" id="music-toggle-btn" aria-label="Music Chalu/Band Kijiye">
-      <i class="fas fa-play" id="music-icon"></i>
-    </button>
-  </div>
 
   <!-- ==========================================================================
        PHOTO MANAGER / CUSTOMIZER FLOATING BUTTON

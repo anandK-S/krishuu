@@ -138,63 +138,8 @@ class SoundEngine {
   }
 
   startBirthdayMelody() {
-    this.init();
-    if (this.isPlayingMelody) return;
-    this.isPlayingMelody = true;
-
-    const melody = [
-      { note: 261.63, dur: 0.3, gap: 0.35 },
-      { note: 261.63, dur: 0.2, gap: 0.25 },
-      { note: 293.66, dur: 0.5, gap: 0.6 },
-      { note: 261.63, dur: 0.5, gap: 0.6 },
-      { note: 349.23, dur: 0.5, gap: 0.6 },
-      { note: 329.63, dur: 0.8, gap: 1.0 },
-
-      { note: 261.63, dur: 0.3, gap: 0.35 },
-      { note: 261.63, dur: 0.2, gap: 0.25 },
-      { note: 293.66, dur: 0.5, gap: 0.6 },
-      { note: 261.63, dur: 0.5, gap: 0.6 },
-      { note: 392.00, dur: 0.5, gap: 0.6 },
-      { note: 349.23, dur: 0.8, gap: 1.0 },
-
-      { note: 261.63, dur: 0.3, gap: 0.35 },
-      { note: 261.63, dur: 0.2, gap: 0.25 },
-      { note: 523.25, dur: 0.6, gap: 0.7 },
-      { note: 440.00, dur: 0.5, gap: 0.6 },
-      { note: 349.23, dur: 0.5, gap: 0.6 },
-      { note: 329.63, dur: 0.5, gap: 0.6 },
-      { note: 293.66, dur: 0.8, gap: 1.0 },
-
-      { note: 466.16, dur: 0.3, gap: 0.35 },
-      { note: 466.16, dur: 0.2, gap: 0.25 },
-      { note: 440.00, dur: 0.6, gap: 0.7 },
-      { note: 349.23, dur: 0.5, gap: 0.6 },
-      { note: 392.00, dur: 0.6, gap: 0.7 },
-      { note: 349.23, dur: 1.2, gap: 1.6 }
-    ];
-
-    let noteIdx = 0;
-    const playNext = () => {
-      if (!this.isPlayingMelody) return;
-      const current = melody[noteIdx];
-
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(current.note, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + current.dur * 1.5);
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + current.dur * 1.5);
-
-      noteIdx = (noteIdx + 1) % melody.length;
-      this.timer = setTimeout(playNext, current.gap * 850);
-    };
-
-    playNext();
+    // Continuous song removed as requested by user
+    return;
   }
 
   stopBirthdayMelody() {
@@ -209,6 +154,14 @@ const sounds = new SoundEngine();
 // 2. PASSCODE VAULT CONTROLLER (Password: 12:14)
 // ==========================================================================
 function initPasscodeVault() {
+  if (!STATE.unlocked) {
+    document.body.classList.add('is-locked');
+    document.documentElement.classList.add('is-locked');
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
+  }
+
   const slots = [
     document.getElementById('slot-1'),
     document.getElementById('slot-2'),
@@ -269,11 +222,29 @@ function initPasscodeVault() {
       sounds.playUnlockChime();
       triggerConfetti();
 
+      // Ensure viewport stays strictly at top
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+
       setTimeout(() => {
         lockScreen.classList.add('unlocked');
         STATE.unlocked = true;
-        toggleAudio(true);
-      }, 500);
+
+        // Restore body scroll and keep at exact top
+        document.body.classList.remove('is-locked');
+        document.documentElement.classList.remove('is-locked');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+
+        setTimeout(() => {
+          lockScreen.style.display = 'none';
+          window.scrollTo(0, 0);
+        }, 600);
+      }, 350);
     } else {
       sounds.playErrorBuzz();
       keypad.classList.add('shake');
@@ -316,41 +287,11 @@ function initPasscodeVault() {
 }
 
 // ==========================================================================
-// 3. BACKGROUND AUDIO TOGGLE & COORDINATION
+// 3. BACKGROUND AUDIO TOGGLE (DISABLED AS REQUESTED)
 // ==========================================================================
-function toggleAudio(forcePlay = false, pauseOnly = false) {
-  const vinyl = document.getElementById('vinyl-disc');
-  const playBtnIcon = document.getElementById('music-icon');
-  const bgAudio = document.getElementById('bg-audio');
-
-  if (pauseOnly) {
-    STATE.audioPlaying = false;
-    if (vinyl) vinyl.classList.remove('playing');
-    if (playBtnIcon) playBtnIcon.className = 'fas fa-play';
-    sounds.stopBirthdayMelody();
-    if (bgAudio) bgAudio.pause();
-    return;
-  }
-
-  if (forcePlay || !STATE.audioPlaying) {
-    STATE.audioPlaying = true;
-    if (vinyl) vinyl.classList.add('playing');
-    if (playBtnIcon) playBtnIcon.className = 'fas fa-pause';
-
-    if (bgAudio && bgAudio.src && !bgAudio.paused) {
-      bgAudio.play().catch(() => {
-        sounds.startBirthdayMelody();
-      });
-    } else {
-      sounds.startBirthdayMelody();
-    }
-  } else {
-    STATE.audioPlaying = false;
-    if (vinyl) vinyl.classList.remove('playing');
-    if (playBtnIcon) playBtnIcon.className = 'fas fa-play';
-    sounds.stopBirthdayMelody();
-    if (bgAudio) bgAudio.pause();
-  }
+function toggleAudio() {
+  // Continuous song removed as requested by user
+  STATE.audioPlaying = false;
 }
 
 // ==========================================================================
@@ -1280,6 +1221,9 @@ function triggerConfetti() {
 // INITIALIZATION ON DOM READY
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
+  if (!STATE.unlocked) {
+    window.scrollTo(0, 0);
+  }
   initPasscodeVault();
   initCountdown();
   initCake();
