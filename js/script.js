@@ -170,14 +170,6 @@ function initPasscodeVault() {
   ];
   const keypad = document.getElementById('lock-container');
   const lockScreen = document.getElementById('lock-screen');
-  const hintToggle = document.getElementById('hint-toggle');
-  const hintBox = document.getElementById('hint-box');
-
-  if (hintToggle && hintBox) {
-    hintToggle.addEventListener('click', () => {
-      hintBox.classList.toggle('show');
-    });
-  }
 
   function updateSlots() {
     const raw = STATE.inputCode;
@@ -865,7 +857,205 @@ function initLightboxControls() {
 }
 
 // ==========================================================================
-// 10. VIRTUAL GIFT BOX UNBOXING
+// 10. BESTIE FRIENDSHIP QUIZ CONTROLLER ("SAWAL-JAWAB")
+// ==========================================================================
+const QUIZ_QUESTIONS = [
+  {
+    icon: "👑",
+    question: "Duniya ki sabse cute aur dramebaaz insaan kaun hai?",
+    options: [
+      { text: "A. Krishuu (Hamaari Drama Queen 👑)", reaction: "Haha bilkul sahi! Is poori duniya me tere jitna cute dramebaaz koi aur nahi ho sakta! 😂💕" },
+      { text: "B. Definitely Krishuu ✨", reaction: "Bilkul 100% correct! Tere jaisi adaayein aur nakhre kisi aur me kahaan! 🌟" },
+      { text: "C. Sirf aur sirf Krishuu 💖", reaction: "Sahi pakde hain! Tere cute expressions ka koi muqabla nahi! 🥰" },
+      { text: "D. Ye saare options sach hain! 🏆", reaction: "BINGO! 100/100 correct answer! Tu hi meri all-time favorite hai! 💖🎉" }
+    ]
+  },
+  {
+    icon: "👭",
+    question: "Jab hum dono saath hote hain, sabse zyada kya hota hai?",
+    options: [
+      { text: "A. Endless baatein aur bina matlab ka hasna 😂", reaction: "Sach me! Ek baar shuru ho gaye toh chup hone ka naam nahi lete! 🤣" },
+      { text: "B. Ek dusre ki taang khinchna aur nakhre uthana 😜", reaction: "Haha sach baat hai! Roothna aur manana hi toh hamari specialty hai! 🫂" },
+      { text: "C. Foodie mode me snacks khatam karna 🍕", reaction: "Sahi me! Tere saath khana aur nayi cheezein try karna best hai! 😋" },
+      { text: "D. Non-stop masti aur pure sukoon 🌟", reaction: "Aww! Bilkul sach, tere saath har ek pal bohot sukoon deta hai! 💕" }
+    ]
+  },
+  {
+    icon: "✨",
+    question: "Krishuu ki smile dekh kar kya hota hai?",
+    options: [
+      { text: "A. Poora din roshan ho jaata hai ☀️", reaction: "100% Sach! Teri hasi me alag hi magic hai! ✨" },
+      { text: "B. Sabse bekaar din bhi instant achha ban jaata hai ✨", reaction: "Bilkul! Chahe kitna bhi kharaab mood ho, tu ek second me fix kar deti hai! 🌸" },
+      { text: "C. Dil khush ho jaata hai 🌸", reaction: "Aww! Hamesha aise hi muskurati rehna meri bestie! 💖" },
+      { text: "D. 100/100 Pure Happiness! 💖", reaction: "Perfect answer! Teri smile is the most precious thing! 🌟👑" }
+    ]
+  },
+  {
+    icon: "🎂",
+    question: "12 October 2009 ko kya khaas hua tha?",
+    options: [
+      { text: "A. Ek angelic pari is duniya me aayi thi 👼", reaction: "Sach me ek pari aayi thi! Happy 17th Birthday Krishuu! 💖" },
+      { text: "B. Meri favorite bestie ka janam hua tha 🎂", reaction: "And that bestie is YOU! Fabulous 17, Queen! 🎉" },
+      { text: "C. Ek chamakta star aasmaan se zameen par utra tha ⭐", reaction: "Aur wo star hamesha aise hi chamakta rahega! 🌟" },
+      { text: "D. Yeh sab 100% sach hai! 👑", reaction: "Jackpot! 12 October 2009 is the most special day! 🥳🎊" }
+    ]
+  },
+  {
+    icon: "🌟",
+    question: "Is 17th birthday par Krishuu ke liye sabse badi wish kya hai?",
+    options: [
+      { text: "A. Tu hamesha aisi hi khush aur hasti rahe 💖", reaction: "Dua hai ki teri smile kabhi kam na ho! 🌸" },
+      { text: "B. Tere saare dreams aur goals sach ho jayein 🌟", reaction: "Tu jo bhi chahe wo sab tujhe mile! ✨" },
+      { text: "C. Hamari dosti lifetime aisi hi mazboot rahe 🤞", reaction: "Promise! Chahe kuch bhi ho jaye, I am always here for you! ❤️" },
+      { text: "D. Wo sab khushiyan jo tu deserve karti hai! 🎁", reaction: "Tujhe milta hai Bestie Certificate! You are 1 in a Billion! 🏆🎉" }
+    ]
+  }
+];
+
+function initFriendshipQuiz() {
+  const card = document.getElementById('quiz-card');
+  const certCard = document.getElementById('quiz-certificate-card');
+  const progressBar = document.getElementById('quiz-progress-bar');
+  const stepLabel = document.getElementById('quiz-step-label');
+  const qIcon = document.getElementById('quiz-icon-top');
+  const qText = document.getElementById('quiz-title-text');
+  const optionsList = document.getElementById('quiz-options-list');
+  const feedbackBox = document.getElementById('quiz-reaction-alert');
+  const replayBtn = document.getElementById('quiz-replay-btn');
+
+  if (!card || !certCard || !optionsList) return;
+
+  let currentIdx = 0;
+
+  function loadQuestion(idx) {
+    if (idx >= QUIZ_QUESTIONS.length) {
+      card.style.display = 'none';
+      certCard.style.display = 'block';
+      if (progressBar) progressBar.style.width = '100%';
+      if (stepLabel) stepLabel.textContent = 'Quiz Completed! 100% Score 🏆';
+      sounds.playUnlockChime();
+      triggerConfetti();
+      return;
+    }
+
+    card.style.display = 'block';
+    certCard.style.display = 'none';
+    if (feedbackBox) {
+      feedbackBox.classList.remove('show');
+      feedbackBox.innerHTML = '';
+    }
+
+    const q = QUIZ_QUESTIONS[idx];
+    if (qIcon) qIcon.textContent = q.icon;
+    if (qText) qText.textContent = q.question;
+    if (stepLabel) stepLabel.textContent = `Sawal ${idx + 1} of ${QUIZ_QUESTIONS.length}`;
+    if (progressBar) progressBar.style.width = `${((idx + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+
+    optionsList.innerHTML = '';
+    q.options.forEach((opt, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option-btn';
+      btn.innerHTML = `
+        <span class="quiz-option-badge">${String.fromCharCode(65 + oIdx)}</span>
+        <span>${opt.text}</span>
+      `;
+      btn.addEventListener('click', () => {
+        sounds.playClick();
+        optionsList.querySelectorAll('.quiz-option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+
+        if (feedbackBox) {
+          feedbackBox.innerHTML = `<strong>✨ Reaction:</strong> ${opt.reaction}`;
+          feedbackBox.classList.add('show');
+        }
+        sounds.playUnlockChime();
+
+        setTimeout(() => {
+          currentIdx++;
+          loadQuestion(currentIdx);
+        }, 1500);
+      });
+      optionsList.appendChild(btn);
+    });
+  }
+
+  loadQuestion(0);
+
+  if (replayBtn) {
+    replayBtn.addEventListener('click', () => {
+      currentIdx = 0;
+      loadQuestion(0);
+      sounds.playClick();
+    });
+  }
+}
+
+// ==========================================================================
+// 11. VINTAGE HEARTFELT LETTER CUSTOMIZER ("JO MEH LIKHUNGA")
+// ==========================================================================
+function initLetterCustomizer() {
+  const letterTextElem = document.getElementById('parchment-letter-text');
+  const editBtn = document.getElementById('btn-letter-edit');
+  const modal = document.getElementById('letter-edit-modal');
+  const closeBtn = document.getElementById('close-letter-edit');
+  const input = document.getElementById('letter-custom-input');
+  const saveBtn = document.getElementById('letter-save-btn');
+  const restoreDefaultBtn = document.getElementById('letter-restore-default-btn');
+
+  if (!letterTextElem) return;
+
+  const defaultLetter = letterTextElem.textContent.trim();
+
+  // Load saved customized letter from localStorage
+  const savedLetter = localStorage.getItem('krishuu_custom_letter');
+  if (savedLetter && savedLetter.trim()) {
+    letterTextElem.textContent = savedLetter;
+  }
+
+  if (editBtn && modal && input) {
+    editBtn.addEventListener('click', () => {
+      input.value = letterTextElem.textContent.trim();
+      modal.classList.add('active');
+      sounds.playClick();
+    });
+  }
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  }
+
+  if (saveBtn && input && modal) {
+    saveBtn.addEventListener('click', () => {
+      const val = input.value.trim();
+      if (!val) return;
+      localStorage.setItem('krishuu_custom_letter', val);
+      letterTextElem.textContent = val;
+      modal.classList.remove('active');
+      sounds.playUnlockChime();
+      triggerConfetti();
+    });
+  }
+
+  if (restoreDefaultBtn && input) {
+    restoreDefaultBtn.addEventListener('click', () => {
+      localStorage.removeItem('krishuu_custom_letter');
+      letterTextElem.textContent = defaultLetter;
+      input.value = defaultLetter;
+      sounds.playClick();
+    });
+  }
+}
+
+// ==========================================================================
+// 12. VIRTUAL GIFT BOX UNBOXING & CUTE GIFS
 // ==========================================================================
 function initGiftBox() {
   const giftBoxWrap = document.getElementById('gift-box-wrap');
@@ -888,6 +1078,16 @@ function initGiftBox() {
       }, 700);
     });
   }
+
+  // Cute reaction GIFs tap listener
+  document.querySelectorAll('.cute-gif-card').forEach(card => {
+    card.addEventListener('click', () => {
+      sounds.playUnlockChime();
+      triggerConfetti();
+      card.style.transform = 'scale(1.08) translateY(-8px)';
+      setTimeout(() => card.style.transform = '', 350);
+    });
+  });
 
   document.querySelectorAll('.btn-redeem').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -1297,6 +1497,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCake();
   initHeroSlideshowRing();
   initPetalRain();
+  initFriendshipQuiz();
+  initLetterCustomizer();
   initCinemaMovie();
   initVideoReels();
   initPhotoVault();
