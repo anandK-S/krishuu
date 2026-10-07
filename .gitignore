@@ -1,3 +1,4 @@
-# Ignore redundant WhatsApp backup folders (already copied to assets/media/)
+# Ignore redundant backup/source folders (already copied to assets/media/)
 WhatsApp Unknown*
+New folder*
 *.bat

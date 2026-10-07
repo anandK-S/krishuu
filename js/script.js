@@ -675,13 +675,12 @@ function initVideoReels() {
 }
 
 // ==========================================================================
-// 8. 170+ PHOTOS INFINITE VAULT
+// 8. 700+ PHOTOS INFINITE VAULT WITH CATEGORY TABS
 // ==========================================================================
 function initPhotoVault() {
   const grid = document.getElementById('vault-grid');
   const loadMoreBtn = document.getElementById('load-more-btn');
-  const tabAll = document.getElementById('tab-all-photos');
-  const tabShuffle = document.getElementById('tab-shuffle-photos');
+  const tabBtns = document.querySelectorAll('.gallery-filter-tabs .tab-btn');
 
   if (!grid || !STATE.vaultPhotos || STATE.vaultPhotos.length === 0) return;
 
@@ -714,31 +713,31 @@ function initPhotoVault() {
 
   if (loadMoreBtn) loadMoreBtn.addEventListener('click', () => renderBatch());
 
-  if (tabShuffle) {
-    tabShuffle.addEventListener('click', () => {
-      tabAll.classList.remove('active');
-      tabShuffle.classList.add('active');
-      for (let i = STATE.vaultPhotos.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [STATE.vaultPhotos[i], STATE.vaultPhotos[j]] = [STATE.vaultPhotos[j], STATE.vaultPhotos[i]];
-      }
-      grid.innerHTML = '';
-      STATE.loadedPhotoCount = 0;
-      renderBatch();
-      sounds.playUnlockChime();
-    });
-  }
+  // Category Tabs Handling
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-  if (tabAll) {
-    tabAll.addEventListener('click', () => {
-      tabShuffle.classList.remove('active');
-      tabAll.classList.add('active');
-      STATE.vaultPhotos = [...KRISHUU_GALLERY.images];
+      const cat = btn.getAttribute('data-cat') || 'all';
+
+      if (cat === 'shuffle') {
+        for (let i = STATE.vaultPhotos.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [STATE.vaultPhotos[i], STATE.vaultPhotos[j]] = [STATE.vaultPhotos[j], STATE.vaultPhotos[i]];
+        }
+        sounds.playUnlockChime();
+      } else if (cat === 'all') {
+        STATE.vaultPhotos = [...KRISHUU_GALLERY.images];
+      } else if (KRISHUU_GALLERY.categories && KRISHUU_GALLERY.categories[cat]) {
+        STATE.vaultPhotos = [...KRISHUU_GALLERY.categories[cat]];
+      }
+
       grid.innerHTML = '';
       STATE.loadedPhotoCount = 0;
       renderBatch();
     });
-  }
+  });
 }
 
 // ==========================================================================
@@ -1218,6 +1217,75 @@ function triggerConfetti() {
 }
 
 // ==========================================================================
+// HERO PHOTO SLIDESHOW RING & PETAL RAIN ANIMATIONS
+// ==========================================================================
+function initHeroSlideshowRing() {
+  const ring = document.getElementById('hero-slideshow-ring');
+  if (!ring) return;
+
+  let pool = [];
+  if (typeof KRISHUU_GALLERY !== 'undefined') {
+    if (KRISHUU_GALLERY.categories && KRISHUU_GALLERY.categories.solo && KRISHUU_GALLERY.categories.solo.length > 0) {
+      pool = KRISHUU_GALLERY.categories.solo;
+    } else if (KRISHUU_GALLERY.images && KRISHUU_GALLERY.images.length > 0) {
+      pool = KRISHUU_GALLERY.images;
+    }
+  }
+
+  if (pool.length === 0) return;
+
+  const count = Math.min(5, pool.length);
+  const step = Math.max(1, Math.floor(pool.length / count));
+  const chosen = [];
+  for (let i = 0; i < count; i++) {
+    chosen.push(pool[(i * step) % pool.length]);
+  }
+
+  ring.innerHTML = '';
+  chosen.forEach((src, idx) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Krishuu Photo #${idx + 1}`;
+    img.className = 'hsr-photo';
+    img.loading = 'lazy';
+    img.title = 'Tap karke zoom me dekho! 💖';
+    img.addEventListener('click', () => {
+      const vIdx = STATE.vaultPhotos.indexOf(src);
+      if (vIdx !== -1) {
+        openLightbox(vIdx);
+      } else {
+        openLightbox(0);
+      }
+    });
+    ring.appendChild(img);
+  });
+}
+
+function initPetalRain() {
+  const container = document.getElementById('petal-rain');
+  if (!container) return;
+
+  const symbols = ['🌸', '✨', '💖', '🌺', '⭐', '🩷', '💫', '🌹', '🎀'];
+  const count = 22;
+
+  container.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const drop = document.createElement('span');
+    drop.className = 'petal-drop';
+    drop.textContent = symbols[i % symbols.length];
+    drop.style.left = `${(i * (100 / count) + (Math.random() * 4 - 2)).toFixed(1)}%`;
+    const dur = (5 + Math.random() * 5).toFixed(1);
+    const delay = (Math.random() * 6).toFixed(1);
+    const size = (0.8 + Math.random() * 0.7).toFixed(2);
+    drop.style.animationDuration = `${dur}s`;
+    drop.style.animationDelay = `${delay}s`;
+    drop.style.fontSize = `${size}rem`;
+    drop.style.opacity = (0.5 + Math.random() * 0.4).toFixed(2);
+    container.appendChild(drop);
+  }
+}
+
+// ==========================================================================
 // INITIALIZATION ON DOM READY
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -1227,6 +1295,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initPasscodeVault();
   initCountdown();
   initCake();
+  initHeroSlideshowRing();
+  initPetalRain();
   initCinemaMovie();
   initVideoReels();
   initPhotoVault();

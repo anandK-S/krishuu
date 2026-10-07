@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Happy Birthday Krishuu! 💖 | Tera Special Digital Surprise</title>
-  <meta name="description" content="Personalized birthday surprise website for Krishuu! Born 12 Oct 2009. Digital cards, countdown timer, 170+ photo memories, 41 video reels, cinematic movie, interactive cake, and gift box.">
+  <meta name="description" content="Personalized birthday surprise website for Krishuu! Born 12 Oct 2009. Digital cards, countdown timer, 700+ photo memories, 45 video reels, cinematic movie, interactive cake, and gift box.">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=2.2">
+  <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 <body class="is-locked">
 
@@ -93,31 +93,74 @@
   <main class="main-wrapper">
 
     <!-- ==========================================================================
-         SECTION 2: HERO STAGE & LIVE COUNTDOWN (12 OCT CELEBRATION)
+         SECTION 2: HERO STAGE — SPECTACULAR BIRTHDAY GIRL CELEBRATION
          ========================================================================== -->
     <section class="hero-section" id="hero">
+
+      <!-- Floating Decorative Elements Layer -->
+      <div class="hero-floats" aria-hidden="true">
+        <span class="hf hf-heart" style="--x:8%;--y:12%;--s:1.4;--d:0s">💖</span>
+        <span class="hf hf-heart" style="--x:88%;--y:20%;--s:1.0;--d:0.6s">💕</span>
+        <span class="hf hf-star"  style="--x:15%;--y:55%;--s:1.2;--d:1.1s">✨</span>
+        <span class="hf hf-star"  style="--x:82%;--y:65%;--s:0.9;--d:0.3s">⭐</span>
+        <span class="hf hf-petal" style="--x:25%;--y:30%;--s:1.3;--d:0.8s">🌸</span>
+        <span class="hf hf-petal" style="--x:72%;--y:40%;--s:1.1;--d:1.5s">🌺</span>
+        <span class="hf hf-balloon" style="--x:5%;--y:70%;--s:1.0;--d:0.4s">🎈</span>
+        <span class="hf hf-balloon" style="--x:92%;--y:75%;--s:1.2;--d:1.2s">🎀</span>
+        <span class="hf hf-sparkle" style="--x:45%;--y:8%;--s:1.5;--d:0.2s">💫</span>
+        <span class="hf hf-sparkle" style="--x:60%;--y:85%;--s:0.8;--d:0.9s">🌟</span>
+        <span class="hf hf-crown"  style="--x:35%;--y:15%;--s:0.9;--d:1.3s">👑</span>
+        <span class="hf hf-heart"  style="--x:70%;--y:10%;--s:0.7;--d:0.5s">🩷</span>
+      </div>
+
+      <!-- Falling Petals / Confetti Rain -->
+      <div class="petal-rain" id="petal-rain" aria-hidden="true"></div>
+
+      <!-- Photo Slideshow Carousel (uses real media images) -->
+      <div class="hero-slideshow-ring" id="hero-slideshow-ring" aria-label="Krishuu ki photos">
+        <!-- JS will populate -->
+      </div>
+
+      <!-- Main Avatar with glow ring -->
       <div class="hero-avatar-wrap">
+        <div class="avatar-glow-ring"></div>
         <div class="crown-badge">👑</div>
         <img src="assets/images/krishuu_hero.jpg" alt="Krishuu" class="hero-avatar" id="hero-img-main">
+        <div class="avatar-sparkle-ring" aria-hidden="true">
+          <span class="asp asp1">✨</span>
+          <span class="asp asp2">💖</span>
+          <span class="asp asp3">⭐</span>
+          <span class="asp asp4">🌸</span>
+          <span class="asp asp5">✨</span>
+          <span class="asp asp6">💕</span>
+        </div>
       </div>
 
+      <!-- DOB Badge -->
       <div class="hero-badge-dob">
-        <i class="fas fa-calendar-star" style="color: var(--gold);"></i>
-        <span>12 October 2009 • Celebrating 17 Magical Years of Krishuu ✨</span>
+        <i class="fas fa-star" style="color: var(--gold);"></i>
+        <span>12 October 2009 &nbsp;•&nbsp; Fabulous 17 Years of Krishuu 🎂</span>
       </div>
 
+      <!-- Big animated title -->
       <h1 class="hero-title">
-        Happy Birthday, <span class="krishuu-name">Krishuu!</span>
+        <span class="ht-line1">Happy Birthday,</span>
+        <span class="krishuu-name">Krishuu! 🎉</span>
       </h1>
 
+      <!-- Glitter subtitle bar -->
+      <div class="glitter-subtitle-bar">
+        <span class="gsb-text">✨ &nbsp; Sweet 17 &nbsp; • &nbsp; Queen &nbsp; • &nbsp; Bestie &nbsp; • &nbsp; ❤️ &nbsp; ✨</span>
+      </div>
+
       <p class="hero-subtitle">
-        Tu sabse pyaari bestie, meri favorite insaan aur sabse cute dost hai! Aaj tu poore 17 saal ki ho gayi hai. Tere chehre ki ye smile hamesha aisi hi chamakti rahe! 💖🌸
+        Tu sabse pyaari, sabse cute aur meri sabse favorite insaan hai! Aaj tu 17 saal ki ho gayi—tere chehre ki ye smile hamesha aise hi chamakti rahe! 💖🌸
       </p>
 
-      <!-- FEATURE HIGHLIGHT: WATCH KRISHUU'S BIRTHDAY MOVIE BUTTON -->
-      <div style="margin-bottom: 30px;">
-        <button class="btn-primary" id="start-cinema-btn" style="background: linear-gradient(135deg, #ffd166, #ff5e8e); color: #1a0b2e; font-size: 1.1rem; padding: 15px 32px; box-shadow: 0 10px 30px rgba(255, 209, 102, 0.4);">
-          <i class="fas fa-film"></i> Krishuu Ki Birthday Film Play Karo 🎬🍿
+      <!-- Cinema CTA -->
+      <div class="hero-cinema-cta">
+        <button class="btn-cinema-glow" id="start-cinema-btn">
+          <i class="fas fa-film"></i>&nbsp; Krishuu Ki Birthday Film Play Karo 🎬🍿
         </button>
       </div>
 
@@ -127,15 +170,15 @@
         <h2 style="font-family: var(--font-handwriting); font-size: clamp(2rem, 5vw, 3rem); color: #ffd166; margin-bottom: 8px;">
           AAGAYA 12 OCTOBER! IT'S YOUR BIRTHDAY KRISHUU! 🎉
         </h2>
-        <p style="font-size: 1.15rem; color: #fff; max-width: 650px; margin: 0 auto 12px; line-height: 1.5;">
-          Aaj ka poora din sirf aur sirf tera hai! 12 October 2009 ko ek pari is duniya me aayi thi. May this 17th year bring you infinite laughs, sweet memories, and success! 💖✨
+        <p style="font-size: 1.1rem; color: #fff; max-width: 600px; margin: 0 auto 12px; line-height: 1.5;">
+          Aaj ka poora din sirf aur sirf tera hai! 💖 12 October 2009 ko ek pari is duniya me aayi thi. May this 17th year be the most magical one yet! ✨
         </p>
         <span style="display: inline-block; background: rgba(255, 94, 142, 0.3); border: 1px solid var(--secondary-pink); padding: 6px 18px; border-radius: 20px; font-size: 0.9rem; color: #ffd166; font-weight: 600;">
           👑 Welcome to Fabulous 17, Queen! 👑
         </span>
       </div>
 
-      <!-- Live Countdown Timer Box -->
+      <!-- Countdown Timer -->
       <div class="countdown-box" id="countdown-box">
         <div class="time-card">
           <span class="time-num" id="days-val">00</span>
@@ -158,7 +201,7 @@
         </div>
       </div>
 
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -25px; margin-bottom: 30px;">
+      <p class="countdown-tagline">
         ⏳ 12 October aane me bacha hua time... Sabse bada celebration bas shuru hone wala hai!
       </p>
 
@@ -172,9 +215,14 @@
         <a href="#gift-section" class="btn-secondary">
           <i class="fas fa-gift"></i> Surprise Gifts Kholo 🎁
         </a>
-        <button class="btn-secondary" id="preview-celebration-btn" title="Dekho 12 Oct ko kaisa blast hoga!">
+        <button class="btn-secondary" id="preview-celebration-btn">
           <i class="fas fa-sparkles" style="color: var(--gold);"></i> 12 Oct Mode Dekho 🎉
         </button>
+      </div>
+
+      <!-- Section divider -->
+      <div class="hero-divider" aria-hidden="true">
+        <span>🌸</span><span>💖</span><span>✨</span><span>👑</span><span>✨</span><span>💖</span><span>🌸</span>
       </div>
     </section>
 
@@ -438,14 +486,14 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 5: VIDEO REELS THEATER (41 VIDEOS!)
+         SECTION 5: VIDEO REELS THEATER (45 VIDEOS!)
          ========================================================================== -->
     <section class="reels-section" id="reels-section">
       <div class="text-center">
         <div class="section-tag"><i class="fas fa-video"></i> Video Reels Theater</div>
         <h2 class="section-title">Krishuu Ki <span>Reel Duniya</span> 🎬</h2>
         <p class="section-desc">
-          41 Khaas Videos & Moments! Horizontal swipe karo aur kisi bhi reel par tap karke full screen me dekho! 🍿✨
+          45 Khaas Videos & Moments! Horizontal swipe karo aur kisi bhi reel par tap karke full screen me dekho! 🍿✨
         </p>
       </div>
 
@@ -456,20 +504,23 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 6: THE INFINITE PHOTO VAULT (170+ PHOTOS OF KRISHUU!)
+         SECTION 6: THE INFINITE PHOTO VAULT (700+ PHOTOS OF KRISHUU!)
          ========================================================================== -->
     <section class="photo-vault-section" id="photo-vault-section">
       <div class="text-center">
         <div class="section-tag"><i class="fas fa-camera"></i> Infinite Photo Vault</div>
-        <h2 class="section-title">170+ Unfiltered <span>Memories</span> 📸</h2>
+        <h2 class="section-title">700+ Unfiltered <span>Memories</span> 📸</h2>
         <p class="section-desc">
-          Chhoti si muskaan se leke saare pagalpan tak — har ek photo me ek khoobsurat kahani hai! Tap karo zoom karne ke liye! 💕
+          Chhoti si muskaan se leke saare pagalpan tak — 700 se zyada khoobsurat yaadein! Tap karke filter karo aur zoom me dekho! 💕
         </p>
       </div>
 
       <div class="gallery-filter-tabs">
-        <button class="tab-btn active" id="tab-all-photos"><i class="fas fa-images"></i> Sabhi Photos (171) 💖</button>
-        <button class="tab-btn" id="tab-shuffle-photos"><i class="fas fa-random"></i> Shuffle Yaadein 🎲</button>
+        <button class="tab-btn active" id="tab-all-photos" data-cat="all"><i class="fas fa-images"></i> Sabhi (703) 💖</button>
+        <button class="tab-btn" id="tab-solo-photos" data-cat="solo"><i class="fas fa-crown"></i> Krishuu Solo (74) 👑</button>
+        <button class="tab-btn" id="tab-together-photos" data-cat="together"><i class="fas fa-heart"></i> Saath Me (399) 🫂</button>
+        <button class="tab-btn" id="tab-raas-photos" data-cat="raas"><i class="fas fa-sparkles"></i> Raas Special ✨</button>
+        <button class="tab-btn" id="tab-shuffle-photos" data-cat="shuffle"><i class="fas fa-random"></i> Shuffle 🎲</button>
       </div>
 
       <!-- Photo Grid -->
@@ -1006,10 +1057,10 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
     </p>
   </footer>
 
-  <!-- Media Collection Data (171 Images & 41 Videos) -->
-  <script src="js/media_data.js?v=2.2"></script>
+  <!-- Media Collection Data (703 Images & 45 Videos) -->
+  <script src="js/media_data.js?v=3.0"></script>
 
   <!-- Core Script -->
-  <script src="js/script.js?v=2.2"></script>
+  <script src="js/script.js?v=3.0"></script>
 </body>
 </html>
