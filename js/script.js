@@ -165,8 +165,7 @@ function initPasscodeVault() {
   const slots = [
     document.getElementById('slot-1'),
     document.getElementById('slot-2'),
-    document.getElementById('slot-3'),
-    document.getElementById('slot-4')
+    document.getElementById('slot-3')
   ];
   const keypad = document.getElementById('lock-container');
   const lockScreen = document.getElementById('lock-screen');
@@ -175,6 +174,7 @@ function initPasscodeVault() {
   function updateSlots() {
     const raw = STATE.inputCode;
     slots.forEach((slot, idx) => {
+      if (!slot) return;
       if (idx < raw.length) {
         slot.textContent = raw[idx];
         slot.classList.add('filled');
@@ -185,8 +185,6 @@ function initPasscodeVault() {
     });
   }
 
-  let codeDebounceTimer = null;
-
   document.querySelectorAll('.key-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       sounds.playClick();
@@ -196,29 +194,18 @@ function initPasscodeVault() {
       if (errorAlert) errorAlert.classList.remove('show');
 
       if (num !== null) {
-        if (STATE.inputCode.length < 4) {
+        if (STATE.inputCode.length < 3) {
           STATE.inputCode += num;
           updateSlots();
 
-          if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
-
-          if (STATE.inputCode.length === 4) {
+          if (STATE.inputCode.length === 3) {
             checkCode();
-          } else if (STATE.inputCode.length === 3 && STATE.inputCode === '111') {
-            // Also accept 3-digit '111' if user pauses
-            codeDebounceTimer = setTimeout(() => {
-              if (STATE.inputCode === '111') {
-                checkCode();
-              }
-            }, 800);
           }
         }
       } else if (action === 'delete') {
-        if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
         STATE.inputCode = STATE.inputCode.slice(0, -1);
         updateSlots();
       } else if (action === 'clear') {
-        if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
         STATE.inputCode = '';
         updateSlots();
       }
@@ -226,7 +213,7 @@ function initPasscodeVault() {
   });
 
   function checkCode() {
-    if (STATE.inputCode === '1111' || STATE.inputCode === '111') {
+    if (STATE.inputCode === '111') {
       sounds.playUnlockChime();
       triggerConfetti();
 
@@ -261,18 +248,32 @@ function initPasscodeVault() {
       }, 350);
     } else {
       sounds.playErrorBuzz();
-      if (keypad) keypad.classList.add('shake');
-      if (errorAlert) errorAlert.classList.add('show');
+      if (keypad) {
+        keypad.classList.remove('shake', 'shake-intense');
+        void keypad.offsetWidth; // trigger reflow
+        keypad.classList.add('shake-intense');
+      }
+      if (errorAlert) {
+        errorAlert.classList.add('show');
+      }
+
+      // Flash slots with angry red border
+      slots.forEach(slot => {
+        if (slot) slot.style.borderColor = '#e53935';
+      });
 
       setTimeout(() => {
-        if (keypad) keypad.classList.remove('shake');
+        if (keypad) keypad.classList.remove('shake-intense');
         STATE.inputCode = '';
         updateSlots();
-      }, 600);
+        slots.forEach(slot => {
+          if (slot) slot.style.borderColor = '';
+        });
+      }, 700);
 
       setTimeout(() => {
         if (errorAlert) errorAlert.classList.remove('show');
-      }, 2500);
+      }, 3000);
     }
   }
 
@@ -281,42 +282,21 @@ function initPasscodeVault() {
     if (errorAlert) errorAlert.classList.remove('show');
 
     if (e.key >= '0' && e.key <= '9') {
-      if (STATE.inputCode.length < 4) {
+      if (STATE.inputCode.length < 3) {
         sounds.playClick();
         STATE.inputCode += e.key;
         updateSlots();
-        if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
 
-        if (STATE.inputCode.length === 4) {
+        if (STATE.inputCode.length === 3) {
           checkCode();
-        } else if (STATE.inputCode.length === 3 && STATE.inputCode === '111') {
-          codeDebounceTimer = setTimeout(() => {
-            if (STATE.inputCode === '111') {
-              checkCode();
-            }
-          }, 800);
         }
       }
     } else if (e.key === 'Backspace') {
       sounds.playClick();
-      if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
       STATE.inputCode = STATE.inputCode.slice(0, -1);
       updateSlots();
     }
   });
-
-  function updateLockTime() {
-    const lockTimeElem = document.getElementById('lock-clock-time');
-    if (!lockTimeElem) return;
-
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    hours = hours % 12 || 12;
-    lockTimeElem.textContent = `${hours}:${minutes}`;
-  }
-  updateLockTime();
-  setInterval(updateLockTime, 1000);
 }
 
 // ==========================================================================

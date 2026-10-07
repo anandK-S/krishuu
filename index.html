@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.0">
+  <link rel="stylesheet" href="css/style.css?v=6.0">
 </head>
 <body class="is-locked">
 
@@ -31,17 +31,11 @@
   <div class="lock-screen" id="lock-screen">
     <div class="lock-container" id="lock-container">
       
-      <!-- Classic Elegant Clock & Date Header -->
+      <!-- Minimalist Luxury Lock Header -->
       <div class="lock-header-classic">
         <div class="lock-top-icon">
           <i class="fas fa-lock" id="lock-icon-status"></i>
         </div>
-        <div class="lock-date-classic">Sunday, 12 October</div>
-        <div class="lock-clock-classic">11:11</div>
-      </div>
-
-      <div class="lock-title-classic">
-        <span class="ltc-sub">Secret Birthday Vault</span>
         <h2 class="ltc-name">Krishuu 👑</h2>
       </div>
 
@@ -59,19 +53,23 @@
         </div>
       </div>
 
-      <!-- Passcode Display -->
+      <!-- Passcode Display (Format: 11:1) -->
       <div class="passcode-display">
         <div class="time-slot" id="slot-1"></div>
         <div class="time-slot" id="slot-2"></div>
         <div class="time-separator">:</div>
         <div class="time-slot" id="slot-3"></div>
-        <div class="time-slot" id="slot-4"></div>
       </div>
 
-      <!-- Anger Emoji Alert on Wrong Code -->
+      <!-- Dramatic Anger Emoji Alert on Wrong Code -->
       <div class="lock-error-alert" id="lock-error-alert">
-        <span class="anger-icon">😡</span>
-        <p>Galat Code! Krishuu Sahi Code Daal 😤</p>
+        <div class="anger-face-row">
+          <span class="anger-steam left">💨</span>
+          <span class="anger-emoji-main" id="anger-emoji-main">😡</span>
+          <span class="anger-steam right">💨</span>
+        </div>
+        <div class="anger-title">GALAT CODE! 😤</div>
+        <div class="anger-subtitle">Krishuu sahi code daal! Gussa aa raha hai! 🤬🔥</div>
       </div>
 
       <!-- Numeric Keypad -->
@@ -208,13 +206,13 @@
       <!-- Birthday Today Celebration Alert Banner (Activates on 12 Oct!) -->
       <div class="birthday-today-banner" id="birthday-today-banner">
         <div style="font-size: 2.8rem; margin-bottom: 5px;">🎉 🎂 👑 🎈 🥳</div>
-        <h2 style="font-family: var(--font-handwriting); font-size: clamp(2rem, 5vw, 3rem); color: #ffd166; margin-bottom: 8px;">
+        <h2 style="font-family: var(--font-handwriting); font-size: clamp(2rem, 5vw, 3rem); color: #d94372; margin-bottom: 8px;">
           AAGAYA 12 OCTOBER! IT'S YOUR BIRTHDAY KRISHUU! 🎉
         </h2>
-        <p style="font-size: 1.1rem; color: #fff; max-width: 600px; margin: 0 auto 12px; line-height: 1.5;">
+        <p style="font-size: 1.1rem; color: #1e1728; max-width: 600px; margin: 0 auto 12px; line-height: 1.5; font-weight: 500;">
           Aaj ka poora din sirf aur sirf tera hai! 💖 12 October 2009 ko ek pari is duniya me aayi thi. May this 17th year be the most magical one yet! ✨
         </p>
-        <span style="display: inline-block; background: rgba(255, 94, 142, 0.3); border: 1px solid var(--secondary-pink); padding: 6px 18px; border-radius: 20px; font-size: 0.9rem; color: #ffd166; font-weight: 600;">
+        <span style="display: inline-block; background: #fff0f5; border: 1.5px solid var(--secondary-pink); padding: 6px 18px; border-radius: 20px; font-size: 0.9rem; color: #a07817; font-weight: 700;">
           👑 Welcome to Fabulous 17, Queen! 👑
         </span>
       </div>
@@ -323,7 +321,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
     <div class="modal-overlay" id="letter-edit-modal">
       <div class="modal-content" style="max-width: 620px; text-align: left;">
         <button class="modal-close-btn" id="close-letter-edit">&times;</button>
-        <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #fff; margin-bottom: 6px;">
+        <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #1e1728; margin-bottom: 6px;">
           Apna <span>Khat Likho</span> ✍️
         </h3>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
@@ -467,7 +465,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
       <!-- Interactive Flip Memory Cards -->
       <div class="flip-carousel-container">
         <div class="text-center" style="margin-bottom: 25px;">
-          <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: #fff;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: #1e1728;">
             Tap Karke <span>Flip Karo</span> Aur Secret Notes Padho! 💌
           </h3>
         </div>
@@ -584,7 +582,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
         
         <!-- SURPRISE 1: CUTE DIGITAL GIFS & BIRTHDAY REACTION STICKERS -->
         <div class="text-center" style="margin-bottom: 25px;">
-          <h3 style="font-family: var(--font-serif); font-size: 2rem; color: #fff;">
+          <h3 style="font-family: var(--font-serif); font-size: 2rem; color: #1e1728;">
             Krishuu Ke <span>Digital GIFs & Stickers</span> 🥳✨
           </h3>
           <p style="color: var(--text-muted); font-size: 0.9rem;">
@@ -628,7 +626,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
 
         <!-- SURPRISE 2: VIP BIRTHDAY COUPONS -->
         <div class="text-center" style="margin-bottom: 25px;">
-          <h3 style="font-family: var(--font-serif); font-size: 2rem; color: #fff;">
+          <h3 style="font-family: var(--font-serif); font-size: 2rem; color: #1e1728;">
             Krishuu Ke <span>VIP Birthday Coupons</span> 🎟️
           </h3>
           <p style="color: var(--text-muted); font-size: 0.9rem;">
@@ -668,7 +666,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
 
         <!-- SURPRISE 3: MAGIC SCRATCH CARD -->
         <div class="scratch-card-box">
-          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: #fff; margin-bottom: 6px;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: #1e1728; margin-bottom: 6px;">
             Magic <span>Scratch Card</span> 🪄
           </h3>
           <p style="font-size: 0.8rem; color: var(--text-muted);">
@@ -983,7 +981,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
   <div class="modal-overlay" id="photo-manager-modal">
     <div class="modal-content">
       <button class="modal-close-btn" id="close-manager-modal" title="Close">&times;</button>
-      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #fff; margin-bottom: 6px;">
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #1e1728; margin-bottom: 6px;">
         Krishuu Ki <span>Photos Badlo</span> 📸
       </h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">
@@ -1094,15 +1092,15 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
        ========================================================================== -->
   <footer>
     <p>Dil se banaya gaya sirf <span>Krishuu</span> ke liye 💕</p>
-    <p style="font-size: 0.75rem; margin-top: 6px; color: rgba(255, 255, 255, 0.4);">
+    <p style="font-size: 0.75rem; margin-top: 6px; color: #72677d; font-weight: 500;">
       12 October 2009 — Hamesha Hamari Favorite Bestie ✨
     </p>
   </footer>
 
   <!-- Media Collection Data (703 Images & 45 Videos) -->
-  <script src="js/media_data.js?v=5.0"></script>
+  <script src="js/media_data.js?v=6.0"></script>
 
   <!-- Core Script -->
-  <script src="js/script.js?v=5.0"></script>
+  <script src="js/script.js?v=6.0"></script>
 </body>
 </html>
