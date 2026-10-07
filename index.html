@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=4.0">
+  <link rel="stylesheet" href="css/style.css?v=5.0">
 </head>
 <body class="is-locked">
 
@@ -37,7 +37,7 @@
           <i class="fas fa-lock" id="lock-icon-status"></i>
         </div>
         <div class="lock-date-classic">Sunday, 12 October</div>
-        <div class="lock-clock-classic">12:14</div>
+        <div class="lock-clock-classic">11:11</div>
       </div>
 
       <div class="lock-title-classic">
@@ -54,18 +54,24 @@
             <span class="notif-time">Now</span>
           </div>
           <div class="notif-body">
-            Hey Krishuu! Tere 17th birthday ke liye ek magical surprise locked hai. Secret passcode enter karo! ✨
+            Hey Krishuu! Tere birthday ke liye ek magical surprise locked hai. Secret passcode enter karo! ✨
           </div>
         </div>
       </div>
 
-      <!-- Passcode Display (HH:MM format for 12:14) -->
+      <!-- Passcode Display -->
       <div class="passcode-display">
         <div class="time-slot" id="slot-1"></div>
         <div class="time-slot" id="slot-2"></div>
         <div class="time-separator">:</div>
         <div class="time-slot" id="slot-3"></div>
         <div class="time-slot" id="slot-4"></div>
+      </div>
+
+      <!-- Anger Emoji Alert on Wrong Code -->
+      <div class="lock-error-alert" id="lock-error-alert">
+        <span class="anger-icon">😡</span>
+        <p>Galat Code! Krishuu Sahi Code Daal 😤</p>
       </div>
 
       <!-- Numeric Keypad -->
@@ -91,6 +97,41 @@
        MAIN CONTENT CONTAINER (REVEALED ON UNLOCK)
        ========================================================================== -->
   <main class="main-wrapper">
+
+    <!-- ==========================================================================
+         STEP 2: THE MOST IMPORTANT QUESTION ("WILL YOU BE MY FRIEND?")
+         ========================================================================== -->
+    <section class="friendship-question-section" id="friendship-question-section">
+      <div class="question-card" id="question-card">
+        <div class="question-sticker">
+          <img src="https://media.giphy.com/media/lTQF0ODLLjhza/giphy.gif" alt="Cute Asking Gif" class="asking-gif" onerror="this.src='assets/images/krishuu_hero.jpg'">
+        </div>
+        <div class="question-sub-badge">Ek Zaroori Sawal 🥺👉👈</div>
+        <h2 class="question-main-text">Will you be my friend? 💖</h2>
+        <p class="question-desc-text">
+          Soch samajh kar jawab dena... kyunki galat option click karna impossible hai! 😜✨
+        </p>
+
+        <div class="question-buttons-row" id="question-buttons-row">
+          <button class="btn-question-yes" id="btn-question-yes">
+            <i class="fas fa-heart"></i> YES! Forever! 🥰💖
+          </button>
+          <button class="btn-question-no" id="btn-question-no">
+            NO 🙅‍♀️
+          </button>
+        </div>
+
+        <!-- Banner revealed when YES is clicked -->
+        <div class="question-accepted-banner" id="question-accepted-banner">
+          <div style="font-size: 2.2rem; margin-bottom: 5px;">🎉 🫂 💖 👑 ✨</div>
+          <h3>YAYYY! Mujhe pata tha tu mana nahi kar sakti! 🥰</h3>
+          <p>Official Besties Forever! Ab neeche scroll karo aur apna poora birthday surprise dekho! ⬇️💕</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRAPPER FOR THE REST OF SURPRISE (UNLOCKED AFTER YES) -->
+    <div class="main-surprise-content" id="main-surprise-content">
 
     <!-- ==========================================================================
          SECTION 2: HERO STAGE — SPECTACULAR BIRTHDAY GIRL CELEBRATION
@@ -206,160 +247,23 @@
       </p>
 
       <div class="hero-cta-group">
-        <a href="#cake-section" class="btn-primary">
-          <i class="fas fa-birthday-cake"></i> Mombatti Bujhao 🎂
+        <a href="#letter-section" class="btn-primary">
+          <i class="fas fa-envelope-open-text"></i> Tera Khaas Khat 💌
         </a>
-        <a href="#reels-section" class="btn-secondary">
-          <i class="fas fa-play-circle"></i> Video Reels Dekho 🎬
+        <a href="#edited-video-section" class="btn-secondary">
+          <i class="fas fa-play-circle"></i> Special Edited Video 🎬
+        </a>
+        <a href="#gallery-section" class="btn-secondary">
+          <i class="fas fa-images"></i> Yaadein Dekho 📸
         </a>
         <a href="#gift-section" class="btn-secondary">
-          <i class="fas fa-gift"></i> Surprise Gifts Kholo 🎁
+          <i class="fas fa-gift"></i> Surprise Gifts 🎁
         </a>
-        <button class="btn-secondary" id="preview-celebration-btn">
-          <i class="fas fa-sparkles" style="color: var(--gold);"></i> 12 Oct Mode Dekho 🎉
-        </button>
       </div>
 
       <!-- Section divider -->
       <div class="hero-divider" aria-hidden="true">
         <span>🌸</span><span>💖</span><span>✨</span><span>👑</span><span>✨</span><span>💖</span><span>🌸</span>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 3: INTERACTIVE BIRTHDAY CAKE & CANDLE BLOWING
-         ========================================================================== -->
-    <section class="cake-section" id="cake-section">
-      <div class="text-center">
-        <div class="section-tag"><i class="fas fa-cake-candles"></i> Virtual Cake</div>
-        <h2 class="section-title">Aankhein Band Karo Aur <span>Wish Maango!</span> ✨</h2>
-        <p class="section-desc">
-          Dil me jo bhi sabse badi wish hai chupke se maang le, aur phir mombatti (candles) par tap karke bujhao! 🎂💨
-        </p>
-      </div>
-
-      <div class="cake-stage">
-        <div class="cake-container">
-          <!-- 3 Candles for tapping/blowing -->
-          <div class="candles-row">
-            <div class="candle" id="candle-1" title="Tap karke bujhao!">
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle" id="candle-2" title="Tap karke bujhao!">
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle" id="candle-3" title="Tap karke bujhao!">
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-          </div>
-
-          <!-- Cake Tiers -->
-          <div class="cake-tier tier-top">
-            <div class="drip" style="left: 15px; height: 16px;"></div>
-            <div class="drip" style="left: 45px; height: 22px;"></div>
-            <div class="drip" style="left: 85px; height: 18px;"></div>
-            <div class="drip" style="left: 125px; height: 20px;"></div>
-          </div>
-          <div class="cake-tier tier-mid">
-            <div class="drip" style="left: 20px; height: 20px; background: #ffd166;"></div>
-            <div class="drip" style="left: 70px; height: 25px; background: #ffd166;"></div>
-            <div class="drip" style="left: 130px; height: 18px; background: #ffd166;"></div>
-            <div class="drip" style="left: 175px; height: 22px; background: #ffd166;"></div>
-          </div>
-          <div class="cake-tier tier-bot">
-            <div class="drip" style="left: 30px; height: 22px;"></div>
-            <div class="drip" style="left: 90px; height: 28px;"></div>
-            <div class="drip" style="left: 150px; height: 20px;"></div>
-            <div class="drip" style="left: 210px; height: 25px;"></div>
-          </div>
-          <div class="cake-plate"></div>
-        </div>
-
-        <div class="cake-action-box">
-          <button class="btn-primary" id="blow-candles-btn">
-            <i class="fas fa-wind"></i> Blow Out The Candles! 💨 (Mombatti Bujhao)
-          </button>
-        </div>
-
-        <!-- Wish Sent Banner -->
-        <div class="cake-wish-banner" id="cake-wish-banner">
-          <h3 style="font-family: var(--font-handwriting); font-size: 2.2rem; color: #ffd166; margin-bottom: 6px;">
-            ✨ Teri Wish Seedha Stars Tak Pahunch Gayi! ✨
-          </h3>
-          <p style="color: #fff; font-size: 1.05rem;">
-            Happy 17th Birthday Krishuu! Bhagwan kare teri har ek dua, har ek khwaab sach ho jaye! 🌟💖
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 4: INTERACTIVE BESTIE FRIENDSHIP QUIZ ("SAWAL-JAWAB")
-         ========================================================================== -->
-    <section class="quiz-section" id="quiz-section">
-      <div class="text-center">
-        <div class="section-tag"><i class="fas fa-question-circle"></i> Fun Sawal-Jawab</div>
-        <h2 class="section-title">Kitna Jaanti Hai <span>Apne Bestie Ko?</span> ❓💖</h2>
-        <p class="section-desc">
-          Ek chhota sa fun sawal-jawab round! Har sawal ka sahi jawab do aur apna official Bestie Certificate unlock karo! ✨
-        </p>
-      </div>
-
-      <div class="quiz-container" id="quiz-container">
-        <!-- Progress Indicator -->
-        <div class="quiz-progress-track">
-          <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
-        </div>
-        <div class="quiz-step-label" id="quiz-step-label">Sawal 1 of 5</div>
-
-        <!-- Dynamic Question Card -->
-        <div class="quiz-card" id="quiz-card">
-          <div class="quiz-icon-top" id="quiz-icon-top">👑</div>
-          <h3 class="quiz-title-text" id="quiz-title-text">Duniya ki sabse cute aur dramebaaz insaan kaun hai?</h3>
-
-          <div class="quiz-options-list" id="quiz-options-list">
-            <!-- Dynamically populated via JS -->
-          </div>
-
-          <div class="quiz-reaction-alert" id="quiz-reaction-alert">
-            <!-- Reaction message shows here -->
-          </div>
-        </div>
-
-        <!-- Friendship Certificate Card (Hidden until all questions answered) -->
-        <div class="quiz-certificate-card" id="quiz-certificate-card">
-          <div class="cert-gold-frame">
-            <div class="cert-emojis">👑 🏆 💖</div>
-            <div class="cert-super-title">OFFICIAL BESTIE CERTIFICATE</div>
-            <h3 class="cert-main-title">Certified Bestie of the Century</h3>
-            <p class="cert-recipient-tag">Yeh Samman Diya Jaata Hai:</p>
-            <h2 class="cert-recipient-name">KRISHUU</h2>
-            <p class="cert-description">
-              Duniya ka sabse pyaara dil rakhne ke liye, 100% drama quotient ke liye, aur meri life ki sabse anmol aur irreplaceable best friend hone ke liye! 🌟
-            </p>
-            <div class="cert-bottom-row">
-              <div class="cert-signature-box">
-                <span class="cert-sign-label">Issued With Infinite Love:</span>
-                <span class="cert-sign-name">Tera Favorite Bestie ❤️</span>
-              </div>
-              <div class="cert-stamp-badge">
-                <span>100%</span>
-                <small>VERIFIED</small>
-              </div>
-            </div>
-          </div>
-          <div class="text-center" style="margin-top: 25px;">
-            <button class="btn-primary" id="quiz-replay-btn">
-              <i class="fas fa-redo"></i> Phir Se Khelo 🎲
-            </button>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -624,52 +528,29 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
     </section>
 
     <!-- ==========================================================================
-         SECTION 5: VIDEO REELS THEATER (45 VIDEOS!)
+         SECTION: SPECIAL EDITED BIRTHDAY VIDEO (CREATED WITH LOVE)
          ========================================================================== -->
-    <section class="reels-section" id="reels-section">
+    <section class="edited-video-section" id="edited-video-section">
       <div class="text-center">
-        <div class="section-tag"><i class="fas fa-video"></i> Video Reels Theater</div>
-        <h2 class="section-title">Krishuu Ki <span>Reel Duniya</span> 🎬</h2>
+        <div class="section-tag"><i class="fas fa-film"></i> Special Birthday Film</div>
+        <h2 class="section-title">Krishuu: Special <span>Edited Birthday Video</span> 🎬🍿</h2>
         <p class="section-desc">
-          45 Khaas Videos & Moments! Horizontal swipe karo aur kisi bhi reel par tap karke full screen me dekho! 🍿✨
+          Dil se banayi gayi ek khaas edited memory video sirf tere liye! Play karo aur dekho! ✨
         </p>
       </div>
 
-      <!-- Reels Horizontal Scroll Wrap -->
-      <div class="reels-carousel-wrap" id="reels-carousel">
-        <!-- Dynamically rendered via js/script.js from KRISHUU_GALLERY.videos -->
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 6: THE INFINITE PHOTO VAULT (700+ PHOTOS OF KRISHUU!)
-         ========================================================================== -->
-    <section class="photo-vault-section" id="photo-vault-section">
-      <div class="text-center">
-        <div class="section-tag"><i class="fas fa-camera"></i> Infinite Photo Vault</div>
-        <h2 class="section-title">700+ Unfiltered <span>Memories</span> 📸</h2>
-        <p class="section-desc">
-          Chhoti si muskaan se leke saare pagalpan tak — 700 se zyada khoobsurat yaadein! Tap karke filter karo aur zoom me dekho! 💕
-        </p>
-      </div>
-
-      <div class="gallery-filter-tabs">
-        <button class="tab-btn active" id="tab-all-photos" data-cat="all"><i class="fas fa-images"></i> Sabhi (703) 💖</button>
-        <button class="tab-btn" id="tab-solo-photos" data-cat="solo"><i class="fas fa-crown"></i> Krishuu Solo (74) 👑</button>
-        <button class="tab-btn" id="tab-together-photos" data-cat="together"><i class="fas fa-heart"></i> Saath Me (399) 🫂</button>
-        <button class="tab-btn" id="tab-raas-photos" data-cat="raas"><i class="fas fa-sparkles"></i> Raas Special ✨</button>
-        <button class="tab-btn" id="tab-shuffle-photos" data-cat="shuffle"><i class="fas fa-random"></i> Shuffle 🎲</button>
-      </div>
-
-      <!-- Photo Grid -->
-      <div class="vault-grid" id="vault-grid">
-        <!-- Dynamically populated via js/script.js from KRISHUU_GALLERY.images -->
-      </div>
-
-      <div class="load-more-wrap" id="load-more-wrap">
-        <button class="btn-primary" id="load-more-btn">
-          <i class="fas fa-plus-circle"></i> Aur Photos Dekho (Load More) 💖
-        </button>
+      <div class="video-theater-container">
+        <div class="video-card-premium">
+          <video id="edited-birthday-video" class="edited-video-player" controls playsinline preload="metadata" poster="assets/images/krishuu_hero.jpg">
+            <source src="assets/media/videos/edited_video.mp4" type="video/mp4">
+            <source src="assets/media/videos/vid_1.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="video-info-strip">
+            <div class="vis-badge"><i class="fas fa-crown"></i> Krishuu Special Edit</div>
+            <span class="vis-sub">12 October 2026 • Made With Love ❤️</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1015,6 +896,7 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
       </button>
     </div>
 
+    </div> <!-- /main-surprise-content -->
   </main>
 
   <!-- ==========================================================================
@@ -1218,9 +1100,9 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
   </footer>
 
   <!-- Media Collection Data (703 Images & 45 Videos) -->
-  <script src="js/media_data.js?v=4.0"></script>
+  <script src="js/media_data.js?v=5.0"></script>
 
   <!-- Core Script -->
-  <script src="js/script.js?v=4.0"></script>
+  <script src="js/script.js?v=5.0"></script>
 </body>
 </html>

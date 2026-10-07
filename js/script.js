@@ -151,7 +151,7 @@ class SoundEngine {
 const sounds = new SoundEngine();
 
 // ==========================================================================
-// 2. PASSCODE VAULT CONTROLLER (Password: 12:14)
+// 2. PASSCODE VAULT CONTROLLER (Password: 11:11 / 11:1)
 // ==========================================================================
 function initPasscodeVault() {
   if (!STATE.unlocked) {
@@ -170,6 +170,7 @@ function initPasscodeVault() {
   ];
   const keypad = document.getElementById('lock-container');
   const lockScreen = document.getElementById('lock-screen');
+  const errorAlert = document.getElementById('lock-error-alert');
 
   function updateSlots() {
     const raw = STATE.inputCode;
@@ -184,25 +185,40 @@ function initPasscodeVault() {
     });
   }
 
+  let codeDebounceTimer = null;
+
   document.querySelectorAll('.key-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       sounds.playClick();
       const num = btn.getAttribute('data-num');
       const action = btn.getAttribute('data-action');
 
+      if (errorAlert) errorAlert.classList.remove('show');
+
       if (num !== null) {
         if (STATE.inputCode.length < 4) {
           STATE.inputCode += num;
           updateSlots();
 
+          if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
+
           if (STATE.inputCode.length === 4) {
             checkCode();
+          } else if (STATE.inputCode.length === 3 && STATE.inputCode === '111') {
+            // Also accept 3-digit '111' if user pauses
+            codeDebounceTimer = setTimeout(() => {
+              if (STATE.inputCode === '111') {
+                checkCode();
+              }
+            }, 800);
           }
         }
       } else if (action === 'delete') {
+        if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
         STATE.inputCode = STATE.inputCode.slice(0, -1);
         updateSlots();
       } else if (action === 'clear') {
+        if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
         STATE.inputCode = '';
         updateSlots();
       }
@@ -210,7 +226,7 @@ function initPasscodeVault() {
   });
 
   function checkCode() {
-    if (STATE.inputCode === '1214') {
+    if (STATE.inputCode === '1111' || STATE.inputCode === '111') {
       sounds.playUnlockChime();
       triggerConfetti();
 
@@ -235,30 +251,55 @@ function initPasscodeVault() {
         setTimeout(() => {
           lockScreen.style.display = 'none';
           window.scrollTo(0, 0);
+
+          // Focus on the Friendship Question Section
+          const questionSection = document.getElementById('friendship-question-section');
+          if (questionSection) {
+            questionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         }, 600);
       }, 350);
     } else {
       sounds.playErrorBuzz();
-      keypad.classList.add('shake');
+      if (keypad) keypad.classList.add('shake');
+      if (errorAlert) errorAlert.classList.add('show');
+
       setTimeout(() => {
-        keypad.classList.remove('shake');
+        if (keypad) keypad.classList.remove('shake');
         STATE.inputCode = '';
         updateSlots();
-      }, 500);
+      }, 600);
+
+      setTimeout(() => {
+        if (errorAlert) errorAlert.classList.remove('show');
+      }, 2500);
     }
   }
 
   window.addEventListener('keydown', (e) => {
     if (STATE.unlocked) return;
+    if (errorAlert) errorAlert.classList.remove('show');
+
     if (e.key >= '0' && e.key <= '9') {
       if (STATE.inputCode.length < 4) {
         sounds.playClick();
         STATE.inputCode += e.key;
         updateSlots();
-        if (STATE.inputCode.length === 4) checkCode();
+        if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
+
+        if (STATE.inputCode.length === 4) {
+          checkCode();
+        } else if (STATE.inputCode.length === 3 && STATE.inputCode === '111') {
+          codeDebounceTimer = setTimeout(() => {
+            if (STATE.inputCode === '111') {
+              checkCode();
+            }
+          }, 800);
+        }
       }
     } else if (e.key === 'Backspace') {
       sounds.playClick();
+      if (codeDebounceTimer) clearTimeout(codeDebounceTimer);
       STATE.inputCode = STATE.inputCode.slice(0, -1);
       updateSlots();
     }
@@ -857,137 +898,91 @@ function initLightboxControls() {
 }
 
 // ==========================================================================
-// 10. BESTIE FRIENDSHIP QUIZ CONTROLLER ("SAWAL-JAWAB")
+// 10. RUNAWAY FRIENDSHIP QUESTION CONTROLLER ("WILL YOU BE MY FRIEND?")
 // ==========================================================================
-const QUIZ_QUESTIONS = [
-  {
-    icon: "👑",
-    question: "Duniya ki sabse cute aur dramebaaz insaan kaun hai?",
-    options: [
-      { text: "A. Krishuu (Hamaari Drama Queen 👑)", reaction: "Haha bilkul sahi! Is poori duniya me tere jitna cute dramebaaz koi aur nahi ho sakta! 😂💕" },
-      { text: "B. Definitely Krishuu ✨", reaction: "Bilkul 100% correct! Tere jaisi adaayein aur nakhre kisi aur me kahaan! 🌟" },
-      { text: "C. Sirf aur sirf Krishuu 💖", reaction: "Sahi pakde hain! Tere cute expressions ka koi muqabla nahi! 🥰" },
-      { text: "D. Ye saare options sach hain! 🏆", reaction: "BINGO! 100/100 correct answer! Tu hi meri all-time favorite hai! 💖🎉" }
-    ]
-  },
-  {
-    icon: "👭",
-    question: "Jab hum dono saath hote hain, sabse zyada kya hota hai?",
-    options: [
-      { text: "A. Endless baatein aur bina matlab ka hasna 😂", reaction: "Sach me! Ek baar shuru ho gaye toh chup hone ka naam nahi lete! 🤣" },
-      { text: "B. Ek dusre ki taang khinchna aur nakhre uthana 😜", reaction: "Haha sach baat hai! Roothna aur manana hi toh hamari specialty hai! 🫂" },
-      { text: "C. Foodie mode me snacks khatam karna 🍕", reaction: "Sahi me! Tere saath khana aur nayi cheezein try karna best hai! 😋" },
-      { text: "D. Non-stop masti aur pure sukoon 🌟", reaction: "Aww! Bilkul sach, tere saath har ek pal bohot sukoon deta hai! 💕" }
-    ]
-  },
-  {
-    icon: "✨",
-    question: "Krishuu ki smile dekh kar kya hota hai?",
-    options: [
-      { text: "A. Poora din roshan ho jaata hai ☀️", reaction: "100% Sach! Teri hasi me alag hi magic hai! ✨" },
-      { text: "B. Sabse bekaar din bhi instant achha ban jaata hai ✨", reaction: "Bilkul! Chahe kitna bhi kharaab mood ho, tu ek second me fix kar deti hai! 🌸" },
-      { text: "C. Dil khush ho jaata hai 🌸", reaction: "Aww! Hamesha aise hi muskurati rehna meri bestie! 💖" },
-      { text: "D. 100/100 Pure Happiness! 💖", reaction: "Perfect answer! Teri smile is the most precious thing! 🌟👑" }
-    ]
-  },
-  {
-    icon: "🎂",
-    question: "12 October 2009 ko kya khaas hua tha?",
-    options: [
-      { text: "A. Ek angelic pari is duniya me aayi thi 👼", reaction: "Sach me ek pari aayi thi! Happy 17th Birthday Krishuu! 💖" },
-      { text: "B. Meri favorite bestie ka janam hua tha 🎂", reaction: "And that bestie is YOU! Fabulous 17, Queen! 🎉" },
-      { text: "C. Ek chamakta star aasmaan se zameen par utra tha ⭐", reaction: "Aur wo star hamesha aise hi chamakta rahega! 🌟" },
-      { text: "D. Yeh sab 100% sach hai! 👑", reaction: "Jackpot! 12 October 2009 is the most special day! 🥳🎊" }
-    ]
-  },
-  {
-    icon: "🌟",
-    question: "Is 17th birthday par Krishuu ke liye sabse badi wish kya hai?",
-    options: [
-      { text: "A. Tu hamesha aisi hi khush aur hasti rahe 💖", reaction: "Dua hai ki teri smile kabhi kam na ho! 🌸" },
-      { text: "B. Tere saare dreams aur goals sach ho jayein 🌟", reaction: "Tu jo bhi chahe wo sab tujhe mile! ✨" },
-      { text: "C. Hamari dosti lifetime aisi hi mazboot rahe 🤞", reaction: "Promise! Chahe kuch bhi ho jaye, I am always here for you! ❤️" },
-      { text: "D. Wo sab khushiyan jo tu deserve karti hai! 🎁", reaction: "Tujhe milta hai Bestie Certificate! You are 1 in a Billion! 🏆🎉" }
-    ]
+function initFriendshipQuestion() {
+  const btnYes = document.getElementById('btn-question-yes');
+  const btnNo = document.getElementById('btn-question-no');
+  const acceptedBanner = document.getElementById('question-accepted-banner');
+  const surpriseContent = document.getElementById('main-surprise-content');
+
+  if (!btnYes || !btnNo) return;
+
+  const teasePhrases = [
+    "NO 🙅‍♀️",
+    "Arre pakad ke dikha! 😜",
+    "Nahi maan rahi? 🏃‍♀️💨",
+    "Oops! Miss ho gaya! 🤭",
+    "Sirf YES daba sakti hai! 💖",
+    "Bhag gaya button! 🚀",
+    "Tu meri bestie hai na! 🥺",
+    "Click karke toh dikha! 😝"
+  ];
+  let phraseIdx = 0;
+
+  function dodgeNoButton(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    sounds.playClick();
+
+    const btnWidth = btnNo.offsetWidth || 110;
+    const btnHeight = btnNo.offsetHeight || 44;
+    const padding = 20;
+
+    const maxX = Math.max(padding, window.innerWidth - btnWidth - padding);
+    const maxY = Math.max(padding, window.innerHeight - btnHeight - padding);
+
+    const randomX = Math.floor(Math.random() * maxX) + padding;
+    const randomY = Math.floor(Math.random() * maxY) + padding;
+
+    btnNo.classList.add('dodging');
+    btnNo.style.position = 'fixed';
+    btnNo.style.left = `${randomX}px`;
+    btnNo.style.top = `${randomY}px`;
+    btnNo.style.zIndex = '99999';
+
+    phraseIdx = (phraseIdx + 1) % teasePhrases.length;
+    btnNo.textContent = teasePhrases[phraseIdx];
   }
-];
 
-function initFriendshipQuiz() {
-  const card = document.getElementById('quiz-card');
-  const certCard = document.getElementById('quiz-certificate-card');
-  const progressBar = document.getElementById('quiz-progress-bar');
-  const stepLabel = document.getElementById('quiz-step-label');
-  const qIcon = document.getElementById('quiz-icon-top');
-  const qText = document.getElementById('quiz-title-text');
-  const optionsList = document.getElementById('quiz-options-list');
-  const feedbackBox = document.getElementById('quiz-reaction-alert');
-  const replayBtn = document.getElementById('quiz-replay-btn');
+  // Prevent Krishuu from ever clicking NO on mouse or touch
+  ['mouseenter', 'mouseover', 'touchstart', 'pointerdown', 'click'].forEach(evt => {
+    btnNo.addEventListener(evt, dodgeNoButton, { passive: false });
+  });
 
-  if (!card || !certCard || !optionsList) return;
+  // On YES click:
+  btnYes.addEventListener('click', () => {
+    sounds.playUnlockChime();
+    triggerConfetti();
 
-  let currentIdx = 0;
+    // Hide runaway NO button
+    btnNo.style.display = 'none';
 
-  function loadQuestion(idx) {
-    if (idx >= QUIZ_QUESTIONS.length) {
-      card.style.display = 'none';
-      certCard.style.display = 'block';
-      if (progressBar) progressBar.style.width = '100%';
-      if (stepLabel) stepLabel.textContent = 'Quiz Completed! 100% Score 🏆';
-      sounds.playUnlockChime();
-      triggerConfetti();
-      return;
+    // Update YES button
+    btnYes.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🥰💖✨';
+    btnYes.style.animation = 'none';
+    btnYes.style.transform = 'scale(1.06)';
+
+    // Show accepted banner
+    if (acceptedBanner) {
+      acceptedBanner.classList.add('show');
     }
 
-    card.style.display = 'block';
-    certCard.style.display = 'none';
-    if (feedbackBox) {
-      feedbackBox.classList.remove('show');
-      feedbackBox.innerHTML = '';
+    // Unhide the main surprise content!
+    if (surpriseContent) {
+      surpriseContent.classList.add('revealed');
     }
 
-    const q = QUIZ_QUESTIONS[idx];
-    if (qIcon) qIcon.textContent = q.icon;
-    if (qText) qText.textContent = q.question;
-    if (stepLabel) stepLabel.textContent = `Sawal ${idx + 1} of ${QUIZ_QUESTIONS.length}`;
-    if (progressBar) progressBar.style.width = `${((idx + 1) / QUIZ_QUESTIONS.length) * 100}%`;
-
-    optionsList.innerHTML = '';
-    q.options.forEach((opt, oIdx) => {
-      const btn = document.createElement('button');
-      btn.className = 'quiz-option-btn';
-      btn.innerHTML = `
-        <span class="quiz-option-badge">${String.fromCharCode(65 + oIdx)}</span>
-        <span>${opt.text}</span>
-      `;
-      btn.addEventListener('click', () => {
-        sounds.playClick();
-        optionsList.querySelectorAll('.quiz-option-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-
-        if (feedbackBox) {
-          feedbackBox.innerHTML = `<strong>✨ Reaction:</strong> ${opt.reaction}`;
-          feedbackBox.classList.add('show');
-        }
-        sounds.playUnlockChime();
-
-        setTimeout(() => {
-          currentIdx++;
-          loadQuestion(currentIdx);
-        }, 1500);
-      });
-      optionsList.appendChild(btn);
-    });
-  }
-
-  loadQuestion(0);
-
-  if (replayBtn) {
-    replayBtn.addEventListener('click', () => {
-      currentIdx = 0;
-      loadQuestion(0);
-      sounds.playClick();
-    });
-  }
+    // Smooth scroll down to surprise
+    setTimeout(() => {
+      const hero = document.getElementById('hero');
+      if (hero) {
+        hero.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1200);
+  });
 }
 
 // ==========================================================================
@@ -1493,15 +1488,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
   }
   initPasscodeVault();
+  initFriendshipQuestion();
   initCountdown();
-  initCake();
   initHeroSlideshowRing();
   initPetalRain();
-  initFriendshipQuiz();
   initLetterCustomizer();
-  initCinemaMovie();
-  initVideoReels();
-  initPhotoVault();
   initLightboxControls();
   initGiftBox();
   initScratchCard();
