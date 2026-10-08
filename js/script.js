@@ -4,11 +4,9 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  initPasscodeVault();
   initQuestionGate();
   initInstaFeed();
   initLetterEditor();
-  initWishButton();
 });
 
 // ==========================================================================
@@ -35,8 +33,8 @@ class SoundFX {
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(480, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(600, this.ctx.currentTime + 0.05);
+    osc.frequency.setValueAtTime(520, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(680, this.ctx.currentTime + 0.05);
     gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
     osc.connect(gain);
@@ -45,7 +43,7 @@ class SoundFX {
     osc.stop(this.ctx.currentTime + 0.05);
   }
 
-  playUnlock() {
+  playCelebration() {
     this.init();
     if (!this.ctx) return;
     const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
@@ -55,27 +53,12 @@ class SoundFX {
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
       gain.gain.setValueAtTime(0.15, this.ctx.currentTime + idx * 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + idx * 0.08 + 0.3);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + idx * 0.08 + 0.35);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start(this.ctx.currentTime + idx * 0.08);
-      osc.stop(this.ctx.currentTime + idx * 0.08 + 0.3);
+      osc.stop(this.ctx.currentTime + idx * 0.08 + 0.35);
     });
-  }
-
-  playBuzzer() {
-    this.init();
-    if (!this.ctx) return;
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(140, this.ctx.currentTime);
-    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
-    osc.start();
-    osc.stop(this.ctx.currentTime + 0.25);
   }
 
   playPop() {
@@ -98,180 +81,12 @@ class SoundFX {
 const sounds = new SoundFX();
 
 // ==========================================================================
-// 2. PASSCODE VAULT CONTROLLER (Passcode: 1111 / 111)
-// ==========================================================================
-function initPasscodeVault() {
-  const lockScreen = document.getElementById('lock-screen');
-  const lockCard = document.getElementById('lock-card');
-  const errorAlert = document.getElementById('lock-error-alert');
-  const dots = [
-    document.getElementById('dot-1'),
-    document.getElementById('dot-2'),
-    document.getElementById('dot-3'),
-    document.getElementById('dot-4')
-  ];
-
-  let enteredCode = '';
-  let autoTimer = null;
-  let isUnlocked = false;
-  const VALID_CODES = ['1111', '111', '1214', '1210'];
-
-  function updateDots() {
-    dots.forEach((dot, idx) => {
-      if (!dot) return;
-      if (idx < enteredCode.length) {
-        dot.textContent = '💖';
-        dot.classList.add('filled');
-      } else {
-        dot.textContent = '';
-        dot.classList.remove('filled');
-      }
-    });
-  }
-
-  function handleDigit(num) {
-    if (isUnlocked) return;
-    sounds.playTap();
-    if (errorAlert) errorAlert.classList.remove('show');
-    if (autoTimer) clearTimeout(autoTimer);
-
-    if (enteredCode.length < 4) {
-      enteredCode += num;
-      updateDots();
-
-      if (enteredCode.length === 4) {
-        verifyCode();
-      } else if (enteredCode.length === 3 && enteredCode === '111') {
-        // Auto-check if Krishuu stops at 3 ones (111)
-        autoTimer = setTimeout(() => {
-          if (enteredCode === '111') verifyCode();
-        }, 500);
-      }
-    }
-  }
-
-  function handleDelete() {
-    if (isUnlocked) return;
-    sounds.playTap();
-    if (errorAlert) errorAlert.classList.remove('show');
-    if (autoTimer) clearTimeout(autoTimer);
-
-    enteredCode = enteredCode.slice(0, -1);
-    updateDots();
-  }
-
-  function verifyCode() {
-    if (isUnlocked) return;
-    if (!enteredCode) return;
-
-    if (VALID_CODES.includes(enteredCode)) {
-      // SUCCESS!
-      isUnlocked = true;
-      sounds.playUnlock();
-      launchConfetti();
-
-      dots.forEach(d => {
-        if (d) {
-          d.style.borderColor = '#10b981';
-          d.style.backgroundColor = '#ecfdf5';
-          d.textContent = '✨';
-        }
-      });
-
-      window.scrollTo(0, 0);
-
-      setTimeout(() => {
-        lockScreen.classList.add('unlocked');
-        document.body.classList.remove('is-locked');
-        document.documentElement.classList.remove('is-locked');
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-        window.scrollTo(0, 0);
-
-        setTimeout(() => {
-          lockScreen.style.display = 'none';
-          window.scrollTo(0, 0);
-          const questionSection = document.getElementById('question-section');
-          if (questionSection) {
-            questionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 550);
-      }, 350);
-
-    } else {
-      // WRONG CODE: ANGER TANTRUM
-      sounds.playBuzzer();
-      if (lockCard) {
-        lockCard.classList.remove('shake-card');
-        void lockCard.offsetWidth; // trigger reflow
-        lockCard.classList.add('shake-card');
-      }
-      if (errorAlert) {
-        errorAlert.classList.add('show');
-      }
-
-      dots.forEach(d => {
-        if (d) {
-          d.style.borderColor = '#ff3b5b';
-          d.textContent = '✖';
-        }
-      });
-
-      setTimeout(() => {
-        if (lockCard) lockCard.classList.remove('shake-card');
-        enteredCode = '';
-        updateDots();
-        dots.forEach(d => {
-          if (d) {
-            d.style.borderColor = '';
-            d.textContent = '';
-          }
-        });
-      }, 700);
-
-      setTimeout(() => {
-        if (errorAlert) errorAlert.classList.remove('show');
-      }, 3500);
-    }
-  }
-
-  // Keypad click handlers
-  document.querySelectorAll('.key-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const num = btn.getAttribute('data-num');
-      const action = btn.getAttribute('data-action');
-
-      if (num !== null) {
-        handleDigit(num);
-      } else if (action === 'delete') {
-        handleDelete();
-      } else if (action === 'unlock') {
-        if (autoTimer) clearTimeout(autoTimer);
-        verifyCode();
-      }
-    });
-  });
-
-  // Physical Keyboard Support
-  window.addEventListener('keydown', (e) => {
-    if (isUnlocked) return;
-    if (e.key >= '0' && e.key <= '9') {
-      handleDigit(e.key);
-    } else if (e.key === 'Backspace') {
-      handleDelete();
-    } else if (e.key === 'Enter') {
-      if (autoTimer) clearTimeout(autoTimer);
-      verifyCode();
-    }
-  });
-}
-
-// ==========================================================================
-// 3. "WILL YOU BE MY FRIEND?" QUESTION GATE (UNTOUCHABLE NO)
+// 2. "WILL YOU BE MY FRIEND?" QUESTION GATE (UNTOUCHABLE NO)
 // ==========================================================================
 function initQuestionGate() {
   const btnYes = document.getElementById('btn-gate-yes');
   const btnNo = document.getElementById('btn-gate-no');
+  const questionSection = document.getElementById('question-section');
   const successCard = document.getElementById('gate-success-card');
   const surpriseContent = document.getElementById('surprise-content');
 
@@ -322,16 +137,20 @@ function initQuestionGate() {
   });
 
   btnYes.addEventListener('click', () => {
-    sounds.playUnlock();
+    sounds.playCelebration();
     launchConfetti();
 
     btnNo.style.display = 'none';
     btnYes.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🥰💖';
     btnYes.style.animation = 'none';
-    btnYes.style.transform = 'scale(1.05)';
+    btnYes.style.transform = 'scale(1.04)';
 
     if (successCard) {
       successCard.classList.add('show');
+    }
+
+    if (questionSection) {
+      questionSection.classList.add('unlocked-mode');
     }
 
     if (surpriseContent) {
@@ -339,16 +158,16 @@ function initQuestionGate() {
     }
 
     setTimeout(() => {
-      const heroSection = document.getElementById('hero-section');
-      if (heroSection) {
-        heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const letterSection = document.getElementById('letter-section');
+      if (letterSection) {
+        letterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 400);
+    }, 450);
   });
 }
 
 // ==========================================================================
-// 4. INSTAGRAM FEED: DOUBLE-TAP & LIKE INTERACTIONS
+// 3. INSTAGRAM FEED: DOUBLE-TAP & LIKE INTERACTIONS
 // ==========================================================================
 function initInstaFeed() {
   const postCards = document.querySelectorAll('.insta-post-card');
@@ -391,7 +210,7 @@ function initInstaFeed() {
     if (mediaWrap) {
       mediaWrap.addEventListener('click', () => {
         const now = Date.now();
-        if (now - lastTap < 300) {
+        if (now - lastTap < 320) {
           // Double Tap Triggered
           if (heartOverlay) {
             heartOverlay.classList.remove('pop');
@@ -408,7 +227,7 @@ function initInstaFeed() {
 }
 
 // ==========================================================================
-// 5. PERSONAL LETTER LIVE EDITOR (LOCAL STORAGE PERSISTENCE)
+// 4. PERSONAL LETTER LIVE EDITOR (LOCAL STORAGE PERSISTENCE)
 // ==========================================================================
 function initLetterEditor() {
   const modal = document.getElementById('letter-modal-overlay');
@@ -430,7 +249,7 @@ function initLetterEditor() {
   const inputAuthor = document.getElementById('input-author');
 
   // Load saved letter if exists
-  const savedData = localStorage.getItem('krishuu_letter_v2');
+  const savedData = localStorage.getItem('krishuu_letter_v3');
   if (savedData) {
     try {
       const parsed = JSON.parse(savedData);
@@ -476,7 +295,7 @@ function initLetterEditor() {
     if (displayP3 && data.p3) displayP3.textContent = data.p3;
     if (displayAuthor && data.author) displayAuthor.textContent = data.author;
 
-    localStorage.setItem('krishuu_letter_v2', JSON.stringify(data));
+    localStorage.setItem('krishuu_letter_v3', JSON.stringify(data));
     closeModal();
     launchConfetti();
   }
@@ -488,24 +307,7 @@ function initLetterEditor() {
 }
 
 // ==========================================================================
-// 6. HERO CELEBRATION BUTTON
-// ==========================================================================
-function initWishButton() {
-  const wishBtn = document.getElementById('btn-insta-wish');
-  if (wishBtn) {
-    wishBtn.addEventListener('click', () => {
-      sounds.playUnlock();
-      launchConfetti();
-      wishBtn.innerHTML = '<i class="fas fa-heart"></i> Woohoo! Happy Birthday Krishuu! 🥳💖';
-      setTimeout(() => {
-        wishBtn.innerHTML = '<i class="fas fa-heart"></i> Happy Birthday Krishuu! 🎂🎉';
-      }, 2500);
-    });
-  }
-}
-
-// ==========================================================================
-// 7. LIGHTWEIGHT CANVAS CONFETTI CANNON
+// 5. LIGHTWEIGHT CANVAS CONFETTI CANNON
 // ==========================================================================
 function launchConfetti() {
   const canvas = document.createElement('canvas');

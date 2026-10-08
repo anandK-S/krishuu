@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi" class="is-locked">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Happy 17th Birthday Krishuu 🌸 | Special Surprise</title>
+  <title>Happy Birthday Krishuu 🌸 | Special Surprise</title>
   <meta name="description" content="Aesthetic minimal birthday surprise for Krishuu. Born 12 October 2009.">
 
   <!-- Google Fonts: Plus Jakarta Sans & Caveat -->
@@ -15,184 +15,110 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Master Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=9.0">
+  <link rel="stylesheet" href="css/style.css?v=10.0">
 </head>
-<body class="is-locked">
+<body>
 
   <!-- ==========================================================================
-       SECTION 1: MINIMAL AESTHETIC PASSCODE LOCK SCREEN (PASSCODE: 1111)
+       STEP 1: "WILL YOU BE MY FRIEND?" QUESTION GATE (UNTOUCHABLE NO)
        ========================================================================== -->
-  <div class="lock-screen" id="lock-screen">
-    <div class="lock-card" id="lock-card">
+  <section class="question-gate-section" id="question-section">
+    <div class="gate-card" id="gate-card">
       
-      <!-- Profile Header -->
-      <div class="lock-profile">
-        <div class="lock-avatar-ring">
-          <img src="assets/images/krishuu_hero.jpg" alt="Krishuu" class="lock-avatar" onerror="this.src='assets/images/avatar.jpg'">
-          <span class="lock-sparkle">✨</span>
-        </div>
-        <h1 class="lock-name">Krishuu 🌸</h1>
-        <p class="lock-subtitle">Secret Birthday Vault</p>
+      <div class="gate-badge">
+        <i class="fas fa-sparkles"></i> Ek Zaroori Sawal 🥺👉👈
+      </div>
+      
+      <div class="gate-avatar-wrap">
+        <img src="assets/images/avatar.jpg" alt="Krishuu" class="gate-avatar" onerror="this.src='assets/images/krishuu_hero.jpg'">
+        <span class="gate-heart-badge">💖</span>
       </div>
 
-      <!-- 4 PIN Dots / Slots -->
-      <div class="pin-dots-row" id="pin-dots-row">
-        <div class="pin-dot" id="dot-1"></div>
-        <div class="pin-dot" id="dot-2"></div>
-        <div class="pin-dot" id="dot-3"></div>
-        <div class="pin-dot" id="dot-4"></div>
-      </div>
+      <h1 class="gate-title">Will you be my friend? 🌸</h1>
+      
+      <p class="gate-desc">
+        Soch samajh kar jawab dena... kyunki galat option click karna scientifically impossible hai! 😜✨
+      </p>
 
-      <!-- Cute Passcode Hint Pill -->
-      <div class="lock-hint-badge">
-        <i class="fas fa-key"></i> Passcode: <strong>1111</strong> (Make a wish! ✨)
-      </div>
-
-      <!-- Anger Alert Popup on Wrong Passcode -->
-      <div class="lock-error-alert" id="lock-error-alert">
-        <div class="anger-face">😡</div>
-        <div class="anger-text">
-          <strong>GALAT CODE! 😤</strong>
-          <span>Krishuu sahi code 1111 daal! Gussa aa raha hai! 🔥</span>
-        </div>
-      </div>
-
-      <!-- Tactile Circular Keypad -->
-      <div class="keypad-grid">
-        <button class="key-btn" data-num="1" type="button">1</button>
-        <button class="key-btn" data-num="2" type="button">2</button>
-        <button class="key-btn" data-num="3" type="button">3</button>
-        <button class="key-btn" data-num="4" type="button">4</button>
-        <button class="key-btn" data-num="5" type="button">5</button>
-        <button class="key-btn" data-num="6" type="button">6</button>
-        <button class="key-btn" data-num="7" type="button">7</button>
-        <button class="key-btn" data-num="8" type="button">8</button>
-        <button class="key-btn" data-num="9" type="button">9</button>
-        <button class="key-btn key-action" data-action="delete" type="button" title="Delete" aria-label="Delete">
-          <i class="fas fa-backspace"></i>
+      <!-- Action Buttons Row -->
+      <div class="gate-buttons" id="gate-buttons">
+        <button class="btn-gate-yes" id="btn-gate-yes" type="button">
+          <i class="fas fa-heart"></i> YES! Forever! 🥰💖
         </button>
-        <button class="key-btn" data-num="0" type="button">0</button>
-        <button class="key-btn key-action key-unlock" data-action="unlock" type="button" title="Unlock" aria-label="Unlock">
-          <i class="fas fa-lock-open"></i>
+        <button class="btn-gate-no" id="btn-gate-no" type="button">
+          NO 🙅‍♀️
         </button>
+      </div>
+
+      <!-- Celebration Card after YES is clicked -->
+      <div class="gate-success-card" id="gate-success-card">
+        <div class="success-emojis">🎉 🫂 💖 👑 ✨</div>
+        <h3>YAYYY! Mujhe pata tha tu mana nahi kar sakti! 🥰</h3>
+        <p>Official Besties Forever! Ab neeche scroll karo aur apna surprise dekho! ⬇️💕</p>
       </div>
 
     </div>
-  </div>
+  </section>
 
   <!-- ==========================================================================
-       MAIN APP CONTAINER (REVEALED ON UNLOCK)
+       MAIN SURPRISE WRAPPER (UNLOCKED AFTER YES)
        ========================================================================== -->
   <main class="main-wrapper" id="main-wrapper">
-
-    <!-- ==========================================================================
-         SECTION 2: "WILL YOU BE MY FRIEND?" QUESTION GATE (UNTOUCHABLE NO)
-         ========================================================================== -->
-    <section class="question-gate-section" id="question-section">
-      <div class="gate-card" id="gate-card">
-        <div class="gate-badge">Important Question 🥺👉👈</div>
-        <div class="gate-avatar-wrap">
-          <img src="assets/images/avatar.jpg" alt="Cute Avatar" class="gate-avatar" onerror="this.src='assets/images/krishuu_hero.jpg'">
-          <span class="gate-heart-float">💖</span>
-        </div>
-        <h2 class="gate-title">Will you be my friend? 🌸</h2>
-        <p class="gate-desc">
-          Soch samajh kar jawab dena... kyunki galat button click karna scientifically impossible hai! 😜
-        </p>
-
-        <!-- Buttons Row -->
-        <div class="gate-buttons" id="gate-buttons">
-          <button class="btn-gate-yes" id="btn-gate-yes" type="button">
-            <i class="fas fa-heart"></i> YES! Forever! 🥰💖
-          </button>
-          <button class="btn-gate-no" id="btn-gate-no" type="button">
-            NO 🙅‍♀️
-          </button>
-        </div>
-
-        <!-- Success Celebration Message -->
-        <div class="gate-success-card" id="gate-success-card">
-          <div class="success-icon">🎉 🫂 💖 👑</div>
-          <h3>YAYYY! Mujhe pata tha tu mana nahi karegi! 🥰</h3>
-          <p>Official Besties Forever! Neeche scroll karo aur apna surprise dekho! ⬇️✨</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SURPRISE CONTENT CONTAINER (UNLOCKED AFTER YES) -->
     <div class="surprise-content" id="surprise-content">
 
       <!-- ==========================================================================
-           SECTION 3: AESTHETIC INSTAGRAM HERO BIRTHDAY CARD
+           SECTION 1: PERSONAL LETTER (WRITTEN BY USER & LIVE EDITABLE)
            ========================================================================== -->
-      <section class="hero-card-section" id="hero-section">
-        <div class="insta-profile-card">
-          
-          <!-- Top bar with handle & verified tag -->
-          <div class="insta-top-bar">
-            <div class="insta-handle">
-              <i class="fab fa-instagram"></i>
-              <span>@krishuu.special</span>
-              <i class="fas fa-check-circle verified-badge" title="Verified Birthday Girl"></i>
-            </div>
-            <div class="insta-dots">•••</div>
-          </div>
+      <section class="letter-section" id="letter-section">
+        <div class="section-heading">
+          <span class="section-tag"><i class="fas fa-feather-alt"></i> Dil Se</span>
+          <h2 class="section-title">A Special Letter For You 💌</h2>
+          <p class="section-subtitle">Kuch baatein jo sirf tere liye hain... 💕</p>
+        </div>
 
-          <!-- Profile info header -->
-          <div class="insta-profile-header">
-            <div class="insta-story-ring">
-              <img src="assets/images/krishuu_hero.jpg" alt="Krishuu" class="insta-avatar" onerror="this.src='assets/images/avatar.jpg'">
-              <span class="insta-bday-crown">👑</span>
-            </div>
-            <div class="insta-stats">
-              <div class="stat-box">
-                <span class="stat-num">17</span>
-                <span class="stat-label">Years</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-num">100%</span>
-                <span class="stat-label">Drama</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-num">∞</span>
-                <span class="stat-label">Cutie</span>
-              </div>
-            </div>
-          </div>
+        <div class="letter-card">
+          <!-- Wax Seal Badge -->
+          <div class="letter-wax-seal">K</div>
 
-          <!-- Bio text -->
-          <div class="insta-bio">
-            <h2 class="bio-name">Krishuu 🌸 <span class="bio-dob-tag">12 Oct 2009</span></h2>
-            <p class="bio-text">
-              🎂 Official Birthday Girl & Chief Happiness Officer ✨<br>
-              💖 Fabulous Sweet 17 — Aaj tera din hai, shine bright like a diamond!
-            </p>
-            <div class="bio-pills">
-              <span class="bio-pill">🌸 Queen</span>
-              <span class="bio-pill">✨ Bestie</span>
-              <span class="bio-pill">🧁 Sweet 17</span>
-              <span class="bio-pill">💖 One In A Billion</span>
-            </div>
-          </div>
-
-          <!-- Quick Action Celebration Button -->
-          <div class="insta-actions">
-            <button class="btn-insta-wish" id="btn-insta-wish" type="button">
-              <i class="fas fa-heart"></i> Happy Birthday Krishuu! 🎂🎉
+          <!-- Edit Button for User -->
+          <div class="letter-edit-bar">
+            <button class="btn-edit-letter" id="btn-open-letter-modal" type="button" title="Letter edit karein">
+              <i class="fas fa-pen-fancy"></i> Edit Letter ✏️
             </button>
           </div>
 
+          <!-- Letter Content -->
+          <div class="letter-body">
+            <h3 class="letter-salutation" id="display-letter-salutation">Dear Krishuu 🌸,</h3>
+            
+            <p class="letter-paragraph" id="display-letter-p1">
+              Happy 17th Birthday! Aaj tu 17 saal ki ho gayi, aur sach bataun toh time kitni jaldi nikal gaya pata hi nahi chala. Tere saath dosti hona meri life ki sabse achhi aur pyaari cheezon me se ek hai.
+            </p>
+
+            <p class="letter-paragraph" id="display-letter-p2">
+              Tu jitni pyaari aur cute dikhti hai, tera dil usse bhi 100 guna zyada saaf hai. Tere dramatic reactions, chhota sa cute pout, aur tera hasna kisi ka bhi mood ek second me theek kar deta hai.
+            </p>
+
+            <p class="letter-paragraph" id="display-letter-p3">
+              Mai bas yahi wish karta hoon ki tere chehre ki ye smile hamesha aise hi chamakti rahe. Tu jo bhi sapna dekhe wo sab poora ho, aur tu hamesha healthy aur khush rahe. Meri favorite bestie hamesha tu hi rahegi!
+            </p>
+
+            <div class="letter-sign-off">
+              <span>Hamesha tere saath,</span>
+              <strong id="display-letter-author">Tera Best Friend 💖</strong>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- ==========================================================================
-           SECTION 4: CURATED PHOTO MEMORY FEED (8-10 AESTHETIC CARDS)
+           SECTION 2: CURATED PHOTO GALLERY (8 AESTHETIC POST CARDS)
            ========================================================================== -->
       <section class="gallery-section" id="gallery-section">
         <div class="section-heading">
-          <span class="section-tag">📸 Photo Feed</span>
-          <h2 class="section-title">Special Moments with <span>Krishuu</span></h2>
-          <p class="section-subtitle">Kuch pyaari yaadein jo hamesha dil ke paas rahengi 💕 (Double-tap to like!)</p>
+          <span class="section-tag"><i class="fas fa-camera-retro"></i> Memories</span>
+          <h2 class="section-title">Photo Gallery 📸</h2>
+          <p class="section-subtitle">Kuch pyaari yaadein jo hamesha dil ke paas rahengi (Double-tap to like! 💖)</p>
         </div>
 
         <div class="insta-feed-grid">
@@ -202,10 +128,10 @@
             <div class="post-header">
               <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <span class="post-username">krishuu.special</span>
-              <span class="post-time">• Memory 01</span>
+              <span class="post-time">• 01</span>
             </div>
             <div class="post-media-wrap">
-              <img src="assets/images/memory1.jpg" alt="Krishuu Memory 1" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <img src="assets/images/memory1.jpg" alt="Memory 1" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <div class="heart-overlay"><i class="fas fa-heart"></i></div>
             </div>
             <div class="post-footer">
@@ -226,10 +152,10 @@
             <div class="post-header">
               <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <span class="post-username">krishuu.special</span>
-              <span class="post-time">• Memory 02</span>
+              <span class="post-time">• 02</span>
             </div>
             <div class="post-media-wrap">
-              <img src="assets/images/memory2.jpg" alt="Krishuu Memory 2" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <img src="assets/images/memory2.jpg" alt="Memory 2" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <div class="heart-overlay"><i class="fas fa-heart"></i></div>
             </div>
             <div class="post-footer">
@@ -250,10 +176,10 @@
             <div class="post-header">
               <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <span class="post-username">krishuu.special</span>
-              <span class="post-time">• Memory 03</span>
+              <span class="post-time">• 03</span>
             </div>
             <div class="post-media-wrap">
-              <img src="assets/images/memory3.jpg" alt="Krishuu Memory 3" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <img src="assets/images/memory3.jpg" alt="Memory 3" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <div class="heart-overlay"><i class="fas fa-heart"></i></div>
             </div>
             <div class="post-footer">
@@ -274,10 +200,10 @@
             <div class="post-header">
               <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <span class="post-username">krishuu.special</span>
-              <span class="post-time">• Memory 04</span>
+              <span class="post-time">• 04</span>
             </div>
             <div class="post-media-wrap">
-              <img src="assets/images/memory4.jpg" alt="Krishuu Memory 4" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <img src="assets/images/memory4.jpg" alt="Memory 4" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <div class="heart-overlay"><i class="fas fa-heart"></i></div>
             </div>
             <div class="post-footer">
@@ -298,10 +224,10 @@
             <div class="post-header">
               <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <span class="post-username">krishuu.special</span>
-              <span class="post-time">• Memory 05</span>
+              <span class="post-time">• 05</span>
             </div>
             <div class="post-media-wrap">
-              <img src="assets/images/memory5.jpg" alt="Krishuu Memory 5" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <img src="assets/images/memory5.jpg" alt="Memory 5" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <div class="heart-overlay"><i class="fas fa-heart"></i></div>
             </div>
             <div class="post-footer">
@@ -322,10 +248,10 @@
             <div class="post-header">
               <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <span class="post-username">krishuu.special</span>
-              <span class="post-time">• Memory 06</span>
+              <span class="post-time">• 06</span>
             </div>
             <div class="post-media-wrap">
-              <img src="assets/images/memory6.jpg" alt="Krishuu Memory 6" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <img src="assets/images/memory6.jpg" alt="Memory 6" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
               <div class="heart-overlay"><i class="fas fa-heart"></i></div>
             </div>
             <div class="post-footer">
@@ -341,16 +267,64 @@
             </div>
           </div>
 
+          <!-- Post 7 -->
+          <div class="insta-post-card" data-post-id="7">
+            <div class="post-header">
+              <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <span class="post-username">krishuu.special</span>
+              <span class="post-time">• 07</span>
+            </div>
+            <div class="post-media-wrap">
+              <img src="assets/images/memory7.jpg" alt="Memory 7" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <div class="heart-overlay"><i class="fas fa-heart"></i></div>
+            </div>
+            <div class="post-footer">
+              <div class="post-actions">
+                <button class="btn-like" type="button" aria-label="Like Post"><i class="far fa-heart"></i></button>
+                <button class="btn-comment" type="button" aria-label="Comment"><i class="far fa-comment"></i></button>
+                <button class="btn-share" type="button" aria-label="Share"><i class="far fa-paper-plane"></i></button>
+              </div>
+              <div class="post-likes"><span class="like-count">2,150</span> likes</div>
+              <div class="post-caption">
+                <strong>krishuu.special</strong> Unlimited laughs and golden memories! 🌟🌸
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 8 -->
+          <div class="insta-post-card" data-post-id="8">
+            <div class="post-header">
+              <img src="assets/images/avatar.jpg" alt="Avatar" class="post-user-pic" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <span class="post-username">krishuu.special</span>
+              <span class="post-time">• 08</span>
+            </div>
+            <div class="post-media-wrap">
+              <img src="assets/images/memory8.jpg" alt="Memory 8" class="post-img" onerror="this.src='assets/images/krishuu_hero.jpg'">
+              <div class="heart-overlay"><i class="fas fa-heart"></i></div>
+            </div>
+            <div class="post-footer">
+              <div class="post-actions">
+                <button class="btn-like" type="button" aria-label="Like Post"><i class="far fa-heart"></i></button>
+                <button class="btn-comment" type="button" aria-label="Comment"><i class="far fa-comment"></i></button>
+                <button class="btn-share" type="button" aria-label="Share"><i class="far fa-paper-plane"></i></button>
+              </div>
+              <div class="post-likes"><span class="like-count">2,417</span> likes</div>
+              <div class="post-caption">
+                <strong>krishuu.special</strong> Fabulous 17 years of being our favorite! 👑💖
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
       <!-- ==========================================================================
-           SECTION 5: VIDEO THEATER (DEDICATED EDITED VIDEO PLAYER)
+           SECTION 3: SPECIAL EDITED VIDEO PLAYER
            ========================================================================== -->
       <section class="video-section" id="video-section">
         <div class="section-heading">
-          <span class="section-tag">🎬 Special Video Reel</span>
-          <h2 class="section-title">Special Birthday Video</h2>
+          <span class="section-tag"><i class="fas fa-film"></i> Video Player</span>
+          <h2 class="section-title">Special Birthday Video 🎬</h2>
           <p class="section-subtitle">Krishuu ke liye dedicated cinema montage ✨</p>
         </div>
 
@@ -363,68 +337,23 @@
           </div>
           <div class="video-bar-info">
             <div class="video-meta">
-              <span class="video-tag-pill"><i class="fas fa-film"></i> Edited with Love</span>
+              <span class="video-tag-pill"><i class="fas fa-heart"></i> Edited with Love</span>
               <h3 class="video-title-text">Krishuu's Special Birthday Edit 🎂</h3>
             </div>
             <p class="video-hint-text">
-              💡 <em>Ye video tere liye banayi gayi hai! Play karke dekho!</em>
+              💡 <em>Ye video tere liye banayi gayi hai! Play button press karke enjoy karo!</em>
             </p>
           </div>
         </div>
       </section>
 
       <!-- ==========================================================================
-           SECTION 6: PERSONAL LETTER (LIVE EDITABLE & CUSTOMIZABLE)
-           ========================================================================== -->
-      <section class="letter-section" id="letter-section">
-        <div class="section-heading">
-          <span class="section-tag">💌 Dil Se</span>
-          <h2 class="section-title">A Special Letter For You</h2>
-          <p class="section-subtitle">Kuch baatein jo sirf tere liye hain... 💕</p>
-        </div>
-
-        <div class="letter-card">
-          <!-- Letter Ribbon / Wax Seal -->
-          <div class="letter-wax-seal">K</div>
-
-          <!-- Edit Button for User -->
-          <div class="letter-edit-bar">
-            <button class="btn-edit-letter" id="btn-open-letter-modal" type="button">
-              <i class="fas fa-pen-fancy"></i> Edit Letter ✏️
-            </button>
-          </div>
-
-          <!-- Letter Content -->
-          <div class="letter-body">
-            <h3 class="letter-salutation" id="display-letter-salutation">Dear Krishuu 🌸,</h3>
-            
-            <p class="letter-paragraph" id="display-letter-p1">
-              Happy 17th Birthday! Aaj tu 17 saal ki ho gayi, aur sach bataun toh time kitni jaldi guzar gaya pata hi nahi chala. Tere saath dosti hona meri life ki sabse achhi cheezon me se ek hai.
-            </p>
-
-            <p class="letter-paragraph" id="display-letter-p2">
-              Tu jitni pyaari aur sweet dikhti hai, tera dil usse bhi 100 guna zyada saaf hai. Tere cute expressions, tera bina baat ke dramatic ban jana, aur tera hasna kisi ka bhi mood ek second me theek kar deta hai.
-            </p>
-
-            <p class="letter-paragraph" id="display-letter-p3">
-              Mai bas yahi wish karta hoon ki tere chehre ki ye smile kabhi kam na ho. Tu jo bhi sapna dekhe, wo sab poora ho, aur tu hamesha healthy aur bohot khush rahe! Meri favorite bestie hamesha tu hi rahegi!
-            </p>
-
-            <div class="letter-sign-off">
-              <span>Hamesha tere saath,</span>
-              <strong id="display-letter-author">Tera Best Friend 💖</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================================================
-           SECTION 7: 17 REASONS WHY KRISHUU IS SPECIAL (SWEET 17)
+           SECTION 4: 17 REASONS WHY SHE'S SPECIAL (SWEET 17)
            ========================================================================== -->
       <section class="reasons-section" id="reasons-section">
         <div class="section-heading">
-          <span class="section-tag">✨ Sweet 17</span>
-          <h2 class="section-title">17 Reasons Why <span>Krishuu</span> Is One In A Billion</h2>
+          <span class="section-tag"><i class="fas fa-heart"></i> Sweet 17</span>
+          <h2 class="section-title">17 Reasons Why She's Special ✨</h2>
           <p class="section-subtitle">17 saal ki Krishuu ke liye 17 sabse cute aur sachhi baatein! 🌸</p>
         </div>
 
@@ -605,7 +534,7 @@
     <div class="modal-card">
       <div class="modal-header">
         <h3><i class="fas fa-feather-alt"></i> Apna Letter Likho ✏️</h3>
-        <button class="modal-close" id="btn-close-letter-modal" type="button">&times;</button>
+        <button class="modal-close" id="btn-close-letter-modal" type="button" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
         <label for="input-salutation">Salutation / Header:</label>
@@ -631,6 +560,6 @@
   </div>
 
   <!-- Master JavaScript -->
-  <script src="js/script.js?v=9.0"></script>
+  <script src="js/script.js?v=10.0"></script>
 </body>
 </html>
