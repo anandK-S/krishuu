@@ -118,11 +118,6 @@ function initGiftUnboxing() {
     e.preventDefault();
     triggerUnbox();
   }, { passive: false });
-
-  // Fast fallback after 1.8s
-  setTimeout(() => {
-    if (!isUnboxing) triggerUnbox();
-  }, 1800);
 }
 
 // ==========================================================================
