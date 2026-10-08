@@ -4,28 +4,11 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  
-      // Solid Elegant Intro Animation
-  const intro = document.getElementById('intro-animation');
-  if(intro) {
-    const dismissIntro = () => {
-      if(intro.classList.contains('hidden')) return;
-      intro.classList.add('hidden');
-      setTimeout(() => {
-        intro.style.display = 'none';
-      }, 500);
-    };
-
-    const timer = setTimeout(dismissIntro, 1800);
-    intro.addEventListener('click', () => {
-      clearTimeout(timer);
-      dismissIntro();
-    });
-  }
-
+  initGiftUnboxing();
   initQuestionGate();
   initWishButton();
-  initInstaFeed();
+  initPolaroidGallery();
+  initReasonReactions();
   initLetterEditor();
 });
 
@@ -101,7 +84,48 @@ class SoundFX {
 const sounds = new SoundFX();
 
 // ==========================================================================
-// 2. MULTI-QUESTION GATE (UNTOUCHABLE NO BUTTONS)
+// 2. MAGICAL 3D UNBOXING INTRO EXPERIENCE
+// ==========================================================================
+function initGiftUnboxing() {
+  const intro = document.getElementById('intro-animation');
+  const giftBox = document.getElementById('intro-gift-box');
+  if (!intro) return;
+
+  let isUnboxing = false;
+
+  function triggerUnbox() {
+    if (isUnboxing) return;
+    isUnboxing = true;
+
+    sounds.playCelebration();
+    launchConfetti();
+
+    if (giftBox) {
+      giftBox.classList.add('unboxing');
+    }
+
+    setTimeout(() => {
+      intro.classList.add('hidden');
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 600);
+    }, 650);
+  }
+
+  intro.addEventListener('click', triggerUnbox);
+  intro.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    triggerUnbox();
+  }, { passive: false });
+
+  // Auto unbox fallback after 3.8s so user never waits too long
+  setTimeout(() => {
+    if (!isUnboxing) triggerUnbox();
+  }, 3800);
+}
+
+// ==========================================================================
+// 3. QUESTION GATE (UNTOUCHABLE NO BUTTON WITH SAFE SCREEN DODGING)
 // ==========================================================================
 function initQuestionGate() {
   const btnYes = document.getElementById('btn-gate-yes-1');
@@ -129,7 +153,7 @@ function initQuestionGate() {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (window.sounds) sounds.playTap();
+    sounds.playTap();
 
     phraseIdx = (phraseIdx + 1) % teasePhrases.length;
     btnNo.textContent = teasePhrases[phraseIdx];
@@ -160,7 +184,7 @@ function initQuestionGate() {
 
   if (btnYes) {
     btnYes.addEventListener('click', () => {
-      if (window.sounds) sounds.playCelebration();
+      sounds.playCelebration();
       launchConfetti();
 
       if (btnNo) btnNo.style.display = 'none';
@@ -176,8 +200,9 @@ function initQuestionGate() {
     });
   }
 }
+
 // ==========================================================================
-// HERO INSTAGRAM WISH BUTTON
+// 4. HERO INSTAGRAM WISH BUTTON
 // ==========================================================================
 function initWishButton() {
   const wishBtn = document.getElementById('btn-insta-wish');
@@ -194,67 +219,114 @@ function initWishButton() {
 }
 
 // ==========================================================================
-// 3. INSTAGRAM FEED: DOUBLE-TAP & LIKE INTERACTIONS
+// 5. POLAROID SCRAPBOOK PHOTO GALLERY & LIGHTBOX
 // ==========================================================================
-function initInstaFeed() {
-  const postCards = document.querySelectorAll('.insta-post-card');
+function initPolaroidGallery() {
+  const cards = document.querySelectorAll('.polaroid-card');
+  const lightboxModal = document.getElementById('lightbox-modal-overlay');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const btnCloseLightbox = document.getElementById('btn-close-lightbox');
 
-  postCards.forEach(card => {
-    const mediaWrap = card.querySelector('.post-media-wrap');
-    const heartOverlay = card.querySelector('.heart-overlay');
-    const btnLike = card.querySelector('.btn-like');
-    const likeCountSpan = card.querySelector('.like-count');
+  cards.forEach(card => {
+    const img = card.querySelector('.gallery-img');
+    const mediaWrap = card.querySelector('.polaroid-media');
+    const captionSpan = card.querySelector('.polaroid-caption');
+    const likeBtn = card.querySelector('.polaroid-like-btn');
+    const likeNum = card.querySelector('.like-num');
 
-    let likes = parseInt(likeCountSpan ? likeCountSpan.textContent.replace(/,/g, '') : '1712', 10);
     let isLiked = false;
 
-    function toggleLike() {
+    function triggerLike() {
       isLiked = !isLiked;
       sounds.playPop();
 
-      if (isLiked) {
-        likes += 1;
-        btnLike.classList.add('liked');
-        btnLike.innerHTML = '<i class="fas fa-heart"></i>';
-      } else {
-        likes = Math.max(0, likes - 1);
-        btnLike.classList.remove('liked');
-        btnLike.innerHTML = '<i class="far fa-heart"></i>';
+      if (likeBtn) {
+        likeBtn.classList.toggle('liked', isLiked);
+        likeBtn.innerHTML = isLiked
+          ? '<i class="fas fa-heart"></i> Liked 💖'
+          : '<i class="far fa-heart"></i> <span class="like-num">' + (likeNum ? likeNum.textContent : '2.1k') + '</span>';
       }
 
-      if (likeCountSpan) {
-        likeCountSpan.textContent = likes.toLocaleString();
+      // Heart burst animation on photo
+      if (mediaWrap) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-pop-burst';
+        heart.innerHTML = '💖';
+        mediaWrap.appendChild(heart);
+        setTimeout(() => heart.remove(), 700);
       }
     }
 
-    // Button click
-    if (btnLike) {
-      btnLike.addEventListener('click', toggleLike);
-    }
-
-    // Double tap on media wrap
-    let lastTap = 0;
-    if (mediaWrap) {
-      mediaWrap.addEventListener('click', () => {
-        const now = Date.now();
-        if (now - lastTap < 320) {
-          // Double Tap Triggered
-          if (heartOverlay) {
-            heartOverlay.classList.remove('pop');
-            void heartOverlay.offsetWidth;
-            heartOverlay.classList.add('pop');
-            setTimeout(() => heartOverlay.classList.remove('pop'), 600);
-          }
-          if (!isLiked) toggleLike();
-        }
-        lastTap = now;
+    if (likeBtn) {
+      likeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        triggerLike();
       });
     }
+
+    // Double tap & single tap on polaroid
+    let lastTap = 0;
+    card.addEventListener('click', (e) => {
+      const now = Date.now();
+      if (now - lastTap < 320) {
+        // Double-tap
+        e.stopPropagation();
+        triggerLike();
+      } else {
+        // Single-tap: Open lightbox
+        if (img && lightboxImg && lightboxModal) {
+          lightboxImg.src = img.src;
+          if (lightboxCaption && captionSpan) {
+            lightboxCaption.textContent = captionSpan.textContent + ' 🌸';
+          }
+          lightboxModal.classList.add('active');
+          sounds.playTap();
+        }
+      }
+      lastTap = now;
+    });
+  });
+
+  if (btnCloseLightbox && lightboxModal) {
+    btnCloseLightbox.addEventListener('click', () => {
+      lightboxModal.classList.remove('active');
+      sounds.playTap();
+    });
+
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) {
+        lightboxModal.classList.remove('active');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+        lightboxModal.classList.remove('active');
+      }
+    });
+  }
+}
+
+// ==========================================================================
+// 6. COLLECTOR'S REASONS TOKEN REACTIONS
+// ==========================================================================
+function initReasonReactions() {
+  const reactBtns = document.querySelectorAll('.token-react-btn');
+  reactBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sounds.playPop();
+      btn.classList.toggle('reacted');
+      const isReacted = btn.classList.contains('reacted');
+      btn.innerHTML = isReacted
+        ? '<i class="fas fa-heart"></i> <span>Loved 💖</span>'
+        : '<i class="far fa-heart"></i> <span>Sweet Trait</span>';
+    });
   });
 }
 
 // ==========================================================================
-// 4. PERSONAL LETTER LIVE EDITOR (LOCAL STORAGE PERSISTENCE)
+// 7. PERSONAL LETTER LIVE EDITOR (LOCAL STORAGE PERSISTENCE)
 // ==========================================================================
 function initLetterEditor() {
   const modal = document.getElementById('letter-modal-overlay');
@@ -307,7 +379,7 @@ function initLetterEditor() {
   }
 
   function saveLetter() {
-    sounds.playPop();
+    sounds.playCelebration();
     const data = {
       salutation: inputSalutation ? inputSalutation.value : '',
       p1: inputP1 ? inputP1.value : '',
@@ -334,7 +406,7 @@ function initLetterEditor() {
 }
 
 // ==========================================================================
-// 5. LIGHTWEIGHT CANVAS CONFETTI CANNON
+// 8. LIGHTWEIGHT CANVAS CONFETTI CANNON
 // ==========================================================================
 function launchConfetti() {
   const canvas = document.createElement('canvas');
@@ -351,21 +423,21 @@ function launchConfetti() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const colors = ['#ff5e83', '#ff7b9a', '#ffd166', '#a288e3', '#06d6a0', '#ff9ebb'];
+  const colors = ['#ff4e70', '#ff809f', '#ffd166', '#a288e3', '#06d6a0', '#ffb3c6', '#ffffff'];
   const particles = [];
-  const particleCount = 75;
+  const particleCount = 85;
 
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
       r: Math.random() * 5 + 3,
-      dx: (Math.random() - 0.5) * 12,
-      dy: (Math.random() - 0.7) * 14,
+      dx: (Math.random() - 0.5) * 14,
+      dy: (Math.random() - 0.7) * 16,
       color: colors[Math.floor(Math.random() * colors.length)],
       tilt: Math.random() * 10,
       tiltAngle: 0,
-      tiltAngleInc: (Math.random() * 0.07) + 0.05,
+      tiltAngleInc: (Math.random() * 0.08) + 0.05,
       alpha: 1
     });
   }
@@ -380,12 +452,12 @@ function launchConfetti() {
     particles.forEach(p => {
       p.x += p.dx;
       p.y += p.dy;
-      p.dy += 0.35; // gravity
+      p.dy += 0.38; // gravity
       p.tiltAngle += p.tiltAngleInc;
       p.tilt = Math.sin(p.tiltAngle) * 8;
 
-      if (frameCount > 30) {
-        p.alpha -= 0.02;
+      if (frameCount > 28) {
+        p.alpha -= 0.022;
       }
 
       ctx.save();
