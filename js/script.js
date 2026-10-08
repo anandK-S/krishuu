@@ -104,13 +104,13 @@ function initGiftUnboxing() {
       giftContainer.classList.add('unboxing');
     }
 
-    // Ultra-fast instant snap into Question Gate (< 200ms)
+    // Perfectly timed celebratory reveal (1200ms: clearly visible & readable!)
     setTimeout(() => {
       intro.classList.add('hidden');
       setTimeout(() => {
         intro.style.display = 'none';
-      }, 150);
-    }, 200);
+      }, 400);
+    }, 1200);
   }
 
   intro.addEventListener('click', triggerUnbox);
