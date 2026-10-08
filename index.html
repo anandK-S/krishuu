@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=6.0">
+  <link rel="stylesheet" href="css/style.css?v=7.0">
 </head>
 <body class="is-locked">
 
@@ -26,7 +26,7 @@
   </button>
 
   <!-- ==========================================================================
-       SECTION 1: CLASSIC LUXURY SECRET VAULT LOCK SCREEN (PASSCODE: 12:14)
+       SECTION 1: LUXURY SECRET VAULT LOCK SCREEN (PASSCODE: 1111 / 111)
        ========================================================================== -->
   <div class="lock-screen" id="lock-screen">
     <div class="lock-container" id="lock-container">
@@ -37,28 +37,20 @@
           <i class="fas fa-lock" id="lock-icon-status"></i>
         </div>
         <h2 class="ltc-name">Krishuu 👑</h2>
+        <p class="ltc-sub">Secret Birthday Vault ✨</p>
       </div>
 
-      <!-- Smartphone Notification Card -->
-      <div class="lock-notification">
-        <img src="assets/images/krishuu_hero.jpg" alt="Krishuu" class="notif-avatar" id="notif-avatar">
-        <div class="notif-content">
-          <div class="notif-header">
-            <span>Special Message 🎂</span>
-            <span class="notif-time">Now</span>
-          </div>
-          <div class="notif-body">
-            Hey Krishuu! Tere birthday ke liye ek magical surprise locked hai. Secret passcode enter karo! ✨
-          </div>
-        </div>
+      <!-- Clean 4-PIN Display -->
+      <div class="pin-display" id="pin-display">
+        <div class="pin-slot" id="slot-1"></div>
+        <div class="pin-slot" id="slot-2"></div>
+        <div class="pin-slot" id="slot-3"></div>
+        <div class="pin-slot" id="slot-4"></div>
       </div>
 
-      <!-- Passcode Display (Format: 11:1) -->
-      <div class="passcode-display">
-        <div class="time-slot" id="slot-1"></div>
-        <div class="time-slot" id="slot-2"></div>
-        <div class="time-separator">:</div>
-        <div class="time-slot" id="slot-3"></div>
+      <!-- Cute Passcode Hint Pill -->
+      <div class="lock-hint-pill">
+        <i class="fas fa-magic"></i> Passcode: <strong>1111</strong> (Make a wish! ✨)
       </div>
 
       <!-- Dramatic Anger Emoji Alert on Wrong Code -->
@@ -69,23 +61,23 @@
           <span class="anger-steam right">💨</span>
         </div>
         <div class="anger-title">GALAT CODE! 😤</div>
-        <div class="anger-subtitle">Krishuu sahi code daal! Gussa aa raha hai! 🤬🔥</div>
+        <div class="anger-subtitle">Krishuu sahi code 1111 daal! Gussa aa raha hai! 🤬🔥</div>
       </div>
 
-      <!-- Numeric Keypad -->
+      <!-- Touch-Optimized Numeric Keypad -->
       <div class="keypad-grid">
-        <button class="key-btn" data-num="1">1<span class="key-sub"></span></button>
-        <button class="key-btn" data-num="2">2<span class="key-sub">ABC</span></button>
-        <button class="key-btn" data-num="3">3<span class="key-sub">DEF</span></button>
-        <button class="key-btn" data-num="4">4<span class="key-sub">GHI</span></button>
-        <button class="key-btn" data-num="5">5<span class="key-sub">JKL</span></button>
-        <button class="key-btn" data-num="6">6<span class="key-sub">MNO</span></button>
-        <button class="key-btn" data-num="7">7<span class="key-sub">PQRS</span></button>
-        <button class="key-btn" data-num="8">8<span class="key-sub">TUV</span></button>
-        <button class="key-btn" data-num="9">9<span class="key-sub">WXYZ</span></button>
-        <button class="key-btn key-action" data-action="clear" title="Reset"><i class="fas fa-undo-alt"></i></button>
-        <button class="key-btn" data-num="0">0<span class="key-sub">+</span></button>
-        <button class="key-btn key-action" data-action="delete" title="Backspace"><i class="fas fa-backspace"></i></button>
+        <button class="key-btn" data-num="1" type="button">1<span class="key-sub"></span></button>
+        <button class="key-btn" data-num="2" type="button">2<span class="key-sub">ABC</span></button>
+        <button class="key-btn" data-num="3" type="button">3<span class="key-sub">DEF</span></button>
+        <button class="key-btn" data-num="4" type="button">4<span class="key-sub">GHI</span></button>
+        <button class="key-btn" data-num="5" type="button">5<span class="key-sub">JKL</span></button>
+        <button class="key-btn" data-num="6" type="button">6<span class="key-sub">MNO</span></button>
+        <button class="key-btn" data-num="7" type="button">7<span class="key-sub">PQRS</span></button>
+        <button class="key-btn" data-num="8" type="button">8<span class="key-sub">TUV</span></button>
+        <button class="key-btn" data-num="9" type="button">9<span class="key-sub">WXYZ</span></button>
+        <button class="key-btn key-action" data-action="delete" type="button" title="Delete" aria-label="Delete"><i class="fas fa-backspace"></i></button>
+        <button class="key-btn" data-num="0" type="button">0<span class="key-sub">+</span></button>
+        <button class="key-btn key-action key-unlock" data-action="unlock" type="button" title="Unlock" aria-label="Unlock"><i class="fas fa-key"></i></button>
       </div>
 
     </div>
@@ -1098,9 +1090,9 @@ Happiest Birthday Once Again, Krishuu! Enjoy your special day to the fullest! �
   </footer>
 
   <!-- Media Collection Data (703 Images & 45 Videos) -->
-  <script src="js/media_data.js?v=6.0"></script>
+  <script src="js/media_data.js?v=7.0"></script>
 
   <!-- Core Script -->
-  <script src="js/script.js?v=6.0"></script>
+  <script src="js/script.js?v=7.0"></script>
 </body>
 </html>

@@ -151,7 +151,7 @@ class SoundEngine {
 const sounds = new SoundEngine();
 
 // ==========================================================================
-// 2. PASSCODE VAULT CONTROLLER (Password: 11:11 / 11:1)
+// 2. PASSCODE VAULT CONTROLLER (Password: 1111 / 111)
 // ==========================================================================
 function initPasscodeVault() {
   if (!STATE.unlocked) {
@@ -165,11 +165,16 @@ function initPasscodeVault() {
   const slots = [
     document.getElementById('slot-1'),
     document.getElementById('slot-2'),
-    document.getElementById('slot-3')
+    document.getElementById('slot-3'),
+    document.getElementById('slot-4')
   ];
   const keypad = document.getElementById('lock-container');
   const lockScreen = document.getElementById('lock-screen');
   const errorAlert = document.getElementById('lock-error-alert');
+  const lockIcon = document.getElementById('lock-icon-status');
+
+  const ACCEPTED_CODES = ['1111', '111', '1214', '1210'];
+  let pauseTimer = null;
 
   function updateSlots() {
     const raw = STATE.inputCode;
@@ -185,37 +190,86 @@ function initPasscodeVault() {
     });
   }
 
+  function handleInput(char) {
+    if (STATE.unlocked) return;
+    if (errorAlert) errorAlert.classList.remove('show');
+    if (pauseTimer) clearTimeout(pauseTimer);
+
+    if (STATE.inputCode.length < 4) {
+      STATE.inputCode += char;
+      updateSlots();
+
+      if (STATE.inputCode.length === 4) {
+        checkCode();
+      } else if (STATE.inputCode.length === 3 && STATE.inputCode === '111') {
+        // If Krishuu typed 3 ones (111) and pauses, auto-unlock smoothly after 500ms
+        pauseTimer = setTimeout(() => {
+          if (STATE.inputCode === '111') {
+            checkCode();
+          }
+        }, 500);
+      }
+    }
+  }
+
+  function handleDelete() {
+    if (STATE.unlocked) return;
+    if (errorAlert) errorAlert.classList.remove('show');
+    if (pauseTimer) clearTimeout(pauseTimer);
+
+    STATE.inputCode = STATE.inputCode.slice(0, -1);
+    updateSlots();
+  }
+
+  function handleClear() {
+    if (STATE.unlocked) return;
+    if (errorAlert) errorAlert.classList.remove('show');
+    if (pauseTimer) clearTimeout(pauseTimer);
+
+    STATE.inputCode = '';
+    updateSlots();
+  }
+
   document.querySelectorAll('.key-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       sounds.playClick();
       const num = btn.getAttribute('data-num');
       const action = btn.getAttribute('data-action');
 
-      if (errorAlert) errorAlert.classList.remove('show');
-
       if (num !== null) {
-        if (STATE.inputCode.length < 3) {
-          STATE.inputCode += num;
-          updateSlots();
-
-          if (STATE.inputCode.length === 3) {
-            checkCode();
-          }
-        }
+        handleInput(num);
       } else if (action === 'delete') {
-        STATE.inputCode = STATE.inputCode.slice(0, -1);
-        updateSlots();
+        handleDelete();
       } else if (action === 'clear') {
-        STATE.inputCode = '';
-        updateSlots();
+        handleClear();
+      } else if (action === 'unlock') {
+        if (pauseTimer) clearTimeout(pauseTimer);
+        checkCode();
       }
     });
   });
 
   function checkCode() {
-    if (STATE.inputCode === '111') {
+    if (STATE.unlocked) return;
+    if (!STATE.inputCode) return;
+
+    if (ACCEPTED_CODES.includes(STATE.inputCode)) {
       sounds.playUnlockChime();
       triggerConfetti();
+
+      if (lockIcon) {
+        lockIcon.classList.remove('fa-lock');
+        lockIcon.classList.add('fa-lock-open');
+        lockIcon.style.color = '#2e7d32';
+      }
+
+      slots.forEach(slot => {
+        if (slot) {
+          slot.style.borderColor = '#4caf50';
+          slot.style.backgroundColor = 'rgba(76, 175, 80, 0.12)';
+          slot.style.color = '#2e7d32';
+        }
+      });
 
       // Ensure viewport stays strictly at top
       window.scrollTo(0, 0);
@@ -245,7 +299,7 @@ function initPasscodeVault() {
             questionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }, 600);
-      }, 350);
+      }, 400);
     } else {
       sounds.playErrorBuzz();
       if (keypad) {
@@ -273,28 +327,26 @@ function initPasscodeVault() {
 
       setTimeout(() => {
         if (errorAlert) errorAlert.classList.remove('show');
-      }, 3000);
+      }, 3500);
     }
   }
 
   window.addEventListener('keydown', (e) => {
     if (STATE.unlocked) return;
-    if (errorAlert) errorAlert.classList.remove('show');
 
     if (e.key >= '0' && e.key <= '9') {
-      if (STATE.inputCode.length < 3) {
-        sounds.playClick();
-        STATE.inputCode += e.key;
-        updateSlots();
-
-        if (STATE.inputCode.length === 3) {
-          checkCode();
-        }
-      }
+      sounds.playClick();
+      handleInput(e.key);
     } else if (e.key === 'Backspace') {
       sounds.playClick();
-      STATE.inputCode = STATE.inputCode.slice(0, -1);
-      updateSlots();
+      handleDelete();
+    } else if (e.key === 'Enter') {
+      sounds.playClick();
+      if (pauseTimer) clearTimeout(pauseTimer);
+      checkCode();
+    } else if (e.key === 'Escape') {
+      sounds.playClick();
+      handleClear();
     }
   });
 }

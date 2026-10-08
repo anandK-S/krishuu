@@ -201,16 +201,17 @@ body.is-locked {
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-  background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f7f1f4 60%, #eee3e8 100%);
+  background: radial-gradient(circle at 50% 20%, #ffffff 0%, #faf5f8 55%, #f2e9ef 100%);
   z-index: 10000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(10px, 2.5vh, 20px) clamp(12px, 3.5vw, 20px);
+  justify-content: center;
+  padding: clamp(12px, 3vh, 24px) clamp(14px, 4vw, 24px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .lock-screen.unlocked {
@@ -221,187 +222,127 @@ body.is-locked {
 
 .lock-container {
   width: 100%;
-  max-width: 360px;
+  max-width: 350px;
   margin: auto;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1.5px solid rgba(184, 134, 11, 0.35);
-  border-radius: clamp(20px, 4.5vw, 28px);
-  padding: clamp(14px, 2.5vh, 22px) clamp(16px, 4vw, 24px);
-  box-shadow: 0 25px 60px rgba(120, 80, 100, 0.16), 0 0 35px rgba(184, 134, 11, 0.15);
+  background: #ffffff;
+  border: 1.5px solid rgba(217, 67, 114, 0.2);
+  border-radius: 28px;
+  padding: clamp(18px, 3.5vh, 26px) clamp(16px, 4.5vw, 24px);
+  box-shadow: 0 20px 50px rgba(120, 80, 100, 0.12), 0 0 25px rgba(217, 67, 114, 0.08);
   text-align: center;
   position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-/* Classic Header with Clock & Date */
 .lock-header-classic {
-  margin-bottom: clamp(6px, 1.5vh, 12px);
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .lock-top-icon {
-  width: clamp(32px, 4.5vh, 38px);
-  height: clamp(32px, 4.5vh, 38px);
-  margin-bottom: 6px;
-  background: rgba(184, 134, 11, 0.12);
-  border: 1px solid rgba(184, 134, 11, 0.45);
+  width: 44px;
+  height: 44px;
+  margin-bottom: 8px;
+  background: rgba(217, 67, 114, 0.08);
+  border: 1.5px solid rgba(217, 67, 114, 0.35);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(0.9rem, 2vh, 1.1rem);
-  color: var(--gold);
-  box-shadow: 0 0 15px rgba(184, 134, 11, 0.2);
+  font-size: 1.15rem;
+  color: var(--primary-pink);
+  box-shadow: 0 4px 15px rgba(217, 67, 114, 0.15);
   animation: floatPulse 3s ease-in-out infinite;
 }
 
 @keyframes floatPulse {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-.lock-date-classic {
-  font-family: var(--font-serif);
-  font-size: clamp(0.72rem, 1.8vh, 0.82rem);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #a07817;
-  font-weight: 600;
-}
-
-.lock-clock-classic {
-  font-family: var(--font-serif);
-  font-size: clamp(2.6rem, 7vh, 3.4rem);
-  font-weight: 400;
-  color: #1e1728;
-  letter-spacing: 1px;
-  line-height: 1.1;
-  text-shadow: 0 2px 10px rgba(184, 134, 11, 0.2);
-  margin: 2px 0;
-}
-
-.lock-title-classic {
-  margin-bottom: clamp(8px, 1.5vh, 14px);
-}
-
-.ltc-sub {
-  font-size: clamp(0.68rem, 1.5vh, 0.74rem);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #7d7286;
-  display: block;
+  50% { transform: translateY(-3px); }
 }
 
 .ltc-name {
   font-family: var(--font-handwriting);
-  font-size: clamp(1.4rem, 3.8vh, 1.7rem);
+  font-size: clamp(1.6rem, 4vh, 2rem);
   color: var(--primary-pink);
-  margin-top: 1px;
+  margin: 0;
+  line-height: 1.1;
 }
 
-/* Smartphone Notification Card inside Lock Screen */
-.lock-notification {
-  background: #fff8fa;
-  border: 1px solid rgba(184, 134, 11, 0.25);
-  border-radius: 14px;
-  padding: clamp(6px, 1vh, 8px) 12px;
-  margin-bottom: clamp(8px, 1.5vh, 14px);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
-  flex-shrink: 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  animation: slideNotification 0.6s ease-out;
-}
-
-@keyframes slideNotification {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.notif-avatar {
-  width: clamp(32px, 4.5vh, 38px);
-  height: clamp(32px, 4.5vh, 38px);
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--gold);
-  flex-shrink: 0;
-}
-
-.notif-content {
-  flex: 1;
-}
-
-.notif-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: clamp(0.68rem, 1.6vh, 0.72rem);
+.ltc-sub {
+  font-family: var(--font-main);
+  font-size: clamp(0.72rem, 1.8vh, 0.8rem);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7d7286;
+  margin: 4px 0 0;
   font-weight: 600;
-  color: #a07817;
-  margin-bottom: 2px;
 }
 
-.notif-time {
-  color: #92879a;
-  font-size: 0.65rem;
-}
-
-.notif-body {
-  font-size: clamp(0.68rem, 1.5vh, 0.74rem);
-  color: #2b2333;
-  line-height: 1.25;
-}
-
-/* Passcode Display (HH:MM format for 11:11) */
-.passcode-display {
+/* 4-Slot PIN Display */
+.pin-display {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(6px, 1.5vw, 8px);
-  margin: clamp(4px, 1vh, 8px) 0 clamp(8px, 1.5vh, 12px);
-  flex-shrink: 0;
+  gap: 12px;
+  margin: 12px 0 8px;
 }
 
-.time-slot {
-  width: clamp(36px, 8vw, 42px);
-  height: clamp(40px, 5.5vh, 46px);
-  border-radius: 12px;
-  background: #fdfaf7;
-  border: 1.5px solid rgba(184, 134, 11, 0.35);
+.pin-slot {
+  width: 46px;
+  height: 50px;
+  border-radius: 14px;
+  background: #fdfafb;
+  border: 2px solid rgba(217, 67, 114, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(1.15rem, 3vh, 1.35rem);
+  font-size: 1.4rem;
   font-weight: 700;
   color: #1e1728;
-  transition: all 0.25s ease;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
 }
 
-.time-slot.filled {
+.pin-slot.filled {
   border-color: var(--primary-pink);
-  background: rgba(217, 67, 114, 0.12);
+  background: rgba(217, 67, 114, 0.1);
   color: var(--primary-pink);
-  box-shadow: 0 0 15px rgba(217, 67, 114, 0.35);
+  box-shadow: 0 4px 15px rgba(217, 67, 114, 0.25);
+  transform: scale(1.06);
+  animation: popSlot 0.2s ease-out;
 }
 
-.time-separator {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gold);
-  animation: blinkColon 1s infinite;
+@keyframes popSlot {
+  0% { transform: scale(0.85); }
+  60% { transform: scale(1.12); }
+  100% { transform: scale(1.06); }
 }
 
-@keyframes blinkColon {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+/* Passcode Hint Pill */
+.lock-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff0f5;
+  border: 1px solid rgba(217, 67, 114, 0.3);
+  color: #c2185b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(217, 67, 114, 0.1);
+}
+
+.lock-hint-pill strong {
+  color: #ad1457;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
 /* Dramatic Anger Emoji & Tantrum Alert on Wrong Code */
@@ -413,11 +354,12 @@ body.is-locked {
   background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
   border: 2px solid #e53935;
   border-radius: 16px;
-  padding: 10px 14px;
-  margin: 6px auto 12px;
-  width: 92%;
+  padding: 8px 12px;
+  margin: 4px 0 10px;
+  width: 100%;
+  box-sizing: border-box;
   box-shadow: 0 8px 25px rgba(229, 57, 53, 0.35);
-  animation: alertPopBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: alertPopBounce 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .lock-error-alert.show {
@@ -433,14 +375,14 @@ body.is-locked {
 }
 
 .anger-emoji-main {
-  font-size: 2.3rem;
+  font-size: 2.2rem;
   display: inline-block;
-  animation: angryTantrum 0.35s infinite alternate ease-in-out;
+  animation: angryTantrum 0.3s infinite alternate ease-in-out;
   filter: drop-shadow(0 2px 8px rgba(229, 57, 53, 0.5));
 }
 
 .anger-steam {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   display: inline-block;
   animation: steamPuff 0.6s infinite ease-out;
 }
@@ -455,16 +397,15 @@ body.is-locked {
 }
 
 .anger-title {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: #b71c1c;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 2px;
 }
 
 .anger-subtitle {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: #c62828;
   line-height: 1.2;
@@ -506,20 +447,20 @@ body.is-locked {
 .keypad-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(6px, 1.2vh, 8px);
+  gap: clamp(8px, 1.5vh, 12px);
   width: 100%;
-  max-width: 240px;
-  margin: 0 auto clamp(4px, 1vh, 8px);
-  flex-shrink: 0;
+  max-width: 250px;
+  margin: 4px auto 0;
+  box-sizing: border-box;
 }
 
 .key-btn {
-  height: clamp(40px, 5.5vh, 46px);
+  height: clamp(48px, 6.2vh, 54px);
   border-radius: 50%;
   background: #ffffff;
-  border: 1px solid rgba(184, 134, 11, 0.28);
+  border: 1.5px solid rgba(217, 67, 114, 0.2);
   color: #1e1728;
-  font-size: clamp(1.1rem, 2.8vh, 1.25rem);
+  font-size: clamp(1.2rem, 3vh, 1.35rem);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -528,7 +469,8 @@ body.is-locked {
   justify-content: center;
   transition: all 0.15s ease;
   user-select: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
 .key-btn:hover {
@@ -541,21 +483,32 @@ body.is-locked {
 .key-btn:active {
   transform: scale(0.92);
   background: var(--primary-pink);
-  color: #fff;
+  color: #ffffff;
+}
+
+.key-btn.key-action {
+  font-size: 1.15rem;
+  background: #faf7f9;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #6b5b75;
+}
+
+.key-btn.key-unlock {
+  background: linear-gradient(135deg, #ffeef4, #ffdbe7);
+  border-color: rgba(217, 67, 114, 0.35);
+  color: var(--primary-pink);
+}
+
+.key-btn.key-unlock:hover {
+  background: var(--primary-pink);
+  color: #ffffff;
 }
 
 .key-sub {
   font-size: 0.5rem;
   letter-spacing: 1px;
-  color: #8c7f99;
+  color: #92879a;
   margin-top: -2px;
-}
-
-.key-action {
-  font-size: 1rem;
-  background: transparent;
-  border: none;
-  color: #8c7f99;
 }
 
 /* ==========================================================================
