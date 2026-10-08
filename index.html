@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Master Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=16.0">
+  <link rel="stylesheet" href="css/style.css?v=17.0">
 </head>
 <body>
 
-        <div id="intro-animation" class="intro-overlay">
+          <div id="intro-animation" class="intro-overlay">
     <div class="intro-floating-items">
       <span class="fl-item fl-1">🎈</span>
       <span class="fl-item fl-2">✨</span>
@@ -34,8 +34,16 @@
     <div class="intro-gift-container" id="intro-gift-box">
       <div class="intro-gift-sparkle-ring"></div>
       
-      <div class="gift-box-wrapper">
-        <div class="gift-box-lid">
+      <!-- Unboxing Reveal Stage (Pops out when tapped) -->
+      <div class="gift-magical-reveal" id="gift-magical-reveal">
+        <div class="reveal-beam-light"></div>
+        <div class="reveal-crown-badge">👑</div>
+        <h2 class="reveal-title">Happy 17th Birthday Krishuu! 🌸</h2>
+        <p class="reveal-sub">A magical surprise unlocked just for you ✨</p>
+      </div>
+
+      <div class="gift-box-wrapper" id="gift-box-wrap">
+        <div class="gift-box-lid" id="gift-lid">
           <div class="gift-ribbon-bow">🎀</div>
         </div>
         <div class="gift-box-cube">
@@ -45,12 +53,13 @@
         </div>
       </div>
 
-      <div class="intro-text-wrapper">
+      <div class="intro-text-wrapper" id="intro-text-wrap">
         <h1 class="intro-magical-title">A Magical Surprise... ✨</h1>
         <p class="intro-tap-guide"><i class="fas fa-hand-pointer"></i> Tap the gift to unwrap!</p>
       </div>
     </div>
   </div>
+
 
   <!-- ==========================================================================
        STEP 1: MULTI-QUESTION GATE (UNTOUCHABLE NO BUTTONS)
@@ -154,9 +163,7 @@
 
           <!-- Celebration Wish Button -->
           <div class="insta-actions">
-            <button class="btn-insta-wish" id="btn-insta-wish" type="button">
-              <i class="fas fa-heart"></i> Happy Birthday Krishuu! 🎂🎉
-            </button>
+            <button class="btn-insta-wish" id="btn-insta-wish" type="button">Happy Birthday Krishuu! 🎂🎉</button>
           </div>
 
         </div>
@@ -218,7 +225,7 @@
         </div>
 
         <div class="polaroid-scrapbook-grid">
-          <div class="polaroid-card tilt-left" data-memory-id="1">
+          <div class="polaroid-card" data-memory-id="1">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory1.jpg" class="gallery-img" alt="Krishuu Memory 1" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -228,12 +235,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Golden Smile 🌸</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">1.7k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-right" data-memory-id="2">
+          <div class="polaroid-card" data-memory-id="2">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory2.jpg" class="gallery-img" alt="Krishuu Memory 2" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -243,12 +247,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Aesthetic Queen ✨</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">2.1k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-left" data-memory-id="3">
+          <div class="polaroid-card" data-memory-id="3">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory3.jpg" class="gallery-img" alt="Krishuu Memory 3" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -258,12 +259,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Bestie Memories 💖</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">1.9k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-right" data-memory-id="4">
+          <div class="polaroid-card" data-memory-id="4">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory4.jpg" class="gallery-img" alt="Krishuu Memory 4" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -273,12 +271,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Pure Happiness 🧁</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">2.4k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-left" data-memory-id="5">
+          <div class="polaroid-card" data-memory-id="5">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory5.jpg" class="gallery-img" alt="Krishuu Memory 5" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -288,12 +283,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Drama & Cuties 👑</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">3.2k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-right" data-memory-id="6">
+          <div class="polaroid-card" data-memory-id="6">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory6.jpg" class="gallery-img" alt="Krishuu Memory 6" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -303,12 +295,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Sweet Moments 🎀</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">1.8k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-left" data-memory-id="7">
+          <div class="polaroid-card" data-memory-id="7">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory7.jpg" class="gallery-img" alt="Krishuu Memory 7" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -318,12 +307,9 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Unmatched Vibe 💎</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">2.6k</span>
-              </button>
             </div>
           </div>
-          <div class="polaroid-card tilt-right" data-memory-id="8">
+          <div class="polaroid-card" data-memory-id="8">
             <div class="washi-tape-sticker"></div>
             <div class="polaroid-media">
               <img src="assets/images/memory8.jpg" class="gallery-img" alt="Krishuu Memory 8" onerror="this.src='assets/images/krishuu_hero.jpg'">
@@ -333,9 +319,6 @@
             </div>
             <div class="polaroid-footer">
               <span class="polaroid-caption">Sweet 17 Magic 🎂</span>
-              <button class="polaroid-like-btn" type="button" aria-label="Like Memory">
-                <i class="far fa-heart"></i> <span class="like-num">4.5k</span>
-              </button>
             </div>
           </div>
         </div>
@@ -380,311 +363,543 @@
           <p class="section-subtitle">17 saal ki Krishuu ke liye 17 sabse cute aur sachhi baatein! 🌸</p>
         </div>
 
-        <div class="collector-reasons-deck">
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#01</span>
-              <span class="token-trait-tag">Pure Magic 🌸</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">✨</div>
-              <div class="token-content">
-                <h3 class="token-title">Tera Contagious Hasna</h3>
-                <p class="token-desc">Tere hasne ki aawaz sunke sabse kharab din bhi ek pal me theek ho jaata hai.</p>
+        <div class="reasons-progress-tracker">
+          <div class="progress-info-row">
+            <span class="progress-label"><i class="fas fa-sparkles"></i> Unlocked Secrets:</span>
+            <span class="progress-count" id="unlocked-count">0 / 17 🔓</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="reasons-progress-fill"></div>
+          </div>
+          <p class="progress-subhint">Tap each secret envelope to reveal why you are so special! 🌸</p>
+        </div>
+
+        <div class="curiosity-reasons-grid">
+          <div class="secret-capsule-card locked" data-reason-id="01">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #01</span>
+                <span class="capsule-tag-hint">Pure Magic 🌸</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #01</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#01 Unlocked! 💖</span>
+                <span class="unlocked-tag">Pure Magic 🌸</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">✨</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Tera Contagious Hasna</h3>
+                  <p class="unlocked-desc">Tere hasne ki aawaz sunke sabse kharab din bhi ek pal me theek ho jaata hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#02</span>
-              <span class="token-trait-tag">Rare Soul 💎</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">💖</div>
-              <div class="token-content">
-                <h3 class="token-title">Tera Pyaara & Saaf Dil</h3>
-                <p class="token-desc">Tu sabki bina kisi matlab ke care karti hai, aisi soul bohot rare hoti hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="02">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #02</span>
+                <span class="capsule-tag-hint">Rare Soul 💎</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #02</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#02 Unlocked! 💖</span>
+                <span class="unlocked-tag">Rare Soul 💎</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">💖</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Tera Pyaara & Saaf Dil</h3>
+                  <p class="unlocked-desc">Tu sabki bina kisi matlab ke care karti hai, aisi soul bohot rare hoti hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#03</span>
-              <span class="token-trait-tag">Queen Vibes ✨</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">👑</div>
-              <div class="token-content">
-                <h3 class="token-title">Cute Dramatic Nakhre</h3>
-                <p class="token-desc">Chhota sa pout, dramatic expressions aur cute gussa... full entertainment!</p>
+          <div class="secret-capsule-card locked" data-reason-id="03">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #03</span>
+                <span class="capsule-tag-hint">Queen Vibes ✨</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #03</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#03 Unlocked! 💖</span>
+                <span class="unlocked-tag">Queen Vibes ✨</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">👑</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Cute Dramatic Nakhre</h3>
+                  <p class="unlocked-desc">Chhota sa pout, dramatic expressions aur cute gussa... full entertainment!</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#04</span>
-              <span class="token-trait-tag">100% Vibe 🎶</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🎧</div>
-              <div class="token-content">
-                <h3 class="token-title">Best Vibe & Music Partner</h3>
-                <p class="token-desc">Tere saath be-sure gaane gaana aur gaane sunna best feeling hoti hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="04">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #04</span>
+                <span class="capsule-tag-hint">100% Vibe 🎶</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #04</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#04 Unlocked! 💖</span>
+                <span class="unlocked-tag">100% Vibe 🎶</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🎧</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Best Vibe & Music Partner</h3>
+                  <p class="unlocked-desc">Tere saath be-sure gaane gaana aur gaane sunna best feeling hoti hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#05</span>
-              <span class="token-trait-tag">Real Strength 🌟</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">💪</div>
-              <div class="token-content">
-                <h3 class="token-title">Tu Bohot Strong Hai</h3>
-                <p class="token-desc">Tu jitna sochti hai, usse kahin zyada brave aur samajhdaar insaan hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="05">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #05</span>
+                <span class="capsule-tag-hint">Real Strength 🌟</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #05</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#05 Unlocked! 💖</span>
+                <span class="unlocked-tag">Real Strength 🌟</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">💪</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Tu Bohot Strong Hai</h3>
+                  <p class="unlocked-desc">Tu jitna sochti hai, usse kahin zyada brave aur samajhdaar insaan hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#06</span>
-              <span class="token-trait-tag">Pure Sukoon 🤍</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🌙</div>
-              <div class="token-content">
-                <h3 class="token-title">Peaceful & Calming Presence</h3>
-                <p class="token-desc">Tere aas-paas reh kar ya baat karke hamesha ek sukoon aur warmth milti hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="06">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #06</span>
+                <span class="capsule-tag-hint">Pure Sukoon 🤍</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #06</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#06 Unlocked! 💖</span>
+                <span class="unlocked-tag">Pure Sukoon 🤍</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🌙</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Peaceful & Calming Presence</h3>
+                  <p class="unlocked-desc">Tere aas-paas reh kar ya baat karke hamesha ek sukoon aur warmth milti hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#07</span>
-              <span class="token-trait-tag">Foodie Bestie 🧁</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🍟</div>
-              <div class="token-content">
-                <h3 class="token-title">Late Night Foodie Partner</h3>
-                <p class="token-desc">Nayi cheezein khane ke plan banana aur snacks ki cravings saath nibhana!</p>
+          <div class="secret-capsule-card locked" data-reason-id="07">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #07</span>
+                <span class="capsule-tag-hint">Foodie Bestie 🧁</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #07</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#07 Unlocked! 💖</span>
+                <span class="unlocked-tag">Foodie Bestie 🧁</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🍟</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Late Night Foodie Partner</h3>
+                  <p class="unlocked-desc">Nayi cheezein khane ke plan banana aur snacks ki cravings saath nibhana!</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#08</span>
-              <span class="token-trait-tag">True Loyalty 💖</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🫂</div>
-              <div class="token-content">
-                <h3 class="token-title">Hamesha Saath Khade Rehna</h3>
-                <p class="token-desc">Chahe situation kitni bhi ajeeb ho, tu hamesha loyal dost banke saath deti hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="08">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #08</span>
+                <span class="capsule-tag-hint">True Loyalty 💖</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #08</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#08 Unlocked! 💖</span>
+                <span class="unlocked-tag">True Loyalty 💖</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🫂</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Hamesha Saath Khade Rehna</h3>
+                  <p class="unlocked-desc">Chahe situation kitni bhi ajeeb ho, tu hamesha loyal dost banke saath deti hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#09</span>
-              <span class="token-trait-tag">Mind Reader 🔮</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">👀</div>
-              <div class="token-content">
-                <h3 class="token-title">Bina Bole Samajh Jaana</h3>
-                <p class="token-desc">Sirf chehra dekh kar jaan leti hai ki kya chal raha hai dimag me.</p>
+          <div class="secret-capsule-card locked" data-reason-id="09">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #09</span>
+                <span class="capsule-tag-hint">Mind Reader 🔮</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #09</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#09 Unlocked! 💖</span>
+                <span class="unlocked-tag">Mind Reader 🔮</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">👀</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Bina Bole Samajh Jaana</h3>
+                  <p class="unlocked-desc">Sirf chehra dekh kar jaan leti hai ki kya chal raha hai dimag me.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#10</span>
-              <span class="token-trait-tag">Iconic Style 🎀</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">👗</div>
-              <div class="token-content">
-                <h3 class="token-title">Aesthetic Style & Vibe</h3>
-                <p class="token-desc">Har cheez me tera aesthetic touch aur classy choice hamesha top-notch hoti hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="10">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #10</span>
+                <span class="capsule-tag-hint">Iconic Style 🎀</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #10</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#10 Unlocked! 💖</span>
+                <span class="unlocked-tag">Iconic Style 🎀</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">👗</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Aesthetic Style & Vibe</h3>
+                  <p class="unlocked-desc">Har cheez me tera aesthetic touch aur classy choice hamesha top-notch hoti hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#11</span>
-              <span class="token-trait-tag">Energy Booster ⚡</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🎉</div>
-              <div class="token-content">
-                <h3 class="token-title">Boring Jagah Ko Fun Banana</h3>
-                <p class="token-desc">Jahan tu hoti hai, wahan kabhi bhi sannata ya boredom nahi ho sakta!</p>
+          <div class="secret-capsule-card locked" data-reason-id="11">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #11</span>
+                <span class="capsule-tag-hint">Energy Booster ⚡</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #11</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#11 Unlocked! 💖</span>
+                <span class="unlocked-tag">Energy Booster ⚡</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🎉</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Boring Jagah Ko Fun Banana</h3>
+                  <p class="unlocked-desc">Jahan tu hoti hai, wahan kabhi bhi sannata ya boredom nahi ho sakta!</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#12</span>
-              <span class="token-trait-tag">Real & True 💯</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">💎</div>
-              <div class="token-content">
-                <h3 class="token-title">100% Honest Opinions</h3>
-                <p class="token-desc">Tu bina kisi fake filter ke hamesha sach bolti hai, jo sabse bada virtue hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="12">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #12</span>
+                <span class="capsule-tag-hint">Real & True 💯</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #12</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#12 Unlocked! 💖</span>
+                <span class="unlocked-tag">Real & True 💯</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">💎</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">100% Honest Opinions</h3>
+                  <p class="unlocked-desc">Tu bina kisi fake filter ke hamesha sach bolti hai, jo sabse bada virtue hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#13</span>
-              <span class="token-trait-tag">Thoughtful Heart 🌸</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🎀</div>
-              <div class="token-content">
-                <h3 class="token-title">Choti Choti Baatein Yaad Rakhna</h3>
-                <p class="token-desc">Wo choti choti baatein jo baaki log bhool jaate hain, tu hamesha yaad rakhti hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="13">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #13</span>
+                <span class="capsule-tag-hint">Thoughtful Heart 🌸</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #13</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#13 Unlocked! 💖</span>
+                <span class="unlocked-tag">Thoughtful Heart 🌸</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🎀</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Choti Choti Baatein Yaad Rakhna</h3>
+                  <p class="unlocked-desc">Wo choti choti baatein jo baaki log bhool jaate hain, tu hamesha yaad rakhti hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#14</span>
-              <span class="token-trait-tag">Endless Talks ☕</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">💬</div>
-              <div class="token-content">
-                <h3 class="token-title">Non-Stop Gossip & Laughs</h3>
-                <p class="token-desc">Tere saath ghanto baat karke bhi aisa lagta hai abhi toh baatein shuru hui hain.</p>
+          <div class="secret-capsule-card locked" data-reason-id="14">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #14</span>
+                <span class="capsule-tag-hint">Endless Talks ☕</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #14</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#14 Unlocked! 💖</span>
+                <span class="unlocked-tag">Endless Talks ☕</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">💬</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Non-Stop Gossip & Laughs</h3>
+                  <p class="unlocked-desc">Tere saath ghanto baat karke bhi aisa lagta hai abhi toh baatein shuru hui hain.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#15</span>
-              <span class="token-trait-tag">Unbreakable 🛡️</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🌟</div>
-              <div class="token-content">
-                <h3 class="token-title">Pure Loyalty & Trust</h3>
-                <p class="token-desc">Aankh band karke bharosa karne waali best friend sirf tu hi hai.</p>
+          <div class="secret-capsule-card locked" data-reason-id="15">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #15</span>
+                <span class="capsule-tag-hint">Unbreakable 🛡️</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #15</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#15 Unlocked! 💖</span>
+                <span class="unlocked-tag">Unbreakable 🛡️</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🌟</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Pure Loyalty & Trust</h3>
+                  <p class="unlocked-desc">Aankh band karke bharosa karne waali best friend sirf tu hi hai.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#16</span>
-              <span class="token-trait-tag">Cute Baccha 🧸</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">🌸</div>
-              <div class="token-content">
-                <h3 class="token-title">Pyaara Baccha Vibe</h3>
-                <p class="token-desc">Badi hone ke baad bhi tere andar ka wo innocent cute baccha hamesha zinda hai!</p>
+          <div class="secret-capsule-card locked" data-reason-id="16">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #16</span>
+                <span class="capsule-tag-hint">Cute Baccha 🧸</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #16</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#16 Unlocked! 💖</span>
+                <span class="unlocked-tag">Cute Baccha 🧸</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">🌸</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">Pyaara Baccha Vibe</h3>
+                  <p class="unlocked-desc">Badi hone ke baad bhi tere andar ka wo innocent cute baccha hamesha zinda hai!</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="reason-token-card">
-            <div class="token-top-bar">
-              <span class="token-number-pill">#17</span>
-              <span class="token-trait-tag">One in a Billion 👑</span>
-            </div>
-            <div class="token-body">
-              <div class="token-icon-medallion">💖</div>
-              <div class="token-content">
-                <h3 class="token-title">You Are You!</h3>
-                <p class="token-desc">Kyunki Krishuu jaisi doosri koi nahi ban sakti. You are truly one in a billion! ✨</p>
+          <div class="secret-capsule-card locked" data-reason-id="17">
+            <!-- Locked State Teaser (Builds Curiosity!) -->
+            <div class="capsule-locked-view">
+              <div class="locked-badge-row">
+                <span class="capsule-number-pill">Secret #17</span>
+                <span class="capsule-tag-hint">One in a Billion 👑</span>
+              </div>
+              <div class="locked-teaser-body">
+                <div class="locked-icon-anim">🔒</div>
+                <div class="locked-prompt">
+                  <strong>Tap to Reveal Secret #17</strong>
+                  <span>Ek cute baat locked hai yahan... ✨</span>
+                </div>
               </div>
             </div>
-            <div class="token-bottom-bar">
-              <button class="token-react-btn" type="button" aria-label="Heart this reason">
-                <i class="far fa-heart"></i> <span>Sweet Trait</span>
-              </button>
+
+            <!-- Unlocked State (Revealed after Tap!) -->
+            <div class="capsule-unlocked-view">
+              <div class="unlocked-header">
+                <span class="unlocked-badge">#17 Unlocked! 💖</span>
+                <span class="unlocked-tag">One in a Billion 👑</span>
+              </div>
+              <div class="unlocked-body">
+                <div class="unlocked-icon-bubble">💖</div>
+                <div class="unlocked-text">
+                  <h3 class="unlocked-title">You Are You!</h3>
+                  <p class="unlocked-desc">Kyunki Krishuu jaisi doosri koi nahi ban sakti. You are truly one in a billion! ✨</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -777,6 +992,6 @@
   </div>
 
   <!-- Master JavaScript -->
-  <script src="js/script.js?v=16.0"></script>
+  <script src="js/script.js?v=17.0"></script>
 </body>
 </html>

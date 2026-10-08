@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuestionGate();
   initWishButton();
   initPolaroidGallery();
-  initReasonReactions();
+  initCuriosityReasons();
   initLetterEditor();
 });
 
@@ -84,11 +84,11 @@ class SoundFX {
 const sounds = new SoundFX();
 
 // ==========================================================================
-// 2. MAGICAL 3D UNBOXING INTRO EXPERIENCE
+// 2. MAGICAL 3D UNBOXING INTRO EXPERIENCE (POP-OUT CARD & CELEBRATION)
 // ==========================================================================
 function initGiftUnboxing() {
   const intro = document.getElementById('intro-animation');
-  const giftBox = document.getElementById('intro-gift-box');
+  const giftContainer = document.getElementById('intro-gift-box');
   if (!intro) return;
 
   let isUnboxing = false;
@@ -100,16 +100,17 @@ function initGiftUnboxing() {
     sounds.playCelebration();
     launchConfetti();
 
-    if (giftBox) {
-      giftBox.classList.add('unboxing');
+    if (giftContainer) {
+      giftContainer.classList.add('unboxing');
     }
 
+    // After celebratory reveal, transition into the Question Gate smoothly
     setTimeout(() => {
       intro.classList.add('hidden');
       setTimeout(() => {
         intro.style.display = 'none';
-      }, 600);
-    }, 650);
+      }, 700);
+    }, 1500);
   }
 
   intro.addEventListener('click', triggerUnbox);
@@ -118,10 +119,10 @@ function initGiftUnboxing() {
     triggerUnbox();
   }, { passive: false });
 
-  // Auto unbox fallback after 3.8s so user never waits too long
+  // Fallback after 4.5s so user never waits too long
   setTimeout(() => {
     if (!isUnboxing) triggerUnbox();
-  }, 3800);
+  }, 4500);
 }
 
 // ==========================================================================
@@ -202,7 +203,7 @@ function initQuestionGate() {
 }
 
 // ==========================================================================
-// 4. HERO INSTAGRAM WISH BUTTON
+// 4. HERO INSTAGRAM WISH BUTTON (NO HEART ICON IN FRONT)
 // ==========================================================================
 function initWishButton() {
   const wishBtn = document.getElementById('btn-insta-wish');
@@ -210,16 +211,16 @@ function initWishButton() {
     wishBtn.addEventListener('click', () => {
       sounds.playCelebration();
       launchConfetti();
-      wishBtn.innerHTML = '<i class="fas fa-heart"></i> Woohoo! Happy Birthday Krishuu! 🥳💖';
+      wishBtn.innerHTML = 'Woohoo! Happy Birthday Krishuu! 🥳💖';
       setTimeout(() => {
-        wishBtn.innerHTML = '<i class="fas fa-heart"></i> Happy Birthday Krishuu! 🎂🎉';
+        wishBtn.innerHTML = 'Happy Birthday Krishuu! 🎂🎉';
       }, 2500);
     });
   }
 }
 
 // ==========================================================================
-// 5. POLAROID SCRAPBOOK PHOTO GALLERY & LIGHTBOX
+// 5. POLAROID PHOTO GALLERY (ZERO OVERFLOW & LIGHTBOX)
 // ==========================================================================
 function initPolaroidGallery() {
   const cards = document.querySelectorAll('.polaroid-card');
@@ -230,61 +231,17 @@ function initPolaroidGallery() {
 
   cards.forEach(card => {
     const img = card.querySelector('.gallery-img');
-    const mediaWrap = card.querySelector('.polaroid-media');
     const captionSpan = card.querySelector('.polaroid-caption');
-    const likeBtn = card.querySelector('.polaroid-like-btn');
-    const likeNum = card.querySelector('.like-num');
 
-    let isLiked = false;
-
-    function triggerLike() {
-      isLiked = !isLiked;
-      sounds.playPop();
-
-      if (likeBtn) {
-        likeBtn.classList.toggle('liked', isLiked);
-        likeBtn.innerHTML = isLiked
-          ? '<i class="fas fa-heart"></i> Liked 💖'
-          : '<i class="far fa-heart"></i> <span class="like-num">' + (likeNum ? likeNum.textContent : '2.1k') + '</span>';
-      }
-
-      // Heart burst animation on photo
-      if (mediaWrap) {
-        const heart = document.createElement('div');
-        heart.className = 'heart-pop-burst';
-        heart.innerHTML = '💖';
-        mediaWrap.appendChild(heart);
-        setTimeout(() => heart.remove(), 700);
-      }
-    }
-
-    if (likeBtn) {
-      likeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        triggerLike();
-      });
-    }
-
-    // Double tap & single tap on polaroid
-    let lastTap = 0;
-    card.addEventListener('click', (e) => {
-      const now = Date.now();
-      if (now - lastTap < 320) {
-        // Double-tap
-        e.stopPropagation();
-        triggerLike();
-      } else {
-        // Single-tap: Open lightbox
-        if (img && lightboxImg && lightboxModal) {
-          lightboxImg.src = img.src;
-          if (lightboxCaption && captionSpan) {
-            lightboxCaption.textContent = captionSpan.textContent + ' 🌸';
-          }
-          lightboxModal.classList.add('active');
-          sounds.playTap();
+    card.addEventListener('click', () => {
+      if (img && lightboxImg && lightboxModal) {
+        lightboxImg.src = img.src;
+        if (lightboxCaption && captionSpan) {
+          lightboxCaption.textContent = captionSpan.textContent;
         }
+        lightboxModal.classList.add('active');
+        sounds.playTap();
       }
-      lastTap = now;
     });
   });
 
@@ -309,18 +266,40 @@ function initPolaroidGallery() {
 }
 
 // ==========================================================================
-// 6. COLLECTOR'S REASONS TOKEN REACTIONS
+// 6. CURIOSITY-DRIVEN 17 REASONS: TAP-TO-UNLOCK LOGIC & PROGRESS
 // ==========================================================================
-function initReasonReactions() {
-  const reactBtns = document.querySelectorAll('.token-react-btn');
-  reactBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      sounds.playPop();
-      btn.classList.toggle('reacted');
-      const isReacted = btn.classList.contains('reacted');
-      btn.innerHTML = isReacted
-        ? '<i class="fas fa-heart"></i> <span>Loved 💖</span>'
-        : '<i class="far fa-heart"></i> <span>Sweet Trait</span>';
+function initCuriosityReasons() {
+  const capsuleCards = document.querySelectorAll('.secret-capsule-card');
+  const countDisplay = document.getElementById('unlocked-count');
+  const progressFill = document.getElementById('reasons-progress-fill');
+  const total = capsuleCards.length || 17;
+  let unlockedCount = 0;
+
+  capsuleCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.classList.contains('locked')) {
+        card.classList.remove('locked');
+        card.classList.add('unlocked');
+        sounds.playPop();
+
+        unlockedCount++;
+        const percent = Math.round((unlockedCount / total) * 100);
+
+        if (countDisplay) {
+          countDisplay.textContent = `${unlockedCount} / ${total} 🔓`;
+        }
+        if (progressFill) {
+          progressFill.style.width = `${percent}%`;
+        }
+
+        // Special Celebration when all 17 reasons are unlocked!
+        if (unlockedCount === total) {
+          setTimeout(() => {
+            sounds.playCelebration();
+            launchConfetti();
+          }, 300);
+        }
+      }
     });
   });
 }
@@ -406,7 +385,7 @@ function initLetterEditor() {
 }
 
 // ==========================================================================
-// 8. LIGHTWEIGHT CANVAS CONFETTI CANNON
+// 8. HIGH-DEFINITION CELEBRATORY CONFETTI & SPARKLE ENGINE
 // ==========================================================================
 function launchConfetti() {
   const canvas = document.createElement('canvas');
@@ -416,28 +395,39 @@ function launchConfetti() {
   canvas.style.width = '100vw';
   canvas.style.height = '100vh';
   canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '99999';
+  canvas.style.zIndex = '999999';
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const colors = ['#ff4e70', '#ff809f', '#ffd166', '#a288e3', '#06d6a0', '#ffb3c6', '#ffffff'];
+  const colors = [
+    '#ff3366', '#ff6b8b', '#ffd166', '#06d6a0', '#118ab2',
+    '#7209b7', '#f72585', '#ffe066', '#ffffff', '#ff9ebb'
+  ];
+
   const particles = [];
-  const particleCount = 85;
+  const particleCount = 135;
 
   for (let i = 0; i < particleCount; i++) {
+    const isStar = Math.random() < 0.25;
+    const isRibbon = Math.random() < 0.35;
     particles.push({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-      r: Math.random() * 5 + 3,
-      dx: (Math.random() - 0.5) * 14,
-      dy: (Math.random() - 0.7) * 16,
+      x: window.innerWidth / 2 + (Math.random() - 0.5) * 60,
+      y: window.innerHeight / 2 + (Math.random() - 0.5) * 60,
+      w: isRibbon ? Math.random() * 8 + 6 : Math.random() * 6 + 4,
+      h: isRibbon ? Math.random() * 16 + 10 : Math.random() * 6 + 4,
+      r: Math.random() * 4 + 3,
+      dx: (Math.random() - 0.5) * 18,
+      dy: (Math.random() - 0.75) * 20,
       color: colors[Math.floor(Math.random() * colors.length)],
-      tilt: Math.random() * 10,
-      tiltAngle: 0,
-      tiltAngleInc: (Math.random() * 0.08) + 0.05,
+      rotation: Math.random() * 360,
+      rotSpeed: (Math.random() - 0.5) * 12,
+      wobble: 0,
+      wobbleSpeed: Math.random() * 0.1 + 0.05,
+      isStar: isStar,
+      isRibbon: isRibbon,
       alpha: 1
     });
   }
@@ -453,23 +443,41 @@ function launchConfetti() {
       p.x += p.dx;
       p.y += p.dy;
       p.dy += 0.38; // gravity
-      p.tiltAngle += p.tiltAngleInc;
-      p.tilt = Math.sin(p.tiltAngle) * 8;
+      p.dx *= 0.985; // air drag
+      p.rotation += p.rotSpeed;
+      p.wobble += p.wobbleSpeed;
 
-      if (frameCount > 28) {
-        p.alpha -= 0.022;
+      if (frameCount > 26) {
+        p.alpha -= 0.018;
       }
 
       ctx.save();
       ctx.globalAlpha = Math.max(0, p.alpha);
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x + p.tilt, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+
+      if (p.isStar) {
+        ctx.fillStyle = '#ffd166';
+        ctx.font = '14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('✨', 0, 0);
+      } else if (p.isRibbon) {
+        ctx.fillStyle = p.color;
+        const scaleX = Math.sin(p.wobble);
+        ctx.scale(scaleX, 1);
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      } else {
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       ctx.restore();
     });
 
-    if (frameCount < 80 && particles.some(p => p.alpha > 0)) {
+    if (frameCount < 85 && particles.some(p => p.alpha > 0)) {
       animationFrame = requestAnimationFrame(update);
     } else {
       cancelAnimationFrame(animationFrame);
