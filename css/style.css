@@ -119,6 +119,31 @@ button {
   margin: auto;
 }
 
+.gate-step-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f0e6eb;
+  transition: all 0.3s ease;
+}
+
+.step-dot.active {
+  width: 22px;
+  border-radius: 10px;
+  background: var(--pink-primary);
+}
+
+.step-dot.done {
+  background: #10b981;
+}
+
 .gate-badge {
   display: inline-flex;
   align-items: center;
@@ -295,6 +320,185 @@ button {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   AESTHETIC INSTAGRAM PROFILE HERO CARD
+   ========================================================================== */
+.hero-card-section {
+  margin-bottom: clamp(35px, 6vh, 50px);
+}
+
+.insta-profile-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--pink-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px, 4vw, 24px);
+  box-shadow: 0 14px 40px var(--pink-shadow);
+}
+
+.insta-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.insta-handle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.insta-handle i.fa-instagram {
+  color: var(--pink-primary);
+  font-size: 1.15rem;
+}
+
+.verified-badge {
+  color: #1da1f2;
+  font-size: 0.85rem;
+}
+
+.insta-dots {
+  color: var(--text-light);
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+}
+
+.insta-profile-header {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 4vw, 24px);
+  margin-bottom: 14px;
+}
+
+.insta-story-ring {
+  position: relative;
+  width: clamp(74px, 18vw, 90px);
+  height: clamp(74px, 18vw, 90px);
+  flex-shrink: 0;
+}
+
+.insta-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 3px var(--pink-primary);
+}
+
+.insta-bday-crown {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  font-size: 1.4rem;
+  animation: floatCrown 2.5s infinite ease-in-out;
+}
+
+@keyframes floatCrown {
+  0%, 100% { transform: translateY(0) rotate(5deg); }
+  50% { transform: translateY(-4px) rotate(-5deg); }
+}
+
+.insta-stats {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: clamp(1.15rem, 3.6vw, 1.4rem);
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.insta-bio {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.bio-name {
+  font-size: clamp(1.05rem, 3.4vw, 1.25rem);
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.bio-dob-tag {
+  font-size: 0.68rem;
+  background: var(--pink-soft);
+  color: var(--pink-primary);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+}
+
+.bio-text {
+  font-size: clamp(0.82rem, 2.6vw, 0.92rem);
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.bio-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bio-pill {
+  background: #faf4f7;
+  color: #7b6375;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.insta-actions {
+  display: flex;
+  width: 100%;
+}
+
+.btn-insta-wish {
+  width: 100%;
+  background: linear-gradient(135deg, var(--pink-primary), #ff7b9a);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(0.88rem, 2.6vw, 0.98rem);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(255, 94, 131, 0.3);
+  transition: transform 0.15s ease;
+}
+
+.btn-insta-wish:active {
+  transform: scale(0.97);
 }
 
 section {

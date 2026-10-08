@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initQuestionGate();
+  initWishButton();
   initInstaFeed();
   initLetterEditor();
 });
@@ -81,16 +82,17 @@ class SoundFX {
 const sounds = new SoundFX();
 
 // ==========================================================================
-// 2. "WILL YOU BE MY FRIEND?" QUESTION GATE (UNTOUCHABLE NO)
+// 2. MULTI-QUESTION GATE (UNTOUCHABLE NO BUTTONS)
 // ==========================================================================
 function initQuestionGate() {
-  const btnYes = document.getElementById('btn-gate-yes');
-  const btnNo = document.getElementById('btn-gate-no');
+  const card1 = document.getElementById('gate-card-1');
+  const card2 = document.getElementById('gate-card-2');
+  const btnYes1 = document.getElementById('btn-gate-yes-1');
+  const btnNo1 = document.getElementById('btn-gate-no-1');
+  const btnYes2 = document.getElementById('btn-gate-yes-2');
+  const btnNo2 = document.getElementById('btn-gate-no-2');
   const questionSection = document.getElementById('question-section');
-  const successCard = document.getElementById('gate-success-card');
   const surpriseContent = document.getElementById('surprise-content');
-
-  if (!btnYes || !btnNo) return;
 
   const teasePhrases = [
     "NO 🙅‍♀️",
@@ -98,68 +100,107 @@ function initQuestionGate() {
     "Nahi maan sakti? 🏃‍♀️💨",
     "Button bhag gaya! 🚀",
     "Sirf YES daba sakti hai! 💖",
-    "Tu meri bestie hai na! 🥺",
+    "Sach bolo na! 🥺",
     "Click karke toh dikha! 😝",
     "Never ever NO! 🥰"
   ];
   let phraseIdx = 0;
 
-  function dodgeButton(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  function makeRunaway(btn) {
+    if (!btn) return;
+    function dodge(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      sounds.playTap();
+
+      phraseIdx = (phraseIdx + 1) % teasePhrases.length;
+      btn.textContent = teasePhrases[phraseIdx];
+
+      const padding = 16;
+      const btnWidth = btn.offsetWidth || 110;
+      const btnHeight = btn.offsetHeight || 44;
+      const screenW = window.innerWidth || document.documentElement.clientWidth || 360;
+      const screenH = window.innerHeight || document.documentElement.clientHeight || 640;
+
+      const maxX = Math.max(padding, screenW - btnWidth - padding);
+      const maxY = Math.max(padding, screenH - btnHeight - padding);
+
+      const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), screenW - btnWidth - 8);
+      const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), screenH - btnHeight - 8);
+
+      btn.style.position = 'fixed';
+      btn.style.left = `${randomX}px`;
+      btn.style.top = `${randomY}px`;
+      btn.style.zIndex = '99999';
     }
-    sounds.playTap();
 
-    phraseIdx = (phraseIdx + 1) % teasePhrases.length;
-    btnNo.textContent = teasePhrases[phraseIdx];
-
-    const padding = 16;
-    const btnWidth = btnNo.offsetWidth || 110;
-    const btnHeight = btnNo.offsetHeight || 44;
-    const screenW = window.innerWidth || document.documentElement.clientWidth || 360;
-    const screenH = window.innerHeight || document.documentElement.clientHeight || 640;
-
-    const maxX = Math.max(padding, screenW - btnWidth - padding);
-    const maxY = Math.max(padding, screenH - btnHeight - padding);
-
-    const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), screenW - btnWidth - 8);
-    const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), screenH - btnHeight - 8);
-
-    btnNo.style.position = 'fixed';
-    btnNo.style.left = `${randomX}px`;
-    btnNo.style.top = `${randomY}px`;
-    btnNo.style.zIndex = '99999';
+    ['mouseenter', 'mouseover', 'touchstart', 'pointerdown'].forEach(evt => {
+      btn.addEventListener(evt, dodge, { passive: false });
+    });
   }
 
-  ['mouseenter', 'mouseover', 'touchstart', 'pointerdown'].forEach(evt => {
-    btnNo.addEventListener(evt, dodgeButton, { passive: false });
-  });
+  makeRunaway(btnNo1);
+  makeRunaway(btnNo2);
 
-  btnYes.addEventListener('click', () => {
-    sounds.playCelebration();
-    launchConfetti();
-
-    btnNo.style.display = 'none';
-    btnYes.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🥰💖';
-
-    // Smoothly fade out and remove question section completely
-    if (questionSection) {
-      questionSection.classList.add('fade-out');
-    }
-
-    // Reveal surprise content immediately
-    if (surpriseContent) {
-      surpriseContent.classList.add('revealed');
-    }
-
-    setTimeout(() => {
-      if (questionSection) {
-        questionSection.style.display = 'none';
+  // Question 1 YES: Transition to Question 2
+  if (btnYes1) {
+    btnYes1.addEventListener('click', () => {
+      sounds.playPop();
+      if (btnNo1) btnNo1.style.display = 'none';
+      if (card1) card1.style.display = 'none';
+      if (card2) {
+        card2.style.display = 'block';
+        card2.style.animation = 'fadeInUp 0.4s ease both';
       }
-      window.scrollTo(0, 0);
-    }, 400);
-  });
+    });
+  }
+
+  // Question 2 YES: Unlock surprise and hide questions!
+  if (btnYes2) {
+    btnYes2.addEventListener('click', () => {
+      sounds.playCelebration();
+      launchConfetti();
+
+      if (btnNo2) btnNo2.style.display = 'none';
+      btnYes2.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🥰💖';
+
+      // Smoothly fade out question section
+      if (questionSection) {
+        questionSection.classList.add('fade-out');
+      }
+
+      // Reveal surprise content
+      if (surpriseContent) {
+        surpriseContent.classList.add('revealed');
+      }
+
+      setTimeout(() => {
+        if (questionSection) {
+          questionSection.style.display = 'none';
+        }
+        window.scrollTo(0, 0);
+      }, 400);
+    });
+  }
+}
+
+// ==========================================================================
+// HERO INSTAGRAM WISH BUTTON
+// ==========================================================================
+function initWishButton() {
+  const wishBtn = document.getElementById('btn-insta-wish');
+  if (wishBtn) {
+    wishBtn.addEventListener('click', () => {
+      sounds.playCelebration();
+      launchConfetti();
+      wishBtn.innerHTML = '<i class="fas fa-heart"></i> Woohoo! Happy Birthday Krishuu! 🥳💖';
+      setTimeout(() => {
+        wishBtn.innerHTML = '<i class="fas fa-heart"></i> Happy Birthday Krishuu! 🎂🎉';
+      }, 2500);
+    });
+  }
 }
 
 // ==========================================================================

@@ -20,13 +20,19 @@
 <body>
 
   <!-- ==========================================================================
-       STEP 1: "WILL YOU BE MY FRIEND?" QUESTION GATE (UNTOUCHABLE NO)
+       STEP 1: MULTI-QUESTION GATE (UNTOUCHABLE NO BUTTONS)
        ========================================================================== -->
   <section class="question-gate-section" id="question-section">
-    <div class="gate-card" id="gate-card">
-      
+    
+    <!-- Question 1: Will you be my friend? -->
+    <div class="gate-card active-card" id="gate-card-1">
+      <div class="gate-step-dots">
+        <span class="step-dot active"></span>
+        <span class="step-dot"></span>
+      </div>
+
       <div class="gate-badge">
-        <i class="fas fa-sparkles"></i> Ek Zaroori Sawal 🥺👉👈
+        <i class="fas fa-sparkles"></i> Sawal #1 🥺👉👈
       </div>
       
       <div class="gate-avatar-wrap">
@@ -41,25 +47,58 @@
       </p>
 
       <!-- Action Buttons Row -->
-      <div class="gate-buttons" id="gate-buttons">
-        <button class="btn-gate-yes" id="btn-gate-yes" type="button">
+      <div class="gate-buttons">
+        <button class="btn-gate-yes" id="btn-gate-yes-1" type="button">
           <i class="fas fa-heart"></i> YES! Forever! 🥰💖
         </button>
-        <button class="btn-gate-no" id="btn-gate-no" type="button">
+        <button class="btn-gate-no" id="btn-gate-no-1" type="button">
           NO 🙅‍♀️
         </button>
       </div>
-
     </div>
+
+    <!-- Question 2: Have I made your day special? -->
+    <div class="gate-card" id="gate-card-2" style="display: none;">
+      <div class="gate-step-dots">
+        <span class="step-dot done"></span>
+        <span class="step-dot active"></span>
+      </div>
+
+      <div class="gate-badge">
+        <i class="fas fa-heart"></i> Sawal #2 🙈✨
+      </div>
+      
+      <div class="gate-avatar-wrap">
+        <img src="assets/images/krishuu_hero.jpg" alt="Krishuu" class="gate-avatar" onerror="this.src='assets/images/avatar.jpg'">
+        <span class="gate-heart-badge">👑</span>
+      </div>
+
+      <h1 class="gate-title">Have I made your day special? 🥺💖</h1>
+      
+      <p class="gate-desc">
+        Dil par haath rakh kar sach sach batana... aaj ka din special laga ya nahi? 🥰🌸
+      </p>
+
+      <!-- Action Buttons Row -->
+      <div class="gate-buttons">
+        <button class="btn-gate-yes" id="btn-gate-yes-2" type="button">
+          <i class="fas fa-star"></i> 100% YES! Bohot Special! 🥰🎉
+        </button>
+        <button class="btn-gate-no" id="btn-gate-no-2" type="button">
+          NO 🙅‍♀️
+        </button>
+      </div>
+    </div>
+
   </section>
 
   <!-- ==========================================================================
-       MAIN SURPRISE WRAPPER (UNLOCKED AFTER YES)
+       MAIN SURPRISE WRAPPER (UNLOCKED AFTER ALL QUESTIONS ANSWERED)
        ========================================================================== -->
   <main class="main-wrapper" id="main-wrapper">
     <div class="surprise-content" id="surprise-content">
 
-      <!-- Top Celebration Banner -->
+      <!-- Top Celebration Greeting -->
       <div class="celebration-top-banner">
         <div class="bday-badge-pill">
           <i class="fas fa-heart"></i> Official Besties Forever! 🎉
@@ -67,6 +106,69 @@
         <h1 class="main-bday-heading">Happy 17th Birthday Krishuu 🌸</h1>
         <p class="main-bday-sub">12 October 2009 • Sweet 17 ✨</p>
       </div>
+
+      <!-- ==========================================================================
+           AESTHETIC INSTAGRAM PROFILE HERO CARD
+           ========================================================================== -->
+      <section class="hero-card-section" id="hero-section">
+        <div class="insta-profile-card">
+          
+          <!-- Top bar with handle & verified tag -->
+          <div class="insta-top-bar">
+            <div class="insta-handle">
+              <i class="fab fa-instagram"></i>
+              <span>@krishuu.special</span>
+              <i class="fas fa-check-circle verified-badge" title="Verified Birthday Girl"></i>
+            </div>
+            <div class="insta-dots">•••</div>
+          </div>
+
+          <!-- Profile info header -->
+          <div class="insta-profile-header">
+            <div class="insta-story-ring">
+              <img src="assets/images/krishuu_hero.jpg" alt="Krishuu" class="insta-avatar" onerror="this.src='assets/images/avatar.jpg'">
+              <span class="insta-bday-crown">👑</span>
+            </div>
+            <div class="insta-stats">
+              <div class="stat-box">
+                <span class="stat-num">17</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num">100%</span>
+                <span class="stat-label">Drama</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num">∞</span>
+                <span class="stat-label">Cutie</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bio text -->
+          <div class="insta-bio">
+            <h2 class="bio-name">Krishuu 🌸 <span class="bio-dob-tag">12 Oct 2009</span></h2>
+            <p class="bio-text">
+              🎂 Official Birthday Girl & Chief Happiness Officer ✨<br>
+              💖 Fabulous Sweet 17 — Aaj tera din hai, shine bright like a diamond! 💎
+            </p>
+            <div class="bio-pills">
+              <span class="bio-pill">🌸 Queen</span>
+              <span class="bio-pill">✨ Bestie</span>
+              <span class="bio-pill">🧁 Sweet 17</span>
+              <span class="bio-pill">💖 One In A Billion</span>
+            </div>
+          </div>
+
+          <!-- Celebration Wish Button -->
+          <div class="insta-actions">
+            <button class="btn-insta-wish" id="btn-insta-wish" type="button">
+              <i class="fas fa-heart"></i> Happy Birthday Krishuu! 🎂🎉
+            </button>
+          </div>
+
+        </div>
+      </section>
 
       <!-- ==========================================================================
            SECTION 1: PERSONAL LETTER (WRITTEN BY USER & LIVE EDITABLE)
