@@ -142,27 +142,23 @@ function initQuestionGate() {
 
     btnNo.style.display = 'none';
     btnYes.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🥰💖';
-    btnYes.style.animation = 'none';
-    btnYes.style.transform = 'scale(1.04)';
 
-    if (successCard) {
-      successCard.classList.add('show');
-    }
-
+    // Smoothly fade out and remove question section completely
     if (questionSection) {
-      questionSection.classList.add('unlocked-mode');
+      questionSection.classList.add('fade-out');
     }
 
+    // Reveal surprise content immediately
     if (surpriseContent) {
       surpriseContent.classList.add('revealed');
     }
 
     setTimeout(() => {
-      const letterSection = document.getElementById('letter-section');
-      if (letterSection) {
-        letterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (questionSection) {
+        questionSection.style.display = 'none';
       }
-    }, 450);
+      window.scrollTo(0, 0);
+    }, 400);
   });
 }
 
