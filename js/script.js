@@ -89,35 +89,47 @@ const sounds = new SoundFX();
 function initGiftUnboxing() {
   const intro = document.getElementById('intro-animation');
   const giftContainer = document.getElementById('intro-gift-box');
-  if (!intro) return;
+  const giftBox = document.getElementById('gift-box-wrap');
+  const textWrap = document.getElementById('intro-text-wrap');
+  if (!intro || !giftContainer) return;
 
   let isUnboxing = false;
 
-  function triggerUnbox() {
+  function triggerUnbox(e) {
     if (isUnboxing) return;
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     isUnboxing = true;
 
     sounds.playCelebration();
     launchConfetti();
 
-    if (giftContainer) {
-      giftContainer.classList.add('unboxing');
-    }
+    giftContainer.classList.add('unboxing');
 
-    // Perfectly timed celebratory reveal (1200ms: clearly visible & readable!)
+    // Keep the reveal stage clearly visible for 2.6 seconds so Krishuu can read and enjoy it!
     setTimeout(() => {
       intro.classList.add('hidden');
       setTimeout(() => {
         intro.style.display = 'none';
-      }, 400);
-    }, 1200);
+      }, 500);
+    }, 2600);
   }
 
-  intro.addEventListener('click', triggerUnbox);
-  intro.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    triggerUnbox();
-  }, { passive: false });
+  // Only trigger on explicit tap/click of the gift box or prompt text, not accidental background touches!
+  if (giftBox) {
+    giftBox.addEventListener('click', triggerUnbox);
+    giftBox.addEventListener('touchend', (e) => {
+      triggerUnbox(e);
+    });
+  }
+  if (textWrap) {
+    textWrap.addEventListener('click', triggerUnbox);
+    textWrap.addEventListener('touchend', (e) => {
+      triggerUnbox(e);
+    });
+  }
 }
 
 // ==========================================================================
@@ -221,7 +233,7 @@ function initWishButton() {
 // 5. POLAROID PHOTO GALLERY (ZERO OVERFLOW & LIGHTBOX)
 // ==========================================================================
 function initPolaroidGallery() {
-  const cards = document.querySelectorAll('.polaroid-card');
+  const cards = document.querySelectorAll('.gallery-story-card, .polaroid-card');
   const lightboxModal = document.getElementById('lightbox-modal-overlay');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxCaption = document.getElementById('lightbox-caption');
@@ -229,7 +241,7 @@ function initPolaroidGallery() {
 
   cards.forEach(card => {
     const img = card.querySelector('.gallery-img');
-    const captionSpan = card.querySelector('.polaroid-caption');
+    const captionSpan = card.querySelector('.story-caption-text, .polaroid-caption');
 
     card.addEventListener('click', () => {
       if (img && lightboxImg && lightboxModal) {
@@ -264,40 +276,230 @@ function initPolaroidGallery() {
 }
 
 // ==========================================================================
-// 6. CURIOSITY-DRIVEN 17 REASONS: TAP-TO-UNLOCK LOGIC & PROGRESS
+// 6. REAL TACTILE FINGER-SCRATCH CARD SYSTEM (HTML5 CANVAS + GESTURE)
 // ==========================================================================
-function initCuriosityReasons() {
-  const capsuleCards = document.querySelectorAll('.secret-capsule-card');
-  const countDisplay = document.getElementById('unlocked-count');
-  const progressFill = document.getElementById('reasons-progress-fill');
-  const total = capsuleCards.length || 17;
-  let unlockedCount = 0;
+function initScratchCards() {
+  const cards = document.querySelectorAll('.scratch-ticket-card');
+  if (!cards || cards.length === 0) return;
 
-  capsuleCards.forEach(card => {
-    card.addEventListener('click', () => {
-      if (card.classList.contains('locked')) {
-        card.classList.remove('locked');
-        card.classList.add('unlocked');
-        sounds.playPop();
+  let totalRevealed = 0;
 
-        unlockedCount++;
-        const percent = Math.round((unlockedCount / total) * 100);
+  function spawnScratchSparkle(card, x, y) {
+    const dot = document.createElement('div');
+    dot.className = 'scratch-sparkle-dot';
+    dot.style.left = `${x}px`;
+    dot.style.top = `${y}px`;
+    dot.style.setProperty('--tx', `${(Math.random() - 0.5) * 40}px`);
+    dot.style.setProperty('--ty', `${(Math.random() - 0.5) * 40}px`);
+    card.appendChild(dot);
+    setTimeout(() => dot.remove(), 500);
+  }
 
-        if (countDisplay) {
-          countDisplay.textContent = `${unlockedCount} / ${total} 🪙`;
-        }
-        if (progressFill) {
-          progressFill.style.width = `${percent}%`;
-        }
+  function setupSingleCard(card) {
+    if (card.dataset.initialized === 'true') return;
 
-        // Special Celebration when all 17 reasons are unlocked!
-        if (unlockedCount === total) {
-          setTimeout(() => {
-            sounds.playCelebration();
-            launchConfetti();
-          }, 300);
-        }
+    const foil = card.querySelector('.ticket-foil-cover');
+    const canvas = card.querySelector('.scratch-canvas');
+    if (!foil || !canvas) return;
+
+    const rect = card.getBoundingClientRect();
+    if (rect.width === 0 || card.offsetWidth === 0) {
+      // Card currently hidden (e.g. before question gate answered)
+      return;
+    }
+
+    card.dataset.initialized = 'true';
+
+    const width = Math.max(card.offsetWidth, 280);
+    const height = Math.max(card.offsetHeight, 100);
+
+    // High-DPI retina canvas support
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // 1. Paint rich metallic rose-gold foil
+    const grad = ctx.createLinearGradient(0, 0, width, height);
+    grad.addColorStop(0, '#f59cb2');
+    grad.addColorStop(0.25, '#ffd2dc');
+    grad.addColorStop(0.5, '#fcaec0');
+    grad.addColorStop(0.75, '#ffe0e8');
+    grad.addColorStop(1, '#f797af');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, width, height);
+
+    // 2. Paint shimmering diagonal texture lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+    ctx.lineWidth = 3.5;
+    for (let x = -width; x < width * 2; x += 30) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x + height * 1.3, height);
+      ctx.stroke();
+    }
+
+    // 3. Paint subtle sparkle glitter specks
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+    for (let i = 0; i < 24; i++) {
+      const rx = (i * 41) % width;
+      const ry = (i * 37) % height;
+      ctx.beginPath();
+      ctx.arc(rx, ry, (i % 2 === 0) ? 1.5 : 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Now set foil wrapper to transparent so destination-out clears directly to text!
+    foil.style.background = 'transparent';
+
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let strokeCount = 0;
+    let isRevealed = false;
+
+    function revealTicket() {
+      if (isRevealed) return;
+      isRevealed = true;
+      totalRevealed++;
+      sounds.playCelebration();
+
+      foil.classList.add('scratched');
+      setTimeout(() => {
+        foil.style.display = 'none';
+      }, 400);
+
+      // Celebration when all 17 reasons are revealed!
+      if (totalRevealed === cards.length) {
+        setTimeout(() => {
+          sounds.playCelebration();
+          launchConfetti();
+        }, 300);
       }
+    }
+
+    function scratchLine(x1, y1, x2, y2) {
+      if (isRevealed) return;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 44 * dpr;
+
+      ctx.beginPath();
+      ctx.moveTo(x1 * dpr, y1 * dpr);
+      ctx.lineTo(x2 * dpr, y2 * dpr);
+      ctx.stroke();
+      ctx.restore();
+
+      const badge = card.querySelector('.foil-badge-ui');
+      if (badge && !badge.classList.contains('hidden-badge')) {
+        badge.classList.add('hidden-badge');
+      }
+
+      if (strokeCount % 2 === 0) {
+        spawnScratchSparkle(card, x2, y2);
+      }
+
+      strokeCount++;
+      if (strokeCount === 1) {
+        sounds.playTap();
+      }
+
+      // After 10 rubs, celebrate & peel off completely!
+      if (strokeCount >= 10) {
+        revealTicket();
+      }
+    }
+
+    function getCoords(e) {
+      const cRect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - cRect.left,
+        y: clientY - cRect.top
+      };
+    }
+
+    // Touch events for mobile finger scratching
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      isDrawing = true;
+      const pos = getCoords(e);
+      lastX = pos.x;
+      lastY = pos.y;
+      scratchLine(pos.x, pos.y, pos.x, pos.y);
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const pos = getCoords(e);
+      scratchLine(lastX, lastY, pos.x, pos.y);
+      lastX = pos.x;
+      lastY = pos.y;
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', () => {
+      isDrawing = false;
+      if (strokeCount >= 5) {
+        revealTicket();
+      }
+    });
+
+    // Mouse drag events for laptop/desktop
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      const pos = getCoords(e);
+      lastX = pos.x;
+      lastY = pos.y;
+      scratchLine(pos.x, pos.y, pos.x, pos.y);
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      const pos = getCoords(e);
+      scratchLine(lastX, lastY, pos.x, pos.y);
+      lastX = pos.x;
+      lastY = pos.y;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDrawing = false;
+    });
+
+    // Tap/Click fallback: Single tap also scratches open cleanly!
+    canvas.addEventListener('click', () => {
+      revealTicket();
+    });
+  }
+
+  // Initialize all cards that are currently visible
+  cards.forEach(card => setupSingleCard(card));
+
+  // IntersectionObserver to auto-initialize when scrolled into view
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setupSingleCard(entry.target);
+        }
+      });
+    }, { rootMargin: '100px' });
+
+    cards.forEach(card => observer.observe(card));
+  }
+
+  window.addEventListener('resize', () => {
+    cards.forEach(card => {
+      card.dataset.initialized = 'false';
+      setupSingleCard(card);
     });
   });
 }
