@@ -4,6 +4,16 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  
+  // Intro Animation
+  const intro = document.getElementById('intro-animation');
+  if(intro) {
+    setTimeout(() => {
+      intro.classList.add('hidden');
+      if(window.sounds) sounds.playCelebration();
+    }, 2500);
+  }
+
   initQuestionGate();
   initWishButton();
   initInstaFeed();
@@ -85,107 +95,78 @@ const sounds = new SoundFX();
 // 2. MULTI-QUESTION GATE (UNTOUCHABLE NO BUTTONS)
 // ==========================================================================
 function initQuestionGate() {
-  const card1 = document.getElementById('gate-card-1');
-  const card2 = document.getElementById('gate-card-2');
-  const btnYes1 = document.getElementById('btn-gate-yes-1');
-  const btnNo1 = document.getElementById('btn-gate-no-1');
-  const btnYes2 = document.getElementById('btn-gate-yes-2');
-  const btnNo2 = document.getElementById('btn-gate-no-2');
+  const btnYes = document.getElementById('btn-gate-yes-1');
+  const btnNo = document.getElementById('btn-gate-no-1');
   const questionSection = document.getElementById('question-section');
   const surpriseContent = document.getElementById('surprise-content');
 
   const teasePhrases = [
     "NO 🙅‍♀️",
-    "Arre pakad ke dikha! 😜",
-    "Nahi maan sakti? 🏃‍♀️💨",
-    "Button bhag gaya! 🚀",
-    "Sirf YES daba sakti hai! 💖",
-    "Sach bolo na! 🥺",
-    "Click karke toh dikha! 😝",
-    "Never ever NO! 🥰"
+    "Arre ek baar Yes toh click karo! 🥺",
+    "Mujhse dosti karni padegi! 😤",
+    "Please na Krishuu! 🌸",
+    "No click karna allowed nahi hai! 🚫",
+    "Kitna nakhra karogi! 😂",
+    "Yes button better hai wese bhi! ✨",
+    "Chal maan ja ab! 🎂",
+    "You have no choice! 👑",
+    "Maan jao na bestie! 💖",
+    "Pakad ke dikha button! 🏃‍♀️💨"
   ];
   let phraseIdx = 0;
 
-  function makeRunaway(btn) {
-    if (!btn) return;
-    function dodge(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      sounds.playTap();
-
-      phraseIdx = (phraseIdx + 1) % teasePhrases.length;
-      btn.textContent = teasePhrases[phraseIdx];
-
-      const padding = 16;
-      const btnWidth = btn.offsetWidth || 110;
-      const btnHeight = btn.offsetHeight || 44;
-      const screenW = window.innerWidth || document.documentElement.clientWidth || 360;
-      const screenH = window.innerHeight || document.documentElement.clientHeight || 640;
-
-      const maxX = Math.max(padding, screenW - btnWidth - padding);
-      const maxY = Math.max(padding, screenH - btnHeight - padding);
-
-      const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), screenW - btnWidth - 8);
-      const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), screenH - btnHeight - 8);
-
-      btn.style.position = 'fixed';
-      btn.style.left = `${randomX}px`;
-      btn.style.top = `${randomY}px`;
-      btn.style.zIndex = '99999';
+  function dodge(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
+    if(window.sounds) sounds.playTap();
 
+    phraseIdx = (phraseIdx + 1) % teasePhrases.length;
+    btnNo.textContent = teasePhrases[phraseIdx];
+
+    const padding = 16;
+    const btnWidth = btnNo.offsetWidth || 150;
+    const btnHeight = btnNo.offsetHeight || 44;
+    const screenW = window.innerWidth || 360;
+    const screenH = window.innerHeight || 640;
+
+    const maxX = Math.max(padding, screenW - btnWidth - padding);
+    const maxY = Math.max(padding, screenH - btnHeight - padding);
+
+    const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), screenW - btnWidth - 8);
+    const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), screenH - btnHeight - 8);
+
+    btnNo.style.position = 'fixed';
+    btnNo.style.left = `${randomX}px`;
+    btnNo.style.top = `${randomY}px`;
+    btnNo.style.zIndex = '99999';
+  }
+
+  if(btnNo) {
     ['mouseenter', 'mouseover', 'touchstart', 'pointerdown'].forEach(evt => {
-      btn.addEventListener(evt, dodge, { passive: false });
+      btnNo.addEventListener(evt, dodge, { passive: false });
     });
   }
 
-  makeRunaway(btnNo1);
-  makeRunaway(btnNo2);
-
-  // Question 1 YES: Transition to Question 2
-  if (btnYes1) {
-    btnYes1.addEventListener('click', () => {
-      sounds.playPop();
-      if (btnNo1) btnNo1.style.display = 'none';
-      if (card1) card1.style.display = 'none';
-      if (card2) {
-        card2.style.display = 'block';
-        card2.style.animation = 'fadeInUp 0.4s ease both';
-      }
-    });
-  }
-
-  // Question 2 YES: Unlock surprise and hide questions!
-  if (btnYes2) {
-    btnYes2.addEventListener('click', () => {
-      sounds.playCelebration();
+  if (btnYes) {
+    btnYes.addEventListener('click', () => {
+      if(window.sounds) sounds.playCelebration();
       launchConfetti();
 
-      if (btnNo2) btnNo2.style.display = 'none';
-      btnYes2.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🥰💖';
+      if (btnNo) btnNo.style.display = 'none';
+      btnYes.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🎉';
 
-      // Smoothly fade out question section
-      if (questionSection) {
-        questionSection.classList.add('fade-out');
-      }
-
-      // Reveal surprise content
-      if (surpriseContent) {
-        surpriseContent.classList.add('revealed');
-      }
+      if (questionSection) questionSection.classList.add('fade-out');
+      if (surpriseContent) surpriseContent.classList.add('revealed');
 
       setTimeout(() => {
-        if (questionSection) {
-          questionSection.style.display = 'none';
-        }
+        if (questionSection) questionSection.style.display = 'none';
         window.scrollTo(0, 0);
       }, 400);
     });
   }
 }
-
 // ==========================================================================
 // HERO INSTAGRAM WISH BUTTON
 // ==========================================================================

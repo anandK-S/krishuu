@@ -1016,3 +1016,91 @@ section {
   border-radius: var(--radius-pill);
   box-shadow: 0 4px 14px rgba(255, 94, 131, 0.35);
 }
+
+/* =========================================
+   INTRO ANIMATION
+========================================= */
+.intro-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: var(--bg-main);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.intro-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.intro-content {
+  text-align: center;
+  animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.intro-gift {
+  font-size: 5rem;
+  animation: bounce 2s infinite;
+}
+.intro-text {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* =========================================
+   UPGRADED PHOTO GALLERY (MASONRY/PINTEREST)
+========================================= */
+.photo-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-auto-rows: 200px;
+  grid-gap: 15px;
+  padding: 10px;
+}
+.gallery-item {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+.gallery-item:nth-child(even) {
+  grid-row: span 2;
+}
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 117, 140, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+  font-size: 2rem;
+  pointer-events: none;
+}
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
