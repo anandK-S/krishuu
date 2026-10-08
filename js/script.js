@@ -187,7 +187,10 @@ function initQuestionGate() {
       btnYes.innerHTML = 'YAYYY! Besties Forever! 🎉';
 
       if (questionSection) questionSection.classList.add('fade-out');
-      if (surpriseContent) surpriseContent.classList.add('revealed');
+      if (surpriseContent) {
+        surpriseContent.classList.add('revealed');
+        setTimeout(initScratchCards, 150);
+      }
 
       setTimeout(() => {
         if (questionSection) questionSection.style.display = 'none';

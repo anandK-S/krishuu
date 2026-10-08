@@ -2374,3 +2374,159 @@ section {
   touch-action: none;
   border-radius: 20px;
 }
+
+
+/* ==========================================================================
+   AESTHETIC GALLERY STORY CARDS (ULTRA-CLEAN UI)
+   ========================================================================== */
+.aesthetic-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 2px;
+}
+
+.gallery-story-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(255, 182, 193, 0.45);
+  border-radius: 20px;
+  padding: 10px 10px 14px;
+  box-shadow: 0 8px 24px rgba(255, 117, 140, 0.1), 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gallery-story-card:hover, .gallery-story-card:active {
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(255, 94, 131, 0.6);
+  box-shadow: 0 14px 32px rgba(255, 117, 140, 0.2);
+}
+
+.story-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.story-num-pill {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ff4e70;
+  background: #fff0f3;
+  padding: 2px 8px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 182, 193, 0.4);
+}
+
+.story-heart-badge {
+  color: #ffccd8;
+  font-size: 0.85rem;
+  transition: all 0.25s ease;
+}
+
+.gallery-story-card.liked .story-heart-badge {
+  color: #ff3366;
+  transform: scale(1.2);
+  filter: drop-shadow(0 2px 6px rgba(255, 51, 102, 0.4));
+}
+
+.story-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff5f7;
+  position: relative;
+}
+
+.story-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-story-card:hover .story-image-wrap img {
+  transform: scale(1.06);
+}
+
+.story-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 94, 131, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.4rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.gallery-story-card:hover .story-overlay {
+  opacity: 1;
+}
+
+.story-caption-bar {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.story-caption-text {
+  font-size: clamp(0.75rem, 2.4vw, 0.86rem);
+  font-weight: 700;
+  color: #2b1f26;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   17 REASONS: CLEAN SCRATCH CARDS (NO FRONT EMOJI BUBBLE)
+   ========================================================================== */
+.scratch-body-clean {
+  text-align: left;
+  padding: 2px 4px 6px;
+}
+
+.scratch-body-clean .scratch-title {
+  font-size: clamp(1rem, 3.4vw, 1.15rem);
+  font-weight: 800;
+  color: #2b1f26;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.scratch-body-clean .scratch-desc {
+  font-size: clamp(0.84rem, 2.7vw, 0.94rem);
+  color: #61525a;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Scratch Canvas Sparkle Particle */
+.scratch-sparkle-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 8px #ffbe0b;
+  pointer-events: none;
+  z-index: 10;
+  animation: sparkleDust 0.5s ease-out forwards;
+}
+
+@keyframes sparkleDust {
+  0% { transform: scale(1) translate(0, 0); opacity: 1; }
+  100% { transform: scale(0) translate(var(--tx, 10px), var(--ty, -15px)); opacity: 0; }
+}
