@@ -5,15 +5,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   
-    // Solid Elegant Intro Animation
+      // Solid Elegant Intro Animation
   const intro = document.getElementById('intro-animation');
   if(intro) {
-    setTimeout(() => {
+    const dismissIntro = () => {
+      if(intro.classList.contains('hidden')) return;
       intro.classList.add('hidden');
       setTimeout(() => {
         intro.style.display = 'none';
-      }, 600);
-    }, 1800);
+      }, 500);
+    };
+
+    const timer = setTimeout(dismissIntro, 1800);
+    intro.addEventListener('click', () => {
+      clearTimeout(timer);
+      dismissIntro();
+    });
   }
 
   initQuestionGate();
@@ -122,22 +129,22 @@ function initQuestionGate() {
       e.preventDefault();
       e.stopPropagation();
     }
-    if(window.sounds) sounds.playTap();
+    if (window.sounds) sounds.playTap();
 
     phraseIdx = (phraseIdx + 1) % teasePhrases.length;
     btnNo.textContent = teasePhrases[phraseIdx];
 
     const padding = 16;
-    const btnWidth = btnNo.offsetWidth || 150;
+    const vWidth = window.visualViewport ? window.visualViewport.width : (window.innerWidth || 360);
+    const vHeight = window.visualViewport ? window.visualViewport.height : (window.innerHeight || 640);
+    const btnWidth = Math.min(btnNo.offsetWidth || 140, vWidth - 32);
     const btnHeight = btnNo.offsetHeight || 44;
-    const screenW = window.innerWidth || 360;
-    const screenH = window.innerHeight || 640;
 
-    const maxX = Math.max(padding, screenW - btnWidth - padding);
-    const maxY = Math.max(padding, screenH - btnHeight - padding);
+    const maxX = Math.max(padding, vWidth - btnWidth - padding);
+    const maxY = Math.max(padding, vHeight - btnHeight - padding);
 
-    const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), screenW - btnWidth - 8);
-    const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), screenH - btnHeight - 8);
+    const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), vWidth - btnWidth - 12);
+    const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), vHeight - btnHeight - 12);
 
     btnNo.style.position = 'fixed';
     btnNo.style.left = `${randomX}px`;
@@ -145,7 +152,7 @@ function initQuestionGate() {
     btnNo.style.zIndex = '99999';
   }
 
-  if(btnNo) {
+  if (btnNo) {
     ['mouseenter', 'mouseover', 'touchstart', 'pointerdown'].forEach(evt => {
       btnNo.addEventListener(evt, dodge, { passive: false });
     });
@@ -153,7 +160,7 @@ function initQuestionGate() {
 
   if (btnYes) {
     btnYes.addEventListener('click', () => {
-      if(window.sounds) sounds.playCelebration();
+      if (window.sounds) sounds.playCelebration();
       launchConfetti();
 
       if (btnNo) btnNo.style.display = 'none';
@@ -164,7 +171,7 @@ function initQuestionGate() {
 
       setTimeout(() => {
         if (questionSection) questionSection.style.display = 'none';
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 400);
     });
   }

@@ -1021,3 +1021,111 @@ section {
   line-height: 1.45;
   margin: 0;
 }
+
+/* =========================================
+   LIGHTBOX MODAL & GALLERY POLISH
+========================================= */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: rgba(15, 10, 14, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-container {
+  max-width: min(90vw, 480px);
+  width: 100%;
+  position: relative;
+  text-align: center;
+  animation: zoomLightbox 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes zoomLightbox {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: none;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.lightbox-image {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  background: #111;
+}
+
+.lightbox-caption {
+  color: #ffb6c1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 12px;
+  letter-spacing: 0.02em;
+}
+
+/* Gallery heart pop animation */
+.heart-pop-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 3.5rem;
+  color: #ff3366;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 4px 15px rgba(255, 51, 102, 0.6));
+  animation: heartPopAnim 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes heartPopAnim {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  45% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+  80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.1) translateY(-20px); opacity: 0; }
+}
+
+/* Runaway NO button smooth transition */
+.btn-gate-no {
+  transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), background 0.2s ease, color 0.2s ease !important;
+  max-width: calc(100vw - 32px);
+}
