@@ -5,13 +5,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Intro Animation
+    // Solid Elegant Intro Animation
   const intro = document.getElementById('intro-animation');
   if(intro) {
     setTimeout(() => {
       intro.classList.add('hidden');
-      if(window.sounds) sounds.playCelebration();
-    }, 2500);
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 600);
+    }, 1800);
   }
 
   initQuestionGate();
@@ -155,7 +157,7 @@ function initQuestionGate() {
       launchConfetti();
 
       if (btnNo) btnNo.style.display = 'none';
-      btnYes.innerHTML = '<i class="fas fa-heart"></i> YAYYY! Besties Forever! 🎉';
+      btnYes.innerHTML = 'YAYYY! Besties Forever! 🎉';
 
       if (questionSection) questionSection.classList.add('fade-out');
       if (surpriseContent) surpriseContent.classList.add('revealed');
