@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Master Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=18.0">
+  <link rel="stylesheet" href="css/style.css?v=19.0">
 </head>
 <body>
 
@@ -363,544 +363,278 @@
           <p class="section-subtitle">17 saal ki Krishuu ke liye 17 sabse cute aur sachhi baatein! 🌸</p>
         </div>
 
-        <div class="reasons-progress-tracker">
-          <div class="progress-info-row">
-            <span class="progress-label"><i class="fas fa-coins"></i> Scratched Cards:</span>
-            <span class="progress-count" id="unlocked-count">0 / 17 🪙</span>
+        <div class="scratch-cards-grid">
+          <div class="real-scratch-card" data-reason-id="01">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#01</span>
+                <span class="scratch-tag">Pure Magic 🌸</span>
+              </div>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">✨</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Tera Contagious Hasna</h3>
+                  <p class="scratch-desc">Tere hasne ki aawaz sunke sabse kharab din bhi ek pal me theek ho jaata hai.</p>
+                </div>
+              </div>
+            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="reasons-progress-fill"></div>
+          <div class="real-scratch-card" data-reason-id="02">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#02</span>
+                <span class="scratch-tag">Rare Soul 💎</span>
+              </div>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">💖</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Tera Pyaara & Saaf Dil</h3>
+                  <p class="scratch-desc">Tu sabki bina kisi matlab ke care karti hai, aisi soul bohot rare hoti hai.</p>
+                </div>
+              </div>
+            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <p class="progress-subhint">Har card ko tap karke scratch karo aur dekho kya chupa hai! 🪙✨</p>
-        </div>
-
-        <div class="curiosity-reasons-grid">
-          <div class="secret-capsule-card locked" data-reason-id="01">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #01</span>
-                <span class="capsule-tag-hint">Pure Magic 🌸</span>
+          <div class="real-scratch-card" data-reason-id="03">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#03</span>
+                <span class="scratch-tag">Queen Vibes ✨</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">👑</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Cute Dramatic Nakhre</h3>
+                  <p class="scratch-desc">Chhota sa pout, dramatic expressions aur cute gussa... full entertainment!</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#01 Scratched! 💖</span>
-                <span class="unlocked-tag">Pure Magic 🌸</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">✨</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Tera Contagious Hasna</h3>
-                  <p class="unlocked-desc">Tere hasne ki aawaz sunke sabse kharab din bhi ek pal me theek ho jaata hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="02">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #02</span>
-                <span class="capsule-tag-hint">Rare Soul 💎</span>
+          <div class="real-scratch-card" data-reason-id="04">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#04</span>
+                <span class="scratch-tag">100% Vibe 🎶</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🎧</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Best Vibe & Music Partner</h3>
+                  <p class="scratch-desc">Tere saath be-sure gaane gaana aur gaane sunna best feeling hoti hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#02 Scratched! 💖</span>
-                <span class="unlocked-tag">Rare Soul 💎</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">💖</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Tera Pyaara & Saaf Dil</h3>
-                  <p class="unlocked-desc">Tu sabki bina kisi matlab ke care karti hai, aisi soul bohot rare hoti hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="03">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #03</span>
-                <span class="capsule-tag-hint">Queen Vibes ✨</span>
+          <div class="real-scratch-card" data-reason-id="05">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#05</span>
+                <span class="scratch-tag">Real Strength 🌟</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">💪</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Tu Bohot Strong Hai</h3>
+                  <p class="scratch-desc">Tu jitna sochti hai, usse kahin zyada brave aur samajhdaar insaan hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#03 Scratched! 💖</span>
-                <span class="unlocked-tag">Queen Vibes ✨</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">👑</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Cute Dramatic Nakhre</h3>
-                  <p class="unlocked-desc">Chhota sa pout, dramatic expressions aur cute gussa... full entertainment!</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="04">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #04</span>
-                <span class="capsule-tag-hint">100% Vibe 🎶</span>
+          <div class="real-scratch-card" data-reason-id="06">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#06</span>
+                <span class="scratch-tag">Pure Sukoon 🤍</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🌙</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Peaceful & Calming Presence</h3>
+                  <p class="scratch-desc">Tere aas-paas reh kar ya baat karke hamesha ek sukoon aur warmth milti hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#04 Scratched! 💖</span>
-                <span class="unlocked-tag">100% Vibe 🎶</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🎧</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Best Vibe & Music Partner</h3>
-                  <p class="unlocked-desc">Tere saath be-sure gaane gaana aur gaane sunna best feeling hoti hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="05">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #05</span>
-                <span class="capsule-tag-hint">Real Strength 🌟</span>
+          <div class="real-scratch-card" data-reason-id="07">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#07</span>
+                <span class="scratch-tag">Foodie Bestie 🧁</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🍟</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Late Night Foodie Partner</h3>
+                  <p class="scratch-desc">Nayi cheezein khane ke plan banana aur snacks ki cravings saath nibhana!</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#05 Scratched! 💖</span>
-                <span class="unlocked-tag">Real Strength 🌟</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">💪</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Tu Bohot Strong Hai</h3>
-                  <p class="unlocked-desc">Tu jitna sochti hai, usse kahin zyada brave aur samajhdaar insaan hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="06">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #06</span>
-                <span class="capsule-tag-hint">Pure Sukoon 🤍</span>
+          <div class="real-scratch-card" data-reason-id="08">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#08</span>
+                <span class="scratch-tag">True Loyalty 💖</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🫂</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Hamesha Saath Khade Rehna</h3>
+                  <p class="scratch-desc">Chahe situation kitni bhi ajeeb ho, tu hamesha loyal dost banke saath deti hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#06 Scratched! 💖</span>
-                <span class="unlocked-tag">Pure Sukoon 🤍</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🌙</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Peaceful & Calming Presence</h3>
-                  <p class="unlocked-desc">Tere aas-paas reh kar ya baat karke hamesha ek sukoon aur warmth milti hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="07">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #07</span>
-                <span class="capsule-tag-hint">Foodie Bestie 🧁</span>
+          <div class="real-scratch-card" data-reason-id="09">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#09</span>
+                <span class="scratch-tag">Mind Reader 🔮</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">👀</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Bina Bole Samajh Jaana</h3>
+                  <p class="scratch-desc">Sirf chehra dekh kar jaan leti hai ki kya chal raha hai dimag me.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#07 Scratched! 💖</span>
-                <span class="unlocked-tag">Foodie Bestie 🧁</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🍟</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Late Night Foodie Partner</h3>
-                  <p class="unlocked-desc">Nayi cheezein khane ke plan banana aur snacks ki cravings saath nibhana!</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="08">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #08</span>
-                <span class="capsule-tag-hint">True Loyalty 💖</span>
+          <div class="real-scratch-card" data-reason-id="10">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#10</span>
+                <span class="scratch-tag">Iconic Style 🎀</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">👗</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Aesthetic Style & Vibe</h3>
+                  <p class="scratch-desc">Har cheez me tera aesthetic touch aur classy choice hamesha top-notch hoti hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#08 Scratched! 💖</span>
-                <span class="unlocked-tag">True Loyalty 💖</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🫂</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Hamesha Saath Khade Rehna</h3>
-                  <p class="unlocked-desc">Chahe situation kitni bhi ajeeb ho, tu hamesha loyal dost banke saath deti hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="09">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #09</span>
-                <span class="capsule-tag-hint">Mind Reader 🔮</span>
+          <div class="real-scratch-card" data-reason-id="11">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#11</span>
+                <span class="scratch-tag">Energy Booster ⚡</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🎉</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Boring Jagah Ko Fun Banana</h3>
+                  <p class="scratch-desc">Jahan tu hoti hai, wahan kabhi bhi sannata ya boredom nahi ho sakta!</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#09 Scratched! 💖</span>
-                <span class="unlocked-tag">Mind Reader 🔮</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">👀</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Bina Bole Samajh Jaana</h3>
-                  <p class="unlocked-desc">Sirf chehra dekh kar jaan leti hai ki kya chal raha hai dimag me.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="10">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #10</span>
-                <span class="capsule-tag-hint">Iconic Style 🎀</span>
+          <div class="real-scratch-card" data-reason-id="12">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#12</span>
+                <span class="scratch-tag">Real & True 💯</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">💎</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">100% Honest Opinions</h3>
+                  <p class="scratch-desc">Tu bina kisi fake filter ke hamesha sach bolti hai, jo sabse bada virtue hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#10 Scratched! 💖</span>
-                <span class="unlocked-tag">Iconic Style 🎀</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">👗</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Aesthetic Style & Vibe</h3>
-                  <p class="unlocked-desc">Har cheez me tera aesthetic touch aur classy choice hamesha top-notch hoti hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="11">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #11</span>
-                <span class="capsule-tag-hint">Energy Booster ⚡</span>
+          <div class="real-scratch-card" data-reason-id="13">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#13</span>
+                <span class="scratch-tag">Thoughtful Heart 🌸</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🎀</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Choti Choti Baatein Yaad Rakhna</h3>
+                  <p class="scratch-desc">Wo choti choti baatein jo baaki log bhool jaate hain, tu hamesha yaad rakhti hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#11 Scratched! 💖</span>
-                <span class="unlocked-tag">Energy Booster ⚡</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🎉</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Boring Jagah Ko Fun Banana</h3>
-                  <p class="unlocked-desc">Jahan tu hoti hai, wahan kabhi bhi sannata ya boredom nahi ho sakta!</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="12">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #12</span>
-                <span class="capsule-tag-hint">Real & True 💯</span>
+          <div class="real-scratch-card" data-reason-id="14">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#14</span>
+                <span class="scratch-tag">Endless Talks ☕</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">💬</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Non-Stop Gossip & Laughs</h3>
+                  <p class="scratch-desc">Tere saath ghanto baat karke bhi aisa lagta hai abhi toh baatein shuru hui hain.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#12 Scratched! 💖</span>
-                <span class="unlocked-tag">Real & True 💯</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">💎</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">100% Honest Opinions</h3>
-                  <p class="unlocked-desc">Tu bina kisi fake filter ke hamesha sach bolti hai, jo sabse bada virtue hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="13">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #13</span>
-                <span class="capsule-tag-hint">Thoughtful Heart 🌸</span>
+          <div class="real-scratch-card" data-reason-id="15">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#15</span>
+                <span class="scratch-tag">Unbreakable 🛡️</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🌟</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Pure Loyalty & Trust</h3>
+                  <p class="scratch-desc">Aankh band karke bharosa karne waali best friend sirf tu hi hai.</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#13 Scratched! 💖</span>
-                <span class="unlocked-tag">Thoughtful Heart 🌸</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🎀</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Choti Choti Baatein Yaad Rakhna</h3>
-                  <p class="unlocked-desc">Wo choti choti baatein jo baaki log bhool jaate hain, tu hamesha yaad rakhti hai.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="14">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #14</span>
-                <span class="capsule-tag-hint">Endless Talks ☕</span>
+          <div class="real-scratch-card" data-reason-id="16">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#16</span>
+                <span class="scratch-tag">Cute Baccha 🧸</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">🌸</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">Pyaara Baccha Vibe</h3>
+                  <p class="scratch-desc">Badi hone ke baad bhi tere andar ka wo innocent cute baccha hamesha zinda hai!</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#14 Scratched! 💖</span>
-                <span class="unlocked-tag">Endless Talks ☕</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">💬</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Non-Stop Gossip & Laughs</h3>
-                  <p class="unlocked-desc">Tere saath ghanto baat karke bhi aisa lagta hai abhi toh baatein shuru hui hain.</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
-          <div class="secret-capsule-card locked" data-reason-id="15">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #15</span>
-                <span class="capsule-tag-hint">Unbreakable 🛡️</span>
+          <div class="real-scratch-card" data-reason-id="17">
+            <div class="scratch-content-beneath">
+              <div class="scratch-top-bar">
+                <span class="scratch-badge">#17</span>
+                <span class="scratch-tag">One in a Billion 👑</span>
               </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
+              <div class="scratch-body">
+                <div class="scratch-icon-bubble">💖</div>
+                <div class="scratch-info">
+                  <h3 class="scratch-title">You Are You!</h3>
+                  <p class="scratch-desc">Kyunki Krishuu jaisi doosri koi nahi ban sakti. You are truly one in a billion! ✨</p>
                 </div>
               </div>
             </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#15 Scratched! 💖</span>
-                <span class="unlocked-tag">Unbreakable 🛡️</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🌟</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Pure Loyalty & Trust</h3>
-                  <p class="unlocked-desc">Aankh band karke bharosa karne waali best friend sirf tu hi hai.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="secret-capsule-card locked" data-reason-id="16">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #16</span>
-                <span class="capsule-tag-hint">Cute Baccha 🧸</span>
-              </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#16 Scratched! 💖</span>
-                <span class="unlocked-tag">Cute Baccha 🧸</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">🌸</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">Pyaara Baccha Vibe</h3>
-                  <p class="unlocked-desc">Badi hone ke baad bhi tere andar ka wo innocent cute baccha hamesha zinda hai!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="secret-capsule-card locked" data-reason-id="17">
-            <!-- Locked State Teaser (Builds Curiosity!) -->
-            <div class="capsule-locked-view">
-              <div class="locked-badge-row">
-                <span class="capsule-number-pill">Scratch Card #17</span>
-                <span class="capsule-tag-hint">One in a Billion 👑</span>
-              </div>
-              <div class="locked-teaser-body">
-                <div class="locked-icon-anim">🔒</div>
-                <div class="locked-prompt">
-                  <strong>🪙 Tap to Scratch & Reveal</strong>
-                  <span>Special surprise coupon for Krishuu ✨</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Unlocked State (Revealed after Tap!) -->
-            <div class="capsule-unlocked-view">
-              <div class="unlocked-header">
-                <span class="unlocked-badge">#17 Scratched! 💖</span>
-                <span class="unlocked-tag">One in a Billion 👑</span>
-              </div>
-              <div class="unlocked-body">
-                <div class="unlocked-icon-bubble">💖</div>
-                <div class="unlocked-text">
-                  <h3 class="unlocked-title">You Are You!</h3>
-                  <p class="unlocked-desc">Kyunki Krishuu jaisi doosri koi nahi ban sakti. You are truly one in a billion! ✨</p>
-                </div>
-              </div>
-            </div>
+            <canvas class="scratch-canvas"></canvas>
           </div>
         </div>
       </section>
@@ -992,6 +726,6 @@
   </div>
 
   <!-- Master JavaScript -->
-  <script src="js/script.js?v=18.0"></script>
+  <script src="js/script.js?v=19.0"></script>
 </body>
 </html>

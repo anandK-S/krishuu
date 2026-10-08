@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuestionGate();
   initWishButton();
   initPolaroidGallery();
-  initCuriosityReasons();
+  initScratchCards();
   initLetterEditor();
 });
 
@@ -104,13 +104,13 @@ function initGiftUnboxing() {
       giftContainer.classList.add('unboxing');
     }
 
-    // Faster & punchier celebration reveal transition into Question Gate
+    // Ultra-fast instant snap into Question Gate (< 200ms)
     setTimeout(() => {
       intro.classList.add('hidden');
       setTimeout(() => {
         intro.style.display = 'none';
-      }, 400);
-    }, 850);
+      }, 150);
+    }, 200);
   }
 
   intro.addEventListener('click', triggerUnbox);
@@ -119,10 +119,10 @@ function initGiftUnboxing() {
     triggerUnbox();
   }, { passive: false });
 
-  // Fallback after 4.5s so user never waits too long
+  // Fast fallback after 1.8s
   setTimeout(() => {
     if (!isUnboxing) triggerUnbox();
-  }, 4500);
+  }, 1800);
 }
 
 // ==========================================================================
