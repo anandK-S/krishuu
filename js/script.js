@@ -104,13 +104,13 @@ function initGiftUnboxing() {
       giftContainer.classList.add('unboxing');
     }
 
-    // After celebratory reveal, transition into the Question Gate smoothly
+    // Faster & punchier celebration reveal transition into Question Gate
     setTimeout(() => {
       intro.classList.add('hidden');
       setTimeout(() => {
         intro.style.display = 'none';
-      }, 700);
-    }, 1500);
+      }, 400);
+    }, 850);
   }
 
   intro.addEventListener('click', triggerUnbox);
@@ -286,7 +286,7 @@ function initCuriosityReasons() {
         const percent = Math.round((unlockedCount / total) * 100);
 
         if (countDisplay) {
-          countDisplay.textContent = `${unlockedCount} / ${total} 🔓`;
+          countDisplay.textContent = `${unlockedCount} / ${total} 🪙`;
         }
         if (progressFill) {
           progressFill.style.width = `${percent}%`;
@@ -419,8 +419,8 @@ function launchConfetti() {
       w: isRibbon ? Math.random() * 8 + 6 : Math.random() * 6 + 4,
       h: isRibbon ? Math.random() * 16 + 10 : Math.random() * 6 + 4,
       r: Math.random() * 4 + 3,
-      dx: (Math.random() - 0.5) * 18,
-      dy: (Math.random() - 0.75) * 20,
+      dx: (Math.random() - 0.5) * 26,
+      dy: (Math.random() - 0.8) * 26,
       color: colors[Math.floor(Math.random() * colors.length)],
       rotation: Math.random() * 360,
       rotSpeed: (Math.random() - 0.5) * 12,
@@ -442,13 +442,13 @@ function launchConfetti() {
     particles.forEach(p => {
       p.x += p.dx;
       p.y += p.dy;
-      p.dy += 0.38; // gravity
-      p.dx *= 0.985; // air drag
-      p.rotation += p.rotSpeed;
-      p.wobble += p.wobbleSpeed;
+      p.dy += 0.55; // faster gravity
+      p.dx *= 0.978; // snappier drag
+      p.rotation += p.rotSpeed * 1.3; // faster spin
+      p.wobble += p.wobbleSpeed * 1.2;
 
-      if (frameCount > 26) {
-        p.alpha -= 0.018;
+      if (frameCount > 20) {
+        p.alpha -= 0.024; // snappier fade
       }
 
       ctx.save();
@@ -477,7 +477,7 @@ function launchConfetti() {
       ctx.restore();
     });
 
-    if (frameCount < 85 && particles.some(p => p.alpha > 0)) {
+    if (frameCount < 70 && particles.some(p => p.alpha > 0)) {
       animationFrame = requestAnimationFrame(update);
     } else {
       cancelAnimationFrame(animationFrame);
