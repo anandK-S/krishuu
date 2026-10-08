@@ -27,7 +27,7 @@
   --font-classic: 'Cinzel', serif;
 }
 
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -37,6 +37,11 @@
 html {
   scroll-behavior: smooth;
   background-color: #faf8f5;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -44,7 +49,9 @@ body {
   background-color: #faf8f5;
   color: var(--text-main);
   min-height: 100vh;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
   position: relative;
   background-image: 
     radial-gradient(circle at 50% 8%, rgba(245, 223, 158, 0.35) 0%, transparent 50%),
@@ -52,6 +59,16 @@ body {
     radial-gradient(circle at 90% 55%, rgba(225, 210, 245, 0.35) 0%, transparent 50%),
     radial-gradient(circle at 50% 88%, rgba(245, 223, 158, 0.3) 0%, transparent 55%);
   background-attachment: fixed;
+}
+
+img, video, iframe, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, button, label {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* ==========================================================================
@@ -201,14 +218,16 @@ body.is-locked {
   width: 100vw;
   height: 100vh;
   height: 100dvh;
+  min-height: -webkit-fill-available;
   background: radial-gradient(circle at 50% 20%, #ffffff 0%, #faf5f8 55%, #f2e9ef 100%);
   z-index: 10000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(12px, 3vh, 24px) clamp(14px, 4vw, 24px);
+  padding: clamp(10px, 2.5vh, 20px) clamp(10px, 3vw, 18px);
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -222,12 +241,12 @@ body.is-locked {
 
 .lock-container {
   width: 100%;
-  max-width: 350px;
+  max-width: min(340px, 92vw);
   margin: auto;
   background: #ffffff;
   border: 1.5px solid rgba(217, 67, 114, 0.2);
-  border-radius: 28px;
-  padding: clamp(18px, 3.5vh, 26px) clamp(16px, 4.5vw, 24px);
+  border-radius: clamp(20px, 5vw, 28px);
+  padding: clamp(14px, 2.8vh, 22px) clamp(12px, 3.5vw, 20px);
   box-shadow: 0 20px 50px rgba(120, 80, 100, 0.12), 0 0 25px rgba(217, 67, 114, 0.08);
   text-align: center;
   position: relative;
@@ -238,23 +257,23 @@ body.is-locked {
 }
 
 .lock-header-classic {
-  margin-bottom: 12px;
+  margin-bottom: clamp(6px, 1.4vh, 12px);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .lock-top-icon {
-  width: 44px;
-  height: 44px;
-  margin-bottom: 8px;
+  width: clamp(34px, 5vh, 42px);
+  height: clamp(34px, 5vh, 42px);
+  margin-bottom: clamp(4px, 1vh, 8px);
   background: rgba(217, 67, 114, 0.08);
   border: 1.5px solid rgba(217, 67, 114, 0.35);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: clamp(0.95rem, 2vh, 1.15rem);
   color: var(--primary-pink);
   box-shadow: 0 4px 15px rgba(217, 67, 114, 0.15);
   animation: floatPulse 3s ease-in-out infinite;
@@ -267,19 +286,19 @@ body.is-locked {
 
 .ltc-name {
   font-family: var(--font-handwriting);
-  font-size: clamp(1.6rem, 4vh, 2rem);
+  font-size: clamp(1.5rem, 4.2vh, 1.95rem);
   color: var(--primary-pink);
   margin: 0;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .ltc-sub {
   font-family: var(--font-main);
-  font-size: clamp(0.72rem, 1.8vh, 0.8rem);
-  letter-spacing: 1.5px;
+  font-size: clamp(0.68rem, 1.5vh, 0.78rem);
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #7d7286;
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   font-weight: 600;
 }
 
@@ -288,20 +307,20 @@ body.is-locked {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin: 12px 0 8px;
+  gap: clamp(8px, 2.2vw, 12px);
+  margin: clamp(8px, 1.6vh, 12px) 0 clamp(6px, 1.2vh, 10px);
 }
 
 .pin-slot {
-  width: 46px;
-  height: 50px;
-  border-radius: 14px;
+  width: clamp(38px, 10.5vw, 46px);
+  height: clamp(42px, 5.5vh, 48px);
+  border-radius: clamp(10px, 2.5vw, 14px);
   background: #fdfafb;
   border: 2px solid rgba(217, 67, 114, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 3vh, 1.4rem);
   font-weight: 700;
   color: #1e1728;
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -331,11 +350,12 @@ body.is-locked {
   background: #fff0f5;
   border: 1px solid rgba(217, 67, 114, 0.3);
   color: #c2185b;
-  font-size: 0.78rem;
+  font-size: clamp(0.7rem, 1.6vh, 0.78rem);
   font-weight: 600;
-  padding: 5px 14px;
+  padding: clamp(4px, 1vh, 6px) clamp(10px, 2.5vw, 14px);
   border-radius: 20px;
-  margin-bottom: 12px;
+  margin-bottom: clamp(8px, 1.6vh, 12px);
+  max-width: 95%;
   box-shadow: 0 2px 8px rgba(217, 67, 114, 0.1);
 }
 
@@ -375,7 +395,7 @@ body.is-locked {
 }
 
 .anger-emoji-main {
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4.5vh, 2.2rem);
   display: inline-block;
   animation: angryTantrum 0.3s infinite alternate ease-in-out;
   filter: drop-shadow(0 2px 8px rgba(229, 57, 53, 0.5));
@@ -443,33 +463,38 @@ body.is-locked {
   20%, 40%, 60%, 80% { transform: translateX(10px) rotate(1.5deg); }
 }
 
-/* Keypad Grid */
+/* Keypad Grid — Perfectly Circular, Touch-Optimized Targets */
 .keypad-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
   gap: clamp(8px, 1.5vh, 12px);
   width: 100%;
-  max-width: 250px;
+  max-width: min(240px, 78vw);
   margin: 4px auto 0;
   box-sizing: border-box;
 }
 
 .key-btn {
-  height: clamp(48px, 6.2vh, 54px);
+  width: clamp(48px, 6.2vh, 56px);
+  height: clamp(48px, 6.2vh, 56px);
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: #ffffff;
-  border: 1.5px solid rgba(217, 67, 114, 0.2);
+  border: 1.5px solid rgba(217, 67, 114, 0.22);
   color: #1e1728;
-  font-size: clamp(1.2rem, 3vh, 1.35rem);
+  font-size: clamp(1.15rem, 2.7vh, 1.35rem);
   font-weight: 600;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s ease;
+  transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -487,7 +512,7 @@ body.is-locked {
 }
 
 .key-btn.key-action {
-  font-size: 1.15rem;
+  font-size: clamp(0.95rem, 2vh, 1.15rem);
   background: #faf7f9;
   border-color: rgba(0, 0, 0, 0.08);
   color: #6b5b75;
@@ -505,10 +530,64 @@ body.is-locked {
 }
 
 .key-sub {
-  font-size: 0.5rem;
-  letter-spacing: 1px;
+  font-size: clamp(0.44rem, 0.9vh, 0.5rem);
+  letter-spacing: 0.6px;
   color: #92879a;
-  margin-top: -2px;
+  margin-top: -1px;
+  line-height: 1;
+}
+
+/* Landscape / Small Viewport Height Adaptations for Lock Screen */
+@media (max-height: 680px) {
+  .lock-screen {
+    padding: 6px 10px;
+  }
+  .lock-container {
+    padding: 10px 14px;
+    border-radius: 18px;
+  }
+  .lock-header-classic {
+    margin-bottom: 4px;
+  }
+  .lock-top-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+  }
+  .ltc-name {
+    font-size: 1.35rem;
+  }
+  .ltc-sub {
+    font-size: 0.65rem;
+  }
+  .pin-display {
+    margin: 4px 0 3px;
+    gap: 6px;
+  }
+  .pin-slot {
+    width: 36px;
+    height: 38px;
+    font-size: 1.1rem;
+    border-radius: 9px;
+  }
+  .lock-hint-pill {
+    padding: 3px 8px;
+    font-size: 0.68rem;
+    margin-bottom: 6px;
+  }
+  .keypad-grid {
+    gap: 5px;
+    max-width: 210px;
+  }
+  .key-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+  .key-sub {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -3560,99 +3639,423 @@ footer span {
 }
 
 /* ==========================================================================
-   AUTO-RESPONSIVENESS & MOBILE HARMONY ENHANCEMENTS
+   MASTER AUTO-RESPONSIVE SYSTEM (FOR EVERY SCREEN & PHONE SIZE)
    ========================================================================== */
-@media (max-width: 480px) {
-  body {
-    font-size: 14px;
-  }
-  .main-wrapper {
-    padding: 10px 12px 80px;
-  }
-  .hero-title {
-    font-size: 2.2rem;
-  }
-  .hero-title .krishuu-name {
-    font-size: 1.2em;
-  }
-  .countdown-box {
-    gap: 8px;
-    padding: 14px 10px;
+
+/* Universal Mobile Hardening: prevent any child from exceeding viewport */
+@media (max-width: 768px) {
+  html, body {
     width: 100%;
-    justify-content: space-between;
+    max-width: 100vw;
+    overflow-x: hidden !important;
   }
+
+  .main-wrapper {
+    padding: 12px 14px 70px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  section {
+    margin-bottom: clamp(45px, 8vh, 70px);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Headings & Section Headers */
+  .section-title {
+    font-size: clamp(1.4rem, 5.5vw, 2rem) !important;
+    line-height: 1.25;
+    padding: 0 8px;
+    word-break: break-word;
+  }
+
+  .section-desc {
+    font-size: clamp(0.82rem, 2.8vw, 0.95rem) !important;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .section-tag {
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    margin-bottom: 8px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: clamp(15px, 3vh, 30px);
+    padding-bottom: clamp(20px, 4vh, 35px);
+    min-height: auto;
+    width: 100%;
+  }
+
+  .hero-avatar-wrap {
+    width: clamp(120px, 32vw, 155px);
+    height: clamp(120px, 32vw, 155px);
+    margin: 0 auto 16px;
+  }
+
+  .crown-badge {
+    font-size: clamp(1.8rem, 5vw, 2.3rem);
+    top: -16px;
+    right: -6px;
+  }
+
+  .hero-badge-dob {
+    font-size: clamp(0.7rem, 2.4vw, 0.82rem);
+    padding: 5px 14px;
+    margin-bottom: 12px;
+    max-width: 95%;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 5.8vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    padding: 0 6px;
+  }
+
+  .hero-title .ht-line1 {
+    font-size: 0.65em;
+  }
+
+  .hero-title .krishuu-name {
+    font-size: 1.18em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.82rem, 2.6vw, 0.98rem);
+    line-height: 1.55;
+    padding: 0 12px;
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+
+  .glitter-subtitle-bar {
+    max-width: 94%;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+  }
+
+  .gsb-text {
+    font-size: clamp(0.82rem, 2.5vw, 1rem);
+  }
+
+  .btn-cinema-glow {
+    max-width: 92%;
+    padding: 10px 18px;
+    font-size: clamp(0.82rem, 2.5vw, 0.95rem);
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  /* Friendship Question Card */
+  .friendship-question-section {
+    margin: 20px auto 40px;
+    padding: 0 8px;
+    max-width: 100%;
+  }
+
+  .question-card {
+    padding: clamp(20px, 4.5vw, 32px) clamp(14px, 3.5vw, 22px);
+    border-radius: 22px;
+    width: 100%;
+  }
+
+  .question-sticker {
+    width: clamp(95px, 24vw, 130px);
+    height: clamp(95px, 24vw, 130px);
+    margin-bottom: 12px;
+  }
+
+  .question-main-text {
+    font-size: clamp(1.35rem, 4.8vw, 1.95rem);
+    line-height: 1.25;
+    margin-bottom: 8px;
+    padding: 0 4px;
+  }
+
+  .question-desc-text {
+    font-size: clamp(0.82rem, 2.6vw, 0.95rem);
+    margin-bottom: 20px;
+    padding: 0 6px;
+  }
+
+  .question-buttons-row {
+    gap: 12px;
+    min-height: 60px;
+  }
+
+  .btn-question-yes {
+    font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+    padding: 11px 22px;
+  }
+
+  .btn-question-no {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: 10px 18px;
+  }
+
+  .question-accepted-banner {
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+
+  .question-accepted-banner h3 {
+    font-size: clamp(1.1rem, 3.4vw, 1.35rem);
+  }
+
+  .question-accepted-banner p {
+    font-size: clamp(0.8rem, 2.5vw, 0.92rem);
+  }
+
+  /* Live Countdown Box */
+  .countdown-box {
+    gap: 6px;
+    padding: 12px 10px;
+    max-width: 100%;
+    justify-content: center;
+  }
+
   .time-card {
-    min-width: 45px;
+    min-width: clamp(48px, 13.5vw, 62px);
+    padding: 8px 6px;
+    border-radius: 12px;
   }
+
   .time-num {
-    font-size: 1.7rem;
+    font-size: clamp(1.35rem, 4.2vw, 1.85rem);
   }
+
   .time-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.8px;
+    font-size: clamp(0.55rem, 1.5vw, 0.65rem);
+    letter-spacing: 0.5px;
   }
+
   .countdown-divider {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding-bottom: 4px;
   }
-  .hero-cta-group {
-    flex-direction: column;
-    width: 100%;
-  }
-  .btn-primary, .btn-secondary {
-    width: 100%;
-    justify-content: center;
-    padding: 12px 18px;
-    font-size: 0.92rem;
-  }
-  .cake-stage {
-    padding: 25px 12px 20px;
-  }
-  .cake-container {
-    transform: scale(0.85);
-    margin-bottom: 10px;
-  }
+
+  /* Polaroid Photo Memories — 100% Mobile Safe (No tilt overflow) */
   .polaroid-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 16px;
+    padding: 0;
   }
-  .vault-grid {
+
+  .polaroid-card,
+  .polaroid-card:nth-child(odd),
+  .polaroid-card:nth-child(even),
+  .polaroid-card:nth-child(3n) {
+    transform: none !important; /* Eliminate rotation so borders NEVER spill off-screen */
+    padding: 12px 12px 18px;
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .polaroid-img-wrap {
+    height: clamp(180px, 46vw, 240px);
+  }
+
+  .polaroid-caption {
+    font-size: clamp(1.15rem, 3.8vw, 1.35rem);
+    margin-top: 10px;
+  }
+
+  /* Video Theater Section */
+  .edited-video-section {
+    margin: 40px auto 60px;
+    padding: 0 4px;
+    max-width: 100%;
+  }
+
+  .video-theater-container {
+    padding: 12px 8px;
+    border-radius: 18px;
+  }
+
+  .video-card-premium {
+    border-radius: 14px;
+  }
+
+  .edited-video-player {
+    max-height: clamp(220px, 48vh, 380px);
+    border-radius: 14px 14px 0 0;
+  }
+
+  .video-info-strip {
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* Romantic Birthday Letter */
+  .letter-section {
+    margin-bottom: 60px;
+  }
+
+  .letter-parchment-wrapper {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .letter-parchment-card {
+    padding: clamp(22px, 4.5vw, 36px) clamp(16px, 4vw, 26px);
+    border-radius: 16px;
+  }
+
+  .parchment-title {
+    font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+  }
+
+  .parchment-greeting {
+    font-size: clamp(1.2rem, 3.8vw, 1.55rem);
+  }
+
+  .letter-content {
+    font-size: clamp(0.95rem, 2.7vw, 1.15rem);
+    line-height: 1.65;
+  }
+
+  .parchment-author {
+    font-size: 1.45rem;
+  }
+
+  /* Reasons & Reasons Grid */
+  .reasons-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reason-card {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+
+  .reason-num {
+    font-size: 1.8rem;
+    top: 12px;
+    right: 14px;
+  }
+
+  .reason-title {
+    font-size: 1.05rem;
+  }
+
+  .reason-text {
+    font-size: 0.84rem;
+  }
+
+  /* Cute Gifs Grid */
+  .cute-gifs-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
-  .vault-item {
-    height: 160px;
+
+  .cute-gif-card {
+    padding: 8px;
+    border-radius: 14px;
   }
-  .reel-card {
-    flex: 0 0 170px;
-    height: 300px;
+
+  .gif-media-wrap {
+    height: clamp(100px, 26vw, 140px);
+    border-radius: 10px;
   }
-  .cinema-theater {
-    height: 95vh;
-    border-radius: 16px;
+
+  .gif-caption-tag {
+    font-size: 0.76rem;
   }
-  .cinema-caption-box {
-    bottom: 15px;
-    left: 10px;
+
+  /* Wish Jar & Gift Box */
+  .jar-stage, .guestbook-box {
+    padding: 24px 16px;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  .gift-box-wrap {
+    width: clamp(170px, 48vw, 210px);
+    height: clamp(170px, 48vw, 210px);
+    margin: 20px auto 30px;
+  }
+
+  .gift-body {
+    height: clamp(115px, 32vw, 140px);
+  }
+
+  /* Modals & Overlays */
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-content {
+    padding: 20px 16px;
+    border-radius: 20px;
+    max-width: 95vw;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+
+  /* Floating Buttons */
+  .photo-manager-btn {
+    bottom: 12px;
+    left: 12px;
+    padding: 7px 12px;
+    font-size: 0.72rem;
+    gap: 5px;
+  }
+
+  .music-controller {
+    top: 10px;
     right: 10px;
-    padding: 10px 12px;
+    padding: 5px 10px;
+    gap: 6px;
   }
-  .letter-envelope-card {
-    padding: 25px 18px;
+
+  .music-title {
+    max-width: 90px;
+    font-size: 0.72rem;
   }
-  .letter-body {
-    font-size: 1.3rem;
+
+  footer {
+    padding: 30px 14px 70px;
+    font-size: 0.85rem;
   }
+}
+
+/* Extra Small Phones (<= 360px wide, e.g. iPhone SE, Galaxy Fold cover, budget devices) */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.55rem;
+  }
+
   .lock-container {
-    padding: 22px 16px;
+    padding: 12px 10px;
   }
-  .time-slot {
-    width: 38px;
-    height: 44px;
-    font-size: 1.2rem;
+
+  .pin-slot {
+    width: 34px;
+    height: 38px;
+    font-size: 1.05rem;
   }
+
   .key-btn {
-    height: 52px;
-    font-size: 1.2rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.05rem;
+  }
+
+  .key-sub {
+    display: none;
+  }
+
+  .cute-gifs-grid {
+    grid-template-columns: 1fr;
   }
 }

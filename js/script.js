@@ -959,24 +959,26 @@ function initFriendshipQuestion() {
     }
     sounds.playClick();
 
-    const btnWidth = btnNo.offsetWidth || 110;
+    phraseIdx = (phraseIdx + 1) % teasePhrases.length;
+    btnNo.textContent = teasePhrases[phraseIdx];
+
+    const padding = 16;
+    const btnWidth = btnNo.offsetWidth || 120;
     const btnHeight = btnNo.offsetHeight || 44;
-    const padding = 20;
+    const screenW = window.innerWidth || document.documentElement.clientWidth || 360;
+    const screenH = window.innerHeight || document.documentElement.clientHeight || 640;
 
-    const maxX = Math.max(padding, window.innerWidth - btnWidth - padding);
-    const maxY = Math.max(padding, window.innerHeight - btnHeight - padding);
+    const maxX = Math.max(padding, screenW - btnWidth - padding);
+    const maxY = Math.max(padding, screenH - btnHeight - padding);
 
-    const randomX = Math.floor(Math.random() * maxX) + padding;
-    const randomY = Math.floor(Math.random() * maxY) + padding;
+    const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), screenW - btnWidth - 8);
+    const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), screenH - btnHeight - 8);
 
     btnNo.classList.add('dodging');
     btnNo.style.position = 'fixed';
     btnNo.style.left = `${randomX}px`;
     btnNo.style.top = `${randomY}px`;
     btnNo.style.zIndex = '99999';
-
-    phraseIdx = (phraseIdx + 1) % teasePhrases.length;
-    btnNo.textContent = teasePhrases[phraseIdx];
   }
 
   // Prevent Krishuu from ever clicking NO on mouse or touch
