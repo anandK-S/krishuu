@@ -88,7 +88,7 @@ button {
 }
 
 /* ==========================================================================
-   STEP 1: "MEMORIES MEIN JAGAH RAHEGI NA?" QUESTION GATE UI
+   STEP 1: ENVELOPE REVEAL & SOFT QUESTION CARD UI
    ========================================================================== */
 .question-gate-section {
   position: fixed;
@@ -100,10 +100,10 @@ button {
   align-items: center;
   justify-content: center;
   padding: clamp(16px, 4vh, 32px) clamp(16px, 4.5vw, 24px);
-  background: radial-gradient(circle at 50% 25%, #ffffff 0%, #fff4f7 55%, #ffeaf0 100%);
+  background: radial-gradient(circle at 50% 30%, #ffffff 0%, #fff6f8 60%, #ffedf2 100%);
   z-index: 10000;
   overflow: hidden;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .question-gate-section.fade-out {
@@ -112,27 +112,131 @@ button {
   pointer-events: none;
 }
 
+/* 1. Interactive Envelope */
+.gate-envelope-wrap {
+  text-align: center;
+  cursor: pointer;
+  z-index: 10;
+  animation: envelopeFloat 3s infinite ease-in-out;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+@keyframes envelopeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.gate-envelope-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope-outer {
+  position: relative;
+  width: clamp(165px, 46vw, 195px);
+  height: clamp(115px, 32vw, 135px);
+  background: linear-gradient(135deg, #fff2f5, #ffdfe7);
+  border: 2px solid rgba(255, 140, 165, 0.5);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(255, 94, 131, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.gate-envelope-wrap:hover .envelope-outer,
+.gate-envelope-wrap:active .envelope-outer {
+  transform: scale(1.05);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: linear-gradient(180deg, #ff8fa9, #ffb3c4);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transition: transform 0.4s ease;
+  transform-origin: top;
+  z-index: 3;
+}
+
+.gate-envelope-wrap.opening .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background: linear-gradient(135deg, #ffd3dd, #ffe2e8);
+  clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%);
+  z-index: 2;
+}
+
+.envelope-seal-badge {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(255, 78, 112, 0.3);
+  border: 1.5px solid rgba(255, 182, 193, 0.6);
+  z-index: 4;
+}
+
+.envelope-tap-guide {
+  font-size: clamp(0.86rem, 2.7vw, 0.98rem);
+  font-weight: 700;
+  color: #ff4e70;
+  margin-top: 14px;
+  background: #ffffff;
+  padding: 6px 18px;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(255, 94, 131, 0.15);
+  display: inline-block;
+  border: 1px solid rgba(255, 182, 193, 0.4);
+}
+
+/* 2. Soft Premium Card */
 .gate-card {
   width: 100%;
-  max-width: min(420px, 92vw);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 182, 193, 0.6);
-  border-radius: 32px;
-  padding: clamp(32px, 7vw, 44px) clamp(20px, 5.5vw, 32px);
+  max-width: min(410px, 92vw);
+  background: #fffbfc;
+  border: 1.5px solid rgba(255, 182, 193, 0.45);
+  border-radius: 28px;
+  padding: clamp(28px, 6vw, 40px) clamp(18px, 5vw, 30px);
   text-align: center;
-  box-shadow: 0 24px 60px rgba(255, 94, 131, 0.18), 0 4px 16px rgba(255, 182, 193, 0.2);
+  box-shadow: 0 16px 45px rgba(255, 94, 131, 0.12), 0 2px 8px rgba(0, 0, 0, 0.02);
   position: relative;
   margin: auto;
   box-sizing: border-box;
+  animation: cardSoftReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardSoftReveal {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .gate-avatar-wrap {
   position: relative;
-  width: clamp(92px, 25vw, 114px);
-  height: clamp(92px, 25vw, 114px);
-  margin: 0 auto 20px;
+  width: clamp(86px, 23vw, 106px);
+  height: clamp(86px, 23vw, 106px);
+  margin: 0 auto 16px;
 }
 
 .gate-avatar {
@@ -140,87 +244,126 @@ button {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #ffffff;
-  box-shadow: 0 0 0 3px #ff4e70, 0 12px 30px rgba(255, 78, 112, 0.35);
+  border: 3.5px solid #ffffff;
+  box-shadow: 0 0 0 3px #ff5e83, 0 10px 24px rgba(255, 94, 131, 0.25);
 }
 
 .gate-heart-badge {
   position: absolute;
   top: -4px;
   right: -4px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   animation: floatHeart 2.5s infinite ease-in-out;
-  filter: drop-shadow(0 3px 8px rgba(255, 78, 112, 0.35));
-}
-
-@keyframes floatHeart {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
 }
 
 .gate-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 4.4vw, 1.68rem);
+  font-size: clamp(1.25rem, 4.2vw, 1.62rem);
   font-weight: 800;
   color: #2b1f26;
-  line-height: 1.4;
-  margin-bottom: 28px;
+  line-height: 1.42;
+  margin-bottom: 26px;
   letter-spacing: -0.01em;
 }
 
+/* 3. Pill Shape Buttons */
 .gate-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  min-height: 58px;
+  gap: 14px;
+  min-height: 56px;
   position: relative;
+  flex-wrap: wrap;
 }
 
 .btn-gate-yes {
   background: linear-gradient(135deg, #ff4e70 0%, #ff7ea5 100%);
   color: #ffffff;
-  font-size: clamp(0.98rem, 3vw, 1.12rem);
+  font-size: clamp(0.96rem, 3vw, 1.08rem);
   font-weight: 800;
-  padding: 14px 30px;
-  border-radius: var(--radius-pill);
+  padding: 13px 28px;
+  border-radius: 50px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 8px 24px rgba(255, 78, 112, 0.42);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 130px;
+  min-height: 50px;
+  justify-content: center;
+  box-shadow: 0 8px 22px rgba(255, 78, 112, 0.35);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
   z-index: 10;
-  animation: yesGlow 2.2s infinite ease-in-out;
+  box-sizing: border-box;
 }
 
-@keyframes yesGlow {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.btn-gate-yes:hover {
-  transform: scale(1.07);
-  box-shadow: 0 12px 30px rgba(255, 78, 112, 0.55);
-}
-
-.btn-gate-yes:active {
-  transform: scale(0.96);
+.btn-gate-yes:hover, .btn-gate-yes:active {
+  transform: scale(1.06);
+  box-shadow: 0 12px 28px rgba(255, 78, 112, 0.5);
 }
 
 .btn-gate-no {
-  background: #fff0f3;
-  color: #8c7885;
-  font-size: clamp(0.94rem, 2.8vw, 1.04rem);
+  background: #ffffff;
+  color: #ff4e70;
+  border: 2px solid #ff4e70;
+  font-size: clamp(0.94rem, 2.9vw, 1.04rem);
   font-weight: 700;
-  padding: 13px 26px;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid rgba(255, 182, 193, 0.55);
-  transition: transform 0.1s ease;
+  padding: 12px 24px;
+  border-radius: 50px;
+  min-width: 120px;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(255, 78, 112, 0.12);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
   user-select: none;
   touch-action: none;
   white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(255, 182, 193, 0.25);
-  z-index: 20;
+  box-sizing: border-box;
+}
+
+.btn-gate-no:hover, .btn-gate-no:active {
+  background: #fff5f8;
+  transform: scale(1.04);
+}
+
+/* 4. Cute Answer Response Screen */
+.gate-answer-response {
+  animation: fadeInResponse 0.4s ease both;
+  padding: 10px 0;
+}
+
+@keyframes fadeInResponse {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.response-sparkle-stars {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  animation: pulseStars 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseStars {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.response-yay-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4.8vw, 1.85rem);
+  font-weight: 800;
+  color: #ff3366;
+  margin-bottom: 8px;
+}
+
+.response-sweet-text {
+  font-family: var(--font-hand);
+  font-size: clamp(1.22rem, 3.8vw, 1.45rem);
+  font-weight: 700;
+  color: #ff4e70;
+  line-height: 1.4;
+  margin: 0;
 }
 
 /* Top Celebration Banner */

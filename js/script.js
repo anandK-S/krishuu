@@ -131,13 +131,28 @@ function initGiftUnboxing() {
 }
 
 // ==========================================================================
-// 3. QUESTION GATE (UNTOUCHABLE NO BUTTON WITH SAFE SCREEN DODGING)
+// 3. ENVELOPE REVEAL & SOFT CARD QUESTION GATE
 // ==========================================================================
 function initQuestionGate() {
+  const envelopeWrap = document.getElementById('gate-envelope-wrap');
+  const gateCard = document.getElementById('gate-card-1');
   const btnYes = document.getElementById('btn-gate-yes-1');
   const btnNo = document.getElementById('btn-gate-no-1');
   const questionSection = document.getElementById('question-section');
   const surpriseContent = document.getElementById('surprise-content');
+
+  // Interactive envelope tap
+  if (envelopeWrap && gateCard) {
+    envelopeWrap.addEventListener('click', () => {
+      sounds.playTap();
+      envelopeWrap.classList.add('opened');
+      setTimeout(() => {
+        envelopeWrap.style.display = 'none';
+        gateCard.style.display = 'flex';
+        gateCard.classList.add('card-appear');
+      }, 500);
+    });
+  }
 
   const teasePhrases = [
     "nahi? 🥺",
@@ -152,58 +167,78 @@ function initQuestionGate() {
     "Pakad ke dikha button! 🏃‍♀️💨"
   ];
   let phraseIdx = 0;
+  let dodgeCount = 0;
+  let lastDodgeTime = 0;
 
+  // Safe Dodge: Keeps button 100% visible inside card at all times!
   function dodge(e) {
-    if (e) {
+    const now = Date.now();
+    if (now - lastDodgeTime < 180) return; // Debounce multi-event triggers
+    lastDodgeTime = now;
+
+    if (e && e.cancelable) {
       e.preventDefault();
-      e.stopPropagation();
     }
     sounds.playTap();
 
+    dodgeCount++;
     phraseIdx = (phraseIdx + 1) % teasePhrases.length;
     btnNo.textContent = teasePhrases[phraseIdx];
 
-    const padding = 16;
-    const vWidth = window.visualViewport ? window.visualViewport.width : (window.innerWidth || 360);
-    const vHeight = window.visualViewport ? window.visualViewport.height : (window.innerHeight || 640);
-    const btnWidth = Math.min(btnNo.offsetWidth || 140, vWidth - 32);
-    const btnHeight = btnNo.offsetHeight || 44;
-
-    const maxX = Math.max(padding, vWidth - btnWidth - padding);
-    const maxY = Math.max(padding, vHeight - btnHeight - padding);
-
-    const randomX = Math.min(Math.max(padding, Math.floor(Math.random() * maxX)), vWidth - btnWidth - 12);
-    const randomY = Math.min(Math.max(padding, Math.floor(Math.random() * maxY)), vHeight - btnHeight - 12);
-
-    btnNo.style.position = 'fixed';
-    btnNo.style.left = `${randomX}px`;
-    btnNo.style.top = `${randomY}px`;
-    btnNo.style.zIndex = '99999';
+    // Safe translational hops within card container bounds
+    const hops = [
+      { x: -35, y: -16 },
+      { x: 35, y: 16 },
+      { x: -38, y: 14 },
+      { x: 32, y: -18 },
+      { x: 0, y: -24 },
+      { x: -25, y: 18 },
+      { x: 25, y: -16 }
+    ];
+    const hop = hops[dodgeCount % hops.length];
+    btnNo.style.transition = 'transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    btnNo.style.transform = `translate(${hop.x}px, ${hop.y}px)`;
   }
 
   if (btnNo) {
-    ['mouseenter', 'mouseover', 'touchstart', 'pointerdown'].forEach(evt => {
+    ['mouseenter', 'touchstart', 'pointerdown'].forEach(evt => {
       btnNo.addEventListener(evt, dodge, { passive: false });
     });
+    btnNo.addEventListener('click', dodge);
   }
 
   if (btnYes) {
     btnYes.addEventListener('click', () => {
-            launchConfetti();
+      sounds.playCelebration();
+      launchConfetti();
 
-      if (btnNo) btnNo.style.display = 'none';
-      btnYes.innerHTML = 'Hamesha! Besties Forever! 🫶🏻💖';
+      // Hide question elements
+      const titleEl = gateCard ? gateCard.querySelector('.gate-title') : null;
+      const buttonsEl = gateCard ? gateCard.querySelector('.gate-buttons') : null;
+      const avatarEl = gateCard ? gateCard.querySelector('.gate-avatar-wrap') : null;
+      const responseEl = document.getElementById('gate-answer-response');
 
-      if (questionSection) questionSection.classList.add('fade-out');
-      if (surpriseContent) {
-        surpriseContent.classList.add('revealed');
-        setTimeout(initScratchCards, 150);
+      if (titleEl) titleEl.style.display = 'none';
+      if (buttonsEl) buttonsEl.style.display = 'none';
+      if (avatarEl) avatarEl.style.display = 'none';
+
+      // Show cute answer response
+      if (responseEl) {
+        responseEl.style.display = 'block';
       }
 
+      // Smoothly transition into surprise content
       setTimeout(() => {
-        if (questionSection) questionSection.style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 400);
+        if (questionSection) questionSection.classList.add('fade-out');
+        if (surpriseContent) {
+          surpriseContent.classList.add('revealed');
+          setTimeout(initScratchCards, 150);
+        }
+        setTimeout(() => {
+          if (questionSection) questionSection.style.display = 'none';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 450);
+      }, 1900);
     });
   }
 }
