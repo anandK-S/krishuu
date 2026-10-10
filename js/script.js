@@ -514,41 +514,15 @@ function initLetterEditor() {
   const btnCancel = document.getElementById('btn-cancel-letter');
   const btnSave = document.getElementById('btn-save-letter');
 
-  const displaySalutation = document.getElementById('display-letter-salutation');
-  const displayP1 = document.getElementById('display-letter-p1');
-  const displayP2 = document.getElementById('display-letter-p2');
-  const displayP3 = document.getElementById('display-letter-p3');
-  const displayAuthor = document.getElementById('display-letter-author');
-
-  const inputSalutation = document.getElementById('input-salutation');
-  const inputP1 = document.getElementById('input-p1');
-  const inputP2 = document.getElementById('input-p2');
-  const inputP3 = document.getElementById('input-p3');
-  const inputAuthor = document.getElementById('input-author');
-
-  // Load saved letter if exists
-  const savedData = localStorage.getItem('krishuu_letter_v3');
-  if (savedData) {
-    try {
-      const parsed = JSON.parse(savedData);
-      if (parsed.salutation && displaySalutation) displaySalutation.textContent = parsed.salutation;
-      if (parsed.p1 && displayP1) displayP1.textContent = parsed.p1;
-      if (parsed.p2 && displayP2) displayP2.textContent = parsed.p2;
-      if (parsed.p3 && displayP3) displayP3.textContent = parsed.p3;
-      if (parsed.author && displayAuthor) displayAuthor.textContent = parsed.author;
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // Clear old legacy letter cache so user's new heartfelt letter is 100% active
+  try {
+    localStorage.removeItem('krishuu_letter_v3');
+    localStorage.removeItem('krishuu_letter_v2');
+    localStorage.removeItem('krishuu_letter_v1');
+  } catch (e) {}
 
   function openModal() {
     sounds.playTap();
-    if (inputSalutation && displaySalutation) inputSalutation.value = displaySalutation.textContent.trim();
-    if (inputP1 && displayP1) inputP1.value = displayP1.textContent.trim();
-    if (inputP2 && displayP2) inputP2.value = displayP2.textContent.trim();
-    if (inputP3 && displayP3) inputP3.value = displayP3.textContent.trim();
-    if (inputAuthor && displayAuthor) inputAuthor.value = displayAuthor.textContent.trim();
-
     if (modal) modal.classList.add('active');
   }
 
@@ -557,31 +531,16 @@ function initLetterEditor() {
     if (modal) modal.classList.remove('active');
   }
 
-  function saveLetter() {
-    sounds.playCelebration();
-    const data = {
-      salutation: inputSalutation ? inputSalutation.value : '',
-      p1: inputP1 ? inputP1.value : '',
-      p2: inputP2 ? inputP2.value : '',
-      p3: inputP3 ? inputP3.value : '',
-      author: inputAuthor ? inputAuthor.value : ''
-    };
-
-    if (displaySalutation && data.salutation) displaySalutation.textContent = data.salutation;
-    if (displayP1 && data.p1) displayP1.textContent = data.p1;
-    if (displayP2 && data.p2) displayP2.textContent = data.p2;
-    if (displayP3 && data.p3) displayP3.textContent = data.p3;
-    if (displayAuthor && data.author) displayAuthor.textContent = data.author;
-
-    localStorage.setItem('krishuu_letter_v3', JSON.stringify(data));
-    closeModal();
-    launchConfetti();
-  }
-
   if (btnOpen) btnOpen.addEventListener('click', openModal);
   if (btnClose) btnClose.addEventListener('click', closeModal);
   if (btnCancel) btnCancel.addEventListener('click', closeModal);
-  if (btnSave) btnSave.addEventListener('click', saveLetter);
+  if (btnSave) {
+    btnSave.addEventListener('click', () => {
+      sounds.playCelebration();
+      closeModal();
+      launchConfetti();
+    });
+  }
 }
 
 // ==========================================================================
