@@ -88,22 +88,24 @@ button {
 }
 
 /* ==========================================================================
-   STEP 1: ENVELOPE REVEAL & SOFT QUESTION CARD UI
+   STEP 1: ENVELOPE REVEAL & SOFT QUESTION CARD UI (100% MOBILE RESPONSIVE)
    ========================================================================== */
 .question-gate-section {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(16px, 4vh, 32px) clamp(16px, 4.5vw, 24px);
+  padding: clamp(12px, 3vh, 24px) clamp(12px, 4vw, 20px);
   background: radial-gradient(circle at 50% 30%, #ffffff 0%, #fff6f8 60%, #ffedf2 100%);
   z-index: 10000;
-  overflow: hidden;
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .question-gate-section.fade-out {
@@ -117,8 +119,15 @@ button {
   text-align: center;
   cursor: pointer;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
   animation: envelopeFloat 3s infinite ease-in-out;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @keyframes envelopeFloat {
@@ -127,19 +136,20 @@ button {
 }
 
 .gate-envelope-card {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .envelope-outer {
   position: relative;
-  width: clamp(165px, 46vw, 195px);
-  height: clamp(115px, 32vw, 135px);
+  width: clamp(150px, 44vw, 185px);
+  height: clamp(105px, 30vw, 128px);
   background: linear-gradient(135deg, #fff2f5, #ffdfe7);
   border: 2px solid rgba(255, 140, 165, 0.5);
   border-radius: 18px;
-  box-shadow: 0 16px 40px rgba(255, 94, 131, 0.22);
+  box-shadow: 0 14px 35px rgba(255, 94, 131, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,7 +175,7 @@ button {
   z-index: 3;
 }
 
-.gate-envelope-wrap.opening .envelope-flap {
+.gate-envelope-wrap.opened .envelope-flap {
   transform: rotateX(180deg);
 }
 
@@ -185,58 +195,67 @@ button {
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   background: #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   box-shadow: 0 4px 12px rgba(255, 78, 112, 0.3);
   border: 1.5px solid rgba(255, 182, 193, 0.6);
   z-index: 4;
 }
 
 .envelope-tap-guide {
-  font-size: clamp(0.86rem, 2.7vw, 0.98rem);
+  font-size: clamp(0.82rem, 2.6vw, 0.95rem);
   font-weight: 700;
   color: #ff4e70;
-  margin-top: 14px;
+  margin-top: 12px;
   background: #ffffff;
-  padding: 6px 18px;
+  padding: 6px 16px;
   border-radius: 50px;
   box-shadow: 0 4px 14px rgba(255, 94, 131, 0.15);
   display: inline-block;
   border: 1px solid rgba(255, 182, 193, 0.4);
 }
 
-/* 2. Soft Premium Card */
+/* 2. Soft Premium Card - 100% Vertical Column Layout */
 .gate-card {
-  width: 100%;
-  max-width: min(410px, 92vw);
-  background: #fffbfc;
-  border: 1.5px solid rgba(255, 182, 193, 0.45);
-  border-radius: 28px;
-  padding: clamp(28px, 6vw, 40px) clamp(18px, 5vw, 30px);
-  text-align: center;
-  box-shadow: 0 16px 45px rgba(255, 94, 131, 0.12), 0 2px 8px rgba(0, 0, 0, 0.02);
-  position: relative;
-  margin: auto;
-  box-sizing: border-box;
-  animation: cardSoftReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  display: none;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: min(380px, 92vw) !important;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(255, 182, 193, 0.55) !important;
+  border-radius: 26px !important;
+  padding: clamp(20px, 4.5vh, 32px) clamp(16px, 4.8vw, 24px) !important;
+  text-align: center !important;
+  box-shadow: 0 16px 45px rgba(255, 94, 131, 0.14), 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+  position: relative !important;
+  margin: auto !important;
+  box-sizing: border-box !important;
+  animation: cardSoftReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.gate-card.active-card {
+  display: flex !important;
 }
 
 @keyframes cardSoftReveal {
-  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .gate-avatar-wrap {
   position: relative;
-  width: clamp(86px, 23vw, 106px);
-  height: clamp(86px, 23vw, 106px);
-  margin: 0 auto 16px;
+  width: clamp(76px, 20vw, 92px);
+  height: clamp(76px, 20vw, 92px);
+  margin: 0 auto clamp(12px, 2.5vh, 18px);
+  flex-shrink: 0;
 }
 
 .gate-avatar {
@@ -244,93 +263,110 @@ button {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3.5px solid #ffffff;
-  box-shadow: 0 0 0 3px #ff5e83, 0 10px 24px rgba(255, 94, 131, 0.25);
+  display: block;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 3px #ff5e83, 0 8px 22px rgba(255, 94, 131, 0.25);
 }
 
 .gate-heart-badge {
   position: absolute;
   top: -4px;
   right: -4px;
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 3.8vw, 1.45rem);
   animation: floatHeart 2.5s infinite ease-in-out;
+  line-height: 1;
 }
 
 .gate-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.25rem, 4.2vw, 1.62rem);
-  font-weight: 800;
+  font-size: clamp(1.1rem, 4.2vw, 1.45rem);
+  font-weight: 700;
   color: #2b1f26;
   line-height: 1.42;
-  margin-bottom: 26px;
+  margin: 0 0 clamp(18px, 3.5vh, 26px) 0;
   letter-spacing: -0.01em;
+  word-break: break-word;
+  max-width: 100%;
+  text-align: center;
 }
 
-/* 3. Pill Shape Buttons */
+/* 3. Pill Shape Buttons Row */
 .gate-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  min-height: 56px;
-  position: relative;
-  flex-wrap: wrap;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(10px, 2.8vw, 16px) !important;
+  width: 100% !important;
+  position: relative !important;
+  min-height: 52px !important;
+  box-sizing: border-box !important;
 }
 
 .btn-gate-yes {
+  flex: 1;
+  max-width: 155px;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+  font-weight: 700;
   background: linear-gradient(135deg, #ff4e70 0%, #ff7ea5 100%);
   color: #ffffff;
-  font-size: clamp(0.96rem, 3vw, 1.08rem);
-  font-weight: 800;
-  padding: 13px 28px;
-  border-radius: 50px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(255, 78, 112, 0.35);
+  cursor: pointer;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-width: 130px;
-  min-height: 50px;
   justify-content: center;
-  box-shadow: 0 8px 22px rgba(255, 78, 112, 0.35);
+  gap: 6px;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
-  z-index: 10;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
 }
 
 .btn-gate-yes:hover, .btn-gate-yes:active {
-  transform: scale(1.06);
-  box-shadow: 0 12px 28px rgba(255, 78, 112, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 10px 24px rgba(255, 78, 112, 0.45);
 }
 
 .btn-gate-no {
+  flex: 1;
+  max-width: 155px;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 50px;
+  font-size: clamp(0.88rem, 3.2vw, 1rem);
+  font-weight: 600;
   background: #ffffff;
   color: #ff4e70;
-  border: 2px solid #ff4e70;
-  font-size: clamp(0.94rem, 2.9vw, 1.04rem);
-  font-weight: 700;
-  padding: 12px 24px;
-  border-radius: 50px;
-  min-width: 120px;
-  min-height: 50px;
+  border: 1.5px solid #ff4e70;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(255, 78, 112, 0.1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(255, 78, 112, 0.12);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
   user-select: none;
   touch-action: none;
-  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .btn-gate-no:hover, .btn-gate-no:active {
   background: #fff5f8;
-  transform: scale(1.04);
 }
 
 /* 4. Cute Answer Response Screen */
 .gate-answer-response {
   animation: fadeInResponse 0.4s ease both;
   padding: 10px 0;
+  text-align: center;
+  width: 100%;
 }
 
 @keyframes fadeInResponse {
@@ -339,7 +375,7 @@ button {
 }
 
 .response-sparkle-stars {
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 6vw, 2.3rem);
   margin-bottom: 8px;
   animation: pulseStars 1.5s infinite ease-in-out;
 }
@@ -358,12 +394,10 @@ button {
 }
 
 .response-sweet-text {
-  font-family: var(--font-hand);
-  font-size: clamp(1.22rem, 3.8vw, 1.45rem);
-  font-weight: 700;
-  color: #ff4e70;
-  line-height: 1.4;
-  margin: 0;
+  font-size: clamp(0.94rem, 3.2vw, 1.08rem);
+  font-weight: 600;
+  color: #555555;
+  line-height: 1.45;
 }
 
 /* Top Celebration Banner */

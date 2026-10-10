@@ -143,28 +143,35 @@ function initQuestionGate() {
 
   // Interactive envelope tap
   if (envelopeWrap && gateCard) {
-    envelopeWrap.addEventListener('click', () => {
+    let envelopeOpened = false;
+    const openEnvelope = (e) => {
+      if (envelopeOpened) return;
+      envelopeOpened = true;
+      if (e && e.cancelable) e.preventDefault();
       sounds.playTap();
       envelopeWrap.classList.add('opened');
       setTimeout(() => {
         envelopeWrap.style.display = 'none';
+        gateCard.classList.add('active-card');
         gateCard.style.display = 'flex';
-        gateCard.classList.add('card-appear');
-      }, 500);
-    });
+      }, 300);
+    };
+
+    envelopeWrap.addEventListener('click', openEnvelope);
+    envelopeWrap.addEventListener('touchend', openEnvelope, { passive: false });
   }
 
   const teasePhrases = [
     "nahi? 🥺",
-    "Pakka nahi? Soch le ek baar! 🥺",
-    "Thodi si bhi jagah nahi? 😭",
-    "Aise mat karo Krishuu! 🌸",
-    "Hamesha wala option better hai! ✨",
+    "Pakka nahi? 🥺",
+    "Soch lo! 🥺",
+    "Aise mat karo! 🌸",
+    "Hamesha na! ✨",
     "Please na! 🫶🏻",
-    "No click karna allowed nahi hai! 😜",
-    "Hamesha hi rahegi na! 💖",
-    "Chal maan ja ab! 🎂",
-    "Pakad ke dikha button! 🏃‍♀️💨"
+    "Allowed nahi! 😜",
+    "Hamesha hi! 💖",
+    "Maan ja na! 🎂",
+    "Pakdo mujhe! 🏃‍♀️💨"
   ];
   let phraseIdx = 0;
   let dodgeCount = 0;
@@ -187,13 +194,13 @@ function initQuestionGate() {
 
     // Safe translational hops within card container bounds
     const hops = [
-      { x: -35, y: -16 },
-      { x: 35, y: 16 },
-      { x: -38, y: 14 },
-      { x: 32, y: -18 },
-      { x: 0, y: -24 },
-      { x: -25, y: 18 },
-      { x: 25, y: -16 }
+      { x: -18, y: -10 },
+      { x: 18, y: 10 },
+      { x: -20, y: 8 },
+      { x: 16, y: -12 },
+      { x: 0, y: -14 },
+      { x: -14, y: 12 },
+      { x: 14, y: -10 }
     ];
     const hop = hops[dodgeCount % hops.length];
     btnNo.style.transition = 'transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
