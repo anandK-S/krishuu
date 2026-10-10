@@ -102,8 +102,7 @@ function initGiftUnboxing() {
     }
     isUnboxing = true;
 
-    sounds.playCelebration();
-    launchConfetti();
+        launchConfetti();
 
     giftContainer.classList.add('unboxing');
 
@@ -191,8 +190,7 @@ function initQuestionGate() {
 
   if (btnYes) {
     btnYes.addEventListener('click', () => {
-      sounds.playCelebration();
-      launchConfetti();
+            launchConfetti();
 
       if (btnNo) btnNo.style.display = 'none';
       btnYes.innerHTML = 'YAYYY! Besties Forever! 🎉';
@@ -218,8 +216,7 @@ function initWishButton() {
   const wishBtn = document.getElementById('btn-insta-wish');
   if (wishBtn) {
     wishBtn.addEventListener('click', () => {
-      sounds.playCelebration();
-      launchConfetti();
+            launchConfetti();
       wishBtn.innerHTML = 'Woohoo! Happy Birthday Krishuu! 🥳💖';
       setTimeout(() => {
         wishBtn.innerHTML = 'Happy Birthday Krishuu! 🎂🎉';
@@ -365,7 +362,6 @@ function initScratchCards() {
       if (isRevealed) return;
       isRevealed = true;
       totalRevealed++;
-      sounds.playCelebration();
 
       foil.classList.add('scratched');
       setTimeout(() => {
@@ -375,7 +371,6 @@ function initScratchCards() {
       // Celebration when all 17 reasons are revealed!
       if (totalRevealed === cards.length) {
         setTimeout(() => {
-          sounds.playCelebration();
           launchConfetti();
         }, 300);
       }
@@ -406,9 +401,6 @@ function initScratchCards() {
       }
 
       strokeCount++;
-      if (strokeCount === 1) {
-        sounds.playTap();
-      }
 
       // After 10 rubs, celebrate & peel off completely!
       if (strokeCount >= 10) {

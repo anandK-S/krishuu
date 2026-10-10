@@ -2734,3 +2734,23 @@ section {
   height: 100% !important;
   z-index: 3 !important;
 }
+
+
+.reasons-footer-card {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #fff5f8 0%, #fffbfd 100%);
+  border: 1.5px solid rgba(255, 182, 193, 0.45);
+  border-radius: 20px;
+  padding: 18px 22px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(255, 94, 131, 0.08);
+}
+
+.reasons-footer-quote {
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 3.8vw, 1.45rem);
+  font-weight: 700;
+  color: #ff3366;
+  line-height: 1.4;
+  margin: 0;
+}
