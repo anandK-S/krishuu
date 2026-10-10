@@ -140,16 +140,15 @@ function initQuestionGate() {
   const surpriseContent = document.getElementById('surprise-content');
 
   const teasePhrases = [
-    "NO 🙅‍♀️",
-    "Arre ek baar Yes toh click karo! 🥺",
-    "Mujhse dosti karni padegi! 😤",
-    "Please na Krishuu! 🌸",
-    "No click karna allowed nahi hai! 🚫",
-    "Kitna nakhra karogi! 😂",
-    "Yes button better hai wese bhi! ✨",
+    "nahi? 🥺",
+    "Pakka nahi? Soch le ek baar! 🥺",
+    "Thodi si bhi jagah nahi? 😭",
+    "Aise mat karo Krishuu! 🌸",
+    "Hamesha wala option better hai! ✨",
+    "Please na! 🫶🏻",
+    "No click karna allowed nahi hai! 😜",
+    "Hamesha hi rahegi na! 💖",
     "Chal maan ja ab! 🎂",
-    "You have no choice! 👑",
-    "Maan jao na bestie! 💖",
     "Pakad ke dikha button! 🏃‍♀️💨"
   ];
   let phraseIdx = 0;
@@ -193,7 +192,7 @@ function initQuestionGate() {
             launchConfetti();
 
       if (btnNo) btnNo.style.display = 'none';
-      btnYes.innerHTML = 'YAYYY! Besties Forever! 🎉';
+      btnYes.innerHTML = 'Hamesha! Besties Forever! 🫶🏻💖';
 
       if (questionSection) questionSection.classList.add('fade-out');
       if (surpriseContent) {
