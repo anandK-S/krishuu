@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initWishButton();
   initPolaroidGallery();
   initScratchCards();
-  initLetterEditor();
 });
 
 // ==========================================================================
@@ -502,45 +501,6 @@ function initScratchCards() {
       setupSingleCard(card);
     });
   });
-}
-
-// ==========================================================================
-// 7. PERSONAL LETTER LIVE EDITOR (LOCAL STORAGE PERSISTENCE)
-// ==========================================================================
-function initLetterEditor() {
-  const modal = document.getElementById('letter-modal-overlay');
-  const btnOpen = document.getElementById('btn-open-letter-modal');
-  const btnClose = document.getElementById('btn-close-letter-modal');
-  const btnCancel = document.getElementById('btn-cancel-letter');
-  const btnSave = document.getElementById('btn-save-letter');
-
-  // Clear old legacy letter cache so user's new heartfelt letter is 100% active
-  try {
-    localStorage.removeItem('krishuu_letter_v3');
-    localStorage.removeItem('krishuu_letter_v2');
-    localStorage.removeItem('krishuu_letter_v1');
-  } catch (e) {}
-
-  function openModal() {
-    sounds.playTap();
-    if (modal) modal.classList.add('active');
-  }
-
-  function closeModal() {
-    sounds.playTap();
-    if (modal) modal.classList.remove('active');
-  }
-
-  if (btnOpen) btnOpen.addEventListener('click', openModal);
-  if (btnClose) btnClose.addEventListener('click', closeModal);
-  if (btnCancel) btnCancel.addEventListener('click', closeModal);
-  if (btnSave) {
-    btnSave.addEventListener('click', () => {
-      sounds.playCelebration();
-      closeModal();
-      launchConfetti();
-    });
-  }
 }
 
 // ==========================================================================
